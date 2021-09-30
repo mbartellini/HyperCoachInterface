@@ -88,9 +88,38 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-card
+        elevation="1"
+        class="mx-auto"
+        max-width="344"
+    >
+      <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+          height="200px"
+      ></v-img>
+      <v-card-title>
+        Top western road trips
+      </v-card-title>
+    </v-card>
+    <div class="text-center">
+      <v-btn
+          :loading="loading3"
+          :disabled="loading3"
+          color="blue-grey"
+          class="ma-2 white--text"
+          @click="loader = 'loading3'"
+      >
+        Upload
+        <v-icon
+            right
+            dark
+        >
+          mdi-cloud-upload
+        </v-icon>
+      </v-btn>
+    </div>
   </v-container>
 </template>
-
 <script>
   export default {
     name: 'HelloWorld',
@@ -146,6 +175,18 @@
           href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
         },
       ],
+      loader: null,
+      loading3: false,
     }),
+    watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
+    },
   }
 </script>
