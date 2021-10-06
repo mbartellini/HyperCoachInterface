@@ -1,5 +1,6 @@
 <template>
     <v-card
+        v-on:click="apiCall()"
         elevation="6"
         max-width="300"
         class="rounded-card"
@@ -17,7 +18,7 @@
 <script>
 export default {
   name: "RoutineCard",
-  props: ['img_src']
+  props: ['img_src', 'apiCall'],
 }
 </script>
 
