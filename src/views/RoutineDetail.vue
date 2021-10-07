@@ -1,60 +1,65 @@
 <template>
   <v-container>
-
-
-    <h1>Recientes</h1>
-
-    <v-container fluid >
-      <v-row dense >
+    <v-row class="ma-5">
+      <v-btn
+          class="my-3 white--text"
+          color = "#8e8e8f"
+          elevation="3"
+          fab
+      >
+        <v-icon>
+         mdi-plus
+        </v-icon>
+      </v-btn>
+    </v-row>
+     <v-row>
         <v-col
-            v-for="card in cards"
-            :key="card.title"
+            cols="6"
         >
-
-          <RoutineCard :img_src="card.src">{{card.title}}</RoutineCard>
-
-
+            <v-img
+                class="ma-auto"
+                lazy-src="https://picsum.photos/id/11/10/6"
+                max-height="200"
+                :src="card.src"
+                contain
+            ></v-img>
         </v-col>
+
+       <v-col
+           cols="6"
+       >
+         <h1>Rutina de brazos</h1>
+
+       </v-col>
       </v-row>
-    </v-container>
+    <v-row>
 
-    <h1>Todas las rutinas</h1>
+      <v-col
+          v-for="cycle in card.cycles"
+          :key="cycle.position"
+          cols="12"
+      >
+        <CycleCard></CycleCard>
+      </v-col>
 
-
-    <v-container fluid>
-      <v-row
-          v-for="n in 3"
-          :key="n"
-          dense>
-        <v-col
-            v-for="card in cards"
-            :key="card.title"
-        >
-
-          <RoutineCard :img_src="card.src">{{card.title}}</RoutineCard>
-
-
-        </v-col>
-      </v-row>
-    </v-container>
-
+    </v-row>
   </v-container>
 </template>
 
 
 
 <script>
-import RoutineCard from '../components/RoutineCard'
+import CycleCard from "../components/CycleCard";
 
 export default {
-  name: 'Home',
+  name: 'RoutineDetail',
 
   components: {
-    RoutineCard,
+    CycleCard
   },
 
   data: () => ({
-    cards: [
+    card:
       { title: 'Pre-fab homes',
         src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
         description: {
@@ -99,7 +104,6 @@ export default {
           },
         ],
       },
-    ],
 
   }),
 }

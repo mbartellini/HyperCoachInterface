@@ -58,9 +58,8 @@ export default {
       { title: 'Tren Superior', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
       { title: 'Piernas', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
       { title: 'Yoga', src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', src: "@/assets/arms.png" }
+      { title: 'Brazos', src: '../assets/arms.jpg' }
     ],
-
   }),
 }
 </script>
