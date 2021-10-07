@@ -15,6 +15,11 @@
           Welcome to Hyper Coach Interface!!!!
         </h1>
 
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Chau pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+
         <p class="subheading font-weight-regular">
           For help and collaboration with other Vuetify developers,
           <br>please join our online
@@ -121,9 +126,13 @@
   </v-container>
 </template>
 <script>
-  export default {
-    name: 'HelloWorld',
+import RoutineCard from "@/components/RoutineCard";
 
+export default {
+    name: 'HelloWorld',
+    components: {
+      RoutineCard,
+    },
     data: () => ({
       ecosystem: [
         {
