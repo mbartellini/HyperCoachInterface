@@ -1,9 +1,12 @@
 <template>
-  <div class="hidden">
     <vs-sidebar
         background="dark"
         textWhite
+        static-position
         absolute
+        default-index="1"
+        class="sidebarx"
+        spacer
         v-model="active"
         open
     >
@@ -20,7 +23,6 @@
         placeHolder4
       </vs-sidebar-item>
     </vs-sidebar>
-  </div>
 </template>
 
 <script>
