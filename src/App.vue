@@ -6,7 +6,7 @@
         permanent
     >
     </v-navigation-drawer>
-  <SideBar/>
+    <SideBar/>
 
     <v-app-bar
         app
@@ -15,7 +15,7 @@
     </v-app-bar>
 
     <v-main app>
-        <RoutineDetail/>
+      <RoutineDetail/>
     </v-main>
 
   </v-app>
@@ -23,7 +23,7 @@
 
 <script>
 
-import SideBar from "@/components/SideBar";
+import  SideBar from "./components/SideBar";
 import RoutineDetail from "./views/RoutineDetail";
 
 
@@ -44,7 +44,7 @@ export default {
 
 <style>
 .v-main{
-  background: url(https://www.pixelstalk.net/wp-content/uploads/2016/04/Grey-backgrounds-free-download.jpg) grey;
+  background: grey url(https://www.pixelstalk.net/wp-content/uploads/2016/04/Grey-backgrounds-free-download.jpg) no-repeat fixed center;
 }
 
 
