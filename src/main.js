@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-
+import router from './router'
 import Vuesax from 'vuesax'
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
@@ -20,12 +20,6 @@ Vue.use(Vuesax, {
 
 new Vue({
   vuetify,
+  router,
   render: h => h(App),
-  theme: {
-    themes: {
-        primary: '#8e8e8f',
-        secondary: '#8e8e8f',
-        anchor: '#8e8e8f',
-    },
-  },
 }).$mount('#app')
