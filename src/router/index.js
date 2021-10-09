@@ -18,7 +18,7 @@ const routes = [
     {
         path: '/myrutines',
         name: 'MyRutines',
-        component: () => import(/* webpackChunkName: "myrutines" */ '../views/MyRutines.vue')
+        component: () => import(/* webpackChunkName: "myroutines" */ '../views/MyRoutines.vue')
     },
     {
         path: '/search',
@@ -37,10 +37,11 @@ const routes = [
     },
 ]
 
+
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
 
 export default router
