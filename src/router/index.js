@@ -16,8 +16,8 @@ const routes = [
         component: () => import(/* webpackChunkName: "favorites" */ '../views/Favorites.vue')
     },
     {
-        path: '/myrutines',
-        name: 'MyRutines',
+        path: '/myroutines',
+        name: 'MyRoutines',
         component: () => import(/* webpackChunkName: "myroutines" */ '../views/MyRoutines.vue')
     },
     {
