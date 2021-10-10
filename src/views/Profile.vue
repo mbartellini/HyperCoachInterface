@@ -38,7 +38,7 @@
       <h1>Nombre</h1>
       <v-card
           elevation="2"
-          class ="mx-md-auto"
+          class ="ma-auto"
           height="40"
           width="400"
       >
