@@ -28,7 +28,7 @@
 <script>
 
 import {mapState, mapGetters, mapActions} from 'vuex'
-import {Credentials} from "@/api/user";
+import {LoginCredentials} from "@/api/user";
 import router from "@/router";
 
 export default {
@@ -59,7 +59,7 @@ export default {
     async login(e) {
       e.preventDefault()
       try {
-        const credentials = new Credentials(this.username, this.password)
+        const credentials = new LoginCredentials(this.username, this.password)
         await this.$login({credentials, rememberMe: true })
         await router.push('/')
       } catch(error) {

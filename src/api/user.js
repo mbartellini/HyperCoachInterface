@@ -1,6 +1,6 @@
 import { Api } from './api.js'
 
-export { UserApi, Credentials }
+export { UserApi, LoginCredentials, RegisterCredentials }
 
 class UserApi {
     static getUrl(slug) {
@@ -9,6 +9,10 @@ class UserApi {
 
     static async login(credentials, controller) {
         return await Api.post(UserApi.getUrl('login'), false, credentials, controller)
+    }
+
+    static async register(credentials, controller) {
+        return await Api.post(UserApi.getUrl(''), false, credentials, controller)
     }
 
     static async logout(controller) {
@@ -20,9 +24,24 @@ class UserApi {
     }
 }
 
-class Credentials {
+class LoginCredentials {
     constructor(username, password) {
         this.username = username
         this.password = password
+    }
+}
+
+class RegisterCredentials {
+    constructor(username, password, firstName, lastName, gender, birthdate, email, phone, avatarUrl, metadata) {
+        this.username = username
+        this.password = password
+        this.firstName = firstName
+        this.lastName = lastName
+        this.gender = gender
+        this.birthdate = birthdate
+        this.email = email
+        this.phone = phone
+        this.avatarUrl = avatarUrl
+        this.metadata = metadata
     }
 }
