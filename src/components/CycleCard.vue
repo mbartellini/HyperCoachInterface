@@ -3,9 +3,8 @@
       elevation="6"
       max-width="300"
       class="rounded-card pb-3"
-      outlined
   >
-    <v-card-title class = "justify-center">{{info.title}}</v-card-title>
+    <v-card-title class = "secondary justify-center mb-3">{{info.title}}</v-card-title>
     <v-row
         v-for="exercise in info.exercises"
         :key="exercise.position"
@@ -19,7 +18,6 @@
         </v-row>
       </v-card-text>
     </v-row>
-
   </v-card>
 </template>
 
