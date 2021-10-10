@@ -36,6 +36,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "info" */ '../views/Info.vue')
     },
     {
+        path: '/routine/:id',
+        name: 'RoutineDetail',
+        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
+        component: () => import(/* webpackChunkName: "routinedetail" */ '../views/RoutineDetail.vue')
+    },
+    {
         path: '*',
         name: 'NotFound',
         component: () => import(/* webpackChunkName: "notfound" */ '../views/NotFound.vue')

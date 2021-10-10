@@ -20,7 +20,7 @@
                 class="ma-auto"
                 lazy-src="https://picsum.photos/id/11/10/6"
                 max-height="200"
-                :src="routine.src"
+                :src="routine.img_src"
                 contain
             ></v-img>
         </v-col>
@@ -49,6 +49,7 @@
 
 
 <script>
+import store from "@/store";
 import CycleCard from "../components/CycleCard";
 
 export default {
@@ -59,112 +60,20 @@ export default {
   },
 
   data: () => ({
-    routine:
-      { title: 'Rutina de brazos',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-        description: {
-          duration: 30,
-          difficulty: 'Principiante',
-          likes: 7700,
-          goal: 'Tonificar músculos',
-          muscles: 'Piernas',
-          equipment: false,
-          favourite: false,
-        },
-        cycles: [
-          {
-            position: 0,
-            title: 'Ciclo de entrada en calor',
-            exercises: [
-              {
-                position: 0,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 1,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              },
-              {
-                position: 2,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 3,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              }
-            ]
-          },
-          {
-            position: 0,
-            title: 'Ciclo principal',
-            exercises: [
-              {
-                position: 0,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 1,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              },
-              {
-                position: 2,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 3,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              }
-            ]
-          },
-          {
-            position: 0,
-            title: 'Ciclo final',
-            exercises: [
-              {
-                position: 0,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 1,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              },
-              {
-                position: 2,
-                title: 'Sentadillas',
-                duration: null,
-                repetitions: 15,
-              },
-              {
-                position: 3,
-                title: 'Descanso',
-                duration: 15,
-                repetitions: null,
-              }
-            ]
-          },
-        ],
-      },
 
   }),
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    }
+  },
+  computed: {
+    routine() {
+      return store.routines.find(
+          routine => routine.id === this.id
+      )
+    }
+  }
 }
 </script>
