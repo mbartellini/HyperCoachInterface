@@ -1,31 +1,24 @@
 <template>
-  <vs-sidebar
-      class="ma-auto overflow-hidden"
-      background="dark"
-      textWhite
-      square
-      v-model="active"
-      open
+  <v-navigation-drawer
+      app
+      clipped
+      permanent
+      class="primary"
+      :width="200"
   >
-    <vs-sidebar-item id="placeHolder1">
-      <b> Hyper Coach Interface </b>
-    </vs-sidebar-item>
-    <vs-sidebar-item id="placeHolder1">
-
-    </vs-sidebar-item>
-    <vs-sidebar-item id="placeHolder1">
-      placeHolder1
-    </vs-sidebar-item>
-    <vs-sidebar-item id="placeHolder2">
-      placeHolder2
-    </vs-sidebar-item>
-    <vs-sidebar-item id="placeHolder3">
-      placeHolder3
-    </vs-sidebar-item>
-    <vs-sidebar-item id="placeHolder4">
-      placeHolder4
-    </vs-sidebar-item>
-  </vs-sidebar>
+    <v-list nav dense>
+      <v-list-item-group mandatory v-model="selectedItem" active-class="secondary">
+        <v-list-item v-for="(route, i) in sideBarRoutes" :key="i" :to="{name: route.name}" exact>
+<!--          <v-list-item-icon>-->
+<!--            <v-icon v-text="route.icon"></v-icon>-->
+<!--          </v-list-item-icon>-->
+          <v-list-item-content >
+            <v-list-item-title class="sidebar-option" v-text="route.name"/>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -33,7 +26,24 @@ export default {
   name: 'SideBar',
 
   data:() => ({
-    active: 'home',
+    sideBarRoutes : [
+      {name: 'Home', icon: ''},
+      {name: 'Favorites', icon:''},
+      {name: 'MyRoutines', icon: ''},
+      {name: 'Search', icon: ''},
+      {name: 'Settings', icon: ''},
+      {name: 'Info', icon: ''},
+    ],
+    selectedItem: null,
   })
 }
 </script>
+
+<style scoped>
+
+.sidebar-option {
+  color: white;
+  text-align: center;
+}
+
+</style>
