@@ -1,12 +1,12 @@
 <template>
     <v-card
         elevation="6"
-        max-width="300"
+        max-width="200"
         class="rounded-card"
     >
       <v-img
           :src="img_src"
-          height="170px"
+          height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class = "justify-center">
         <slot>None</slot>

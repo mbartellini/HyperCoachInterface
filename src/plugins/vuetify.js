@@ -15,7 +15,7 @@ const vuetify = new Vuetify({
                 success: '#4CAF50',
                 warning: '#FFC107',
                 primaryFont: '#FFFFFF',
-                secondaryFont: '#000000'',
+                secondaryFont: '#000000',
             },
         },
     },
