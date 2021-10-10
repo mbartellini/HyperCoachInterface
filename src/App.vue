@@ -5,7 +5,12 @@
       <v-toolbar-title class="title">Hyper Coach Interface</v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer app clipped class="primary">
+    <v-navigation-drawer
+        app
+        clipped
+        permanent
+        class="primary"
+    >
       <v-list nav dense>
         <v-list-item-group mandatory v-model="selectedItem" active-class="accent">
           <v-list-item v-for="(route, i) in sideBarRoutes" :key="i" :to="{name: route}" exact>
