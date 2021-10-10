@@ -63,6 +63,7 @@ export default {
   },
 
   data: () => ({
+    last: null,
     cards: [
       { title: 'Abdominales', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
       { title: 'Tren Superior', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
