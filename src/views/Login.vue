@@ -71,7 +71,10 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+
 input[type="text"] { padding: 2px; border: 4px solid gray }
 input[type="password"] { padding: 2px; border: 4px solid gray }
+
 </style>
