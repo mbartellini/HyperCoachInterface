@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '@/store.js'
 
 Vue.use(VueRouter)
 
@@ -39,15 +40,32 @@ const routes = [
         path: '/routine/:id',
         name: 'RoutineDetail',
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
-        component: () => import(/* webpackChunkName: "routinedetail" */ '../views/RoutineDetail.vue')
+        component: () => import(/* webpackChunkName: "routinedetail" */ '../views/RoutineDetail.vue'),
+        beforeEnter: (to, from, next) => {
+            const exists = store.routines.find(
+                routine => routine.id === to.params.id
+            )
+            if (exists) {
+                next()
+            } else {
+                next({name: 'NotFound'})
+            }
+        },
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import(/* webpackChunkName: "login" */ '../views/Login')
     },
     {
         path: '/profile',
         name: 'Profile',
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile')
     },
     {
-        path: '*',
+        path: '/notfound',
+        alias: '*',
         name: 'NotFound',
         component: () => import(/* webpackChunkName: "notfound" */ '../views/NotFound.vue')
     },
@@ -57,7 +75,15 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(route => route.meta.requiresAuth) && !store.user) {
+        next({name: "Login", query: { redirect: to.fullPath }});
+    } else {
+        next();
+    }
+});
 
 export default router

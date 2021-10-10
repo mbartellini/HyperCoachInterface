@@ -1,4 +1,5 @@
 export default {
+    user: null,
     routines: [
         {
             id: 0,
