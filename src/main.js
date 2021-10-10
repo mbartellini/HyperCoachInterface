@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './api'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import Vuesax from 'vuesax'
 
-import 'vuesax/dist/vuesax.css' //Vuesax styles
+import 'vuesax/dist/vuesax.css'
 
 Vue.config.productionTip = false
 
@@ -19,7 +20,11 @@ Vue.use(Vuesax, {
 })
 
 new Vue({
+  store,
   vuetify,
   router,
-  render: h => h(App),
+  async beforeCreate() {
+    await this.$store.dispatch('security/initialize')
+  },
+  render: h => h(App)
 }).$mount('#app')

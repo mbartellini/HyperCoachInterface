@@ -51,7 +51,9 @@ export default {
       'MyRoutines',
       'Search',
       'Settings',
-      'Info'
+      'Info',
+      'Login',
+      'LoginQuestions',
     ],
     selectedItem: null,
   }),
