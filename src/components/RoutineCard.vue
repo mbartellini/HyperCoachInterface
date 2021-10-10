@@ -5,11 +5,11 @@
         class="rounded-card"
     >
       <v-img
-          :src="img_src"
+          :src="routine.img_src"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class = "justify-center">
-        <slot>None</slot>
+        {{ routine.title }}
       </v-card-title>
     </v-card>
 </template>
@@ -17,7 +17,9 @@
 <script>
 export default {
   name: "RoutineCard",
-  props: ['img_src'],
+  props: {
+    routine: Object,
+  },
 }
 </script>
 

@@ -6,13 +6,10 @@
     <v-container fluid >
       <v-row dense >
         <v-col
-            v-for="card in cards"
-            :key="card.title"
+            v-for="(card, i) in cards"
+            :key="i"
         >
-
-          <RoutineCard :img_src="card.src">{{card.title}}</RoutineCard>
-
-
+          <RoutineCard :routine="card" />
         </v-col>
       </v-row>
     </v-container>
@@ -26,13 +23,10 @@
           :key="n"
           dense>
         <v-col
-            v-for="card in cards"
-            :key="card.title"
+            v-for="(card, i) in cards"
+            :key="i"
         >
-
-          <RoutineCard :img_src="card.src">{{card.title}}</RoutineCard>
-
-
+          <RoutineCard :routine="card" />
         </v-col>
       </v-row>
     </v-container>
@@ -54,11 +48,11 @@ export default {
 
   data: () => ({
     cards: [
-      { title: 'Abdominales', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', src: '../assets/arms.jpg' }
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: 'require("@/assets/arms.png")' }
     ],
   }),
 }
