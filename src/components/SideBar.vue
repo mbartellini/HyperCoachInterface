@@ -8,12 +8,12 @@
   >
     <v-list nav dense>
       <v-list-item-group mandatory v-model="selectedItem" active-class="secondary">
-        <v-list-item v-for="(route, i) in sideBarRoutes" :key="i" :to="{name: route.name}" exact>
+        <v-list-item v-for="(route, i) in sideBarRoutes" :key="i" :to="{name: route.route}" exact>
 <!--          <v-list-item-icon>-->
 <!--            <v-icon v-text="route.icon"></v-icon>-->
 <!--          </v-list-item-icon>-->
-          <v-list-item-content >
-            <v-list-item-title class="sidebar-option" v-text="route.name"/>
+          <v-list-item-content class="my-3" height="20" >
+            <v-list-item-title class="sidebar-option text-h6 py-1"> {{route.name}} </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -27,12 +27,12 @@ export default {
 
   data:() => ({
     sideBarRoutes : [
-      {name: 'Home', icon: ''},
-      {name: 'Favorites', icon:''},
-      {name: 'MyRoutines', icon: ''},
-      {name: 'Search', icon: ''},
-      {name: 'Settings', icon: ''},
-      {name: 'Info', icon: ''},
+      {name: 'Inicio', route: 'Home', icon: ''},
+      {name: 'Favoritos', route: 'Favorites', icon:''},
+      {name: 'Mis rutinas', route: 'MyRoutines', icon: ''},
+      {name: 'Buscar', route: 'Search', icon: ''},
+      {name: 'Configuración', route: 'Settings', icon: ''},
+      {name: 'Info', route: 'Info', icon: ''},
     ],
     selectedItem: null,
   })
