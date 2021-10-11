@@ -34,7 +34,12 @@ const routes = [
     {
         path: '/myroutines',
         name: 'MyRoutines',
-        component: () => import(/* webpackChunkName: "myroutines" */ '../views/MyRoutines.vue')
+        component: () => import(/* webpackChunkName: "MyRoutines" */ '../views/MyRoutines.vue')
+    },
+    {
+        path: '/new_routine',
+        name: 'NewRoutine',
+        component: () => import(/* webpackChunkName: "NewRoutine" */ '../views/NewRoutine.vue')
     },
     {
         path: '/search',
