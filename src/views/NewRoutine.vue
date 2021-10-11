@@ -1,33 +1,25 @@
 <template>
   <div class="flex items-center justify-center h-screen">
-    <h1>Registro</h1>
+    <h1>NUEVA RUTINA</h1>
     <div class="sm:w-1/2">
       <div class="p-5 w-4/5 mx-auto text-left font-raleway">
         <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
-        <form @submit="login">
+        <form @submit="create">
           <div class="my-5">
             <h3 class="text-left font-bold mb-5 font-montserrat">Nombre</h3>
-            <input type="text" v-model="firstname"/>
+            <input type="text" v-model="name"/>
           </div>
           <div class="my-5">
-            <h3 class="text-left font-bold mb-5 font-montserrat">Apellido</h3>
-            <input type="text" v-model="lastname"/>
+            <h3 class="text-left font-bold mb-5 font-montserrat">Detalle</h3>
+            <input type="text" v-model="detail"/>
           </div>
           <div class="my-5">
-            <h3 class="text-left font-bold mb-5 font-montserrat">Gender</h3>
-            <input type="text" v-model="gender"/>
+            <h3 class="text-left font-bold mb-5 font-montserrat">Dificultad</h3>
+            <input type="number" max="5" min="0" v-model="difficult"/>
           </div>
           <div class="my-5">
-            <h3 class="text-left font-bold mb-5 font-montserrat">E-mail</h3>
-            <input type="email" v-model="email"/>
-          </div>
-          <div class="my-5">
-            <h3 class="text-left font-bold mb-5 font-montserrat">fecha de nacimiento</h3>
-            <input type="date" v-model="date"/>
-          </div>
-          <div class="my-5">
-            <h3 class="text-left font-bold mb-5 font-montserrat">Username</h3>
-            <input type="text" v-model="username"/>
+            <h3 class="text-left font-bold mb-5 font-montserrat">Categoria: nombre</h3>
+            <input type="email" v-model="cat_name"/>
           </div>
           <div class="my-5">
             <h3 class="text-left font-bold mb-5 font-montserrat">Imagen</h3>
@@ -37,12 +29,60 @@
               <label @change="PreviewImage" for="file-upload">Subir foto</label>
             </v-btn>
           </div>
-          <div class="my-5" id="password">
-            <h3 class="text-left font-bold mb-5 font-montserrat">Password</h3>
-            <input type="password" v-model="password">
+          <div class="my-5">
+            <h3 class="text-left font-bold mb-5 font-montserrat">ciclo entrada en calor</h3>
+            <v-container @change="update" full-height class="py-0">
+              <v-row>
+                <v-col cols="12">
+                  <card-list v-model="items" #default="{ item }">
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field v-model="item.name" label="Name" hide-details />
+                      </v-col>
+                    </v-row>
+                  </card-list>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="auto" class="py-0 mx-auto">
+                  <v-btn @click="add" text>
+                    <v-icon>
+                      mdi-plus
+                    </v-icon>
+                    Add
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </div>
+          <div class="my-5">
+            <h3 class="text-left font-bold mb-5 font-montserrat">ciclo de potencia</h3>
+            <v-container @change="update" full-height class="py-0">
+              <v-row>
+                <v-col cols="12">
+                  <card-list v-model="items2" #default="{ item2 }">
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field v-model="item2.name" label="Name" hide-details />
+                      </v-col>
+                    </v-row>
+                  </card-list>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="auto" class="py-0 mx-auto">
+                  <v-btn @click="add2" text>
+                    <v-icon>
+                      mdi-plus
+                    </v-icon>
+                    Add
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
           </div>
 
-          <button type="submit" :disabled="password.length < 3" class="bg-green-400 p-5 text-white">
+          <button type="submit" class="bg-green-400 p-5 text-white">
             Registrarse
           </button>
           <p class="my-2">
@@ -56,28 +96,31 @@
 <script>
 
 import {mapState, mapGetters, mapActions} from 'vuex'
-import {RegisterCredentials} from "@/api/user";
-import {Sport} from "@/api/sport";
-import router from "@/router";
+
+import {Category} from "@/api/category";
+import CardList from "@/components/CardList";
 
 
 export default {
   name: 'NewRoutine',
-
+  components: {
+    CardList
+  },
   data() {
     return {
-      username: '',
-      firstname: '',
-      lastname: '',
-      password: '',
-      gender: '',
-      date: '',
-      email: '',
+      name: '',
+      detail: '',
+      difficult: 0,
+      cat_name: '',
+      cat_detail: '',
       preview: null,
       image: null,
-      phone: '',
       metadata: null,
       error: false,
+      counter: 10,
+      counter2: 10,
+      items: [],
+      items2: [],
       errorMsg: `An error occurred, please try again`
     }
   },
@@ -87,9 +130,12 @@ export default {
     }),
     ...mapGetters('security', {
       $isLoggedIn: 'isLoggedIn'
-    })
+    }),
   },
   methods: {
+    update() {
+      console.log(this.items[0].name)
+    },
     PreviewImage() {
       this.preview = URL.createObjectURL(this.image)
     },
@@ -97,35 +143,19 @@ export default {
       $getCurrentUser: 'getCurrentUser',
       $register: 'register',
     }),
-    ...mapActions('sport', {
-      $createSport: 'create',
+    ...mapActions('category', {
+      $createCategory: 'create',
     }),
-    async login(e) {
-      e.preventDefault()
-      try {
-        console.log(this.date)
-        this.date = new Date(this.date.toString()).getTime()
-        this.image = URL.createObjectURL(this.image)
-        const credentials = new RegisterCredentials(this.username, this.password, this.firstName, this.lastName, this.gender, this.date, this.email, this.phone, this.image, this.metadata)
-        console.log(JSON.stringify(credentials))
-        await this.$register({credentials, rememberMe: true })
-        await router.push('/')
-      } catch(error) {
-        this.error = true
-        this.errorMsg = error // TODO: beautify this output
-        this.password = ''
-      }
+    async create() {
+      let cat = new Category(null, "test", "test");
+      await this.$createCategory(cat)
     },
-    async createSport() {
-      const index = Math.floor(Math.random() * (999 - 1) + 1)
-      const sport = new Sport(null, `sport ${index}`, `sport ${index}`);
-      try {
-        this.sport = await this.$createSport(sport);
-        this.setResult(this.sport)
-      } catch (e) {
-        this.setResult(e)
-      }
+    add () {
+      this.items.push({ id: this.counter++ })
     },
+    add2 () {
+      this.items2.push({ id: this.counter2++ })
+    }
   }
 }
 </script>
@@ -142,6 +172,10 @@ input[type="date"] { padding: 2px; border: 4px solid gray }
   right: 15px;
   border-radius: 50%;
   border: 1px solid white;
+}
+
+.container {
+  max-width: 600px !important;
 }
 
 </style>

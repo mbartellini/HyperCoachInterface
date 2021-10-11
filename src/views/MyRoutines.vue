@@ -1,12 +1,11 @@
 <template>
   <div>
     <h1>My Routines</h1>
-    <button @click="routeNew">
-      Press me
+    <button @click="newRoutine">
+      Create new routine
     </button>
   </div>
 </template>
-
 
 
 <script>
@@ -22,7 +21,7 @@ export default {
   }),
 
   methods: {
-    async routeNew() {
+    async newRoutine() {
       await router.push('/new_routine')
     }
   },
