@@ -1,6 +1,8 @@
 <template>
   <div>
-  <h1>Favorites</h1>
+    <v-container>
+      <h1 class="increase">Favoritos</h1>
+    </v-container>
     <v-container fluid >
       <v-row dense >
         <v-col v-for="routine in favorites" :key="routine">
