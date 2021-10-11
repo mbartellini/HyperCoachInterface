@@ -1,6 +1,14 @@
 <template>
   <span class="go-back">
-    <button @click="goBack">Go Back</button>
+    <v-btn
+        fab
+        color=primary
+        @click="goBack"
+    >
+      <v-icon color="white">
+        mdi-close
+      </v-icon>
+    </v-btn>
   </span>
 </template>
 
