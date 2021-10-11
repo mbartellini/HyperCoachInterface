@@ -11,7 +11,7 @@
             class="ma-auto"
             lazy-src="https://picsum.photos/id/11/10/6"
             max-height="300"
-            src="@/assets/arms.png"
+            :src="routine.src"
             contain
         ></v-img>
       </v-col>
