@@ -73,6 +73,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "login" */ '../views/Login')
     },
     {
+        path: 'loginprompt',
+        name: 'LoginPrompt',
+        component: () => import(/* webpackChunkName: "loginprompt" */ '../views/LoginPrompt')
+    },
+    {
         path: '/profile',
         name: 'Profile',
         meta: { requiresAuth: true },
