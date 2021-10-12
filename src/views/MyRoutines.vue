@@ -3,7 +3,7 @@
     <h1>MyRoutines</h1>
     <v-container fluid >
       <v-row dense >
-        <v-col v-for="routine in my_routines" :key="routine">
+        <v-col v-for="(routine, i) in my_routines" :key="i">
           <RoutineCard :img_src="routine.src">{{routine.title}}</RoutineCard>
         </v-col>
       </v-row>
