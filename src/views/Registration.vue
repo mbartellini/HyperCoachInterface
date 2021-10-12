@@ -236,7 +236,7 @@ export default {
       e.preventDefault()
       try {
         console.log(this.date)
-        this.date = new Date(this.date.toString()).getTime()
+        this.date = new Date(this.date.toString()).getTime().toString()
         if (this.gender === "Prefiero no indicar") {
           this.gender = 'other'
         } else if (this.gender === "Masculino") {
