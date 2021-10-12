@@ -56,7 +56,7 @@ const routes = [
         name: 'RoutineDetail',
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
-        beforeEnter: (to, from, next) => {
+        /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
                 routine => routine.id === to.params.id
             )
@@ -65,10 +65,10 @@ const routes = [
             } else {
                 next({name: 'NotFound'})
             }
-        },
+        }, */
     },
     {
-        path: 'loginprompt',
+        path: '/loginprompt',
         name: 'LoginPrompt',
         component: () => import(/* webpackChunkName: "login_prompt" */ '../views/LoginPrompt')
     },
