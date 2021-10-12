@@ -184,6 +184,7 @@ export default {
       firstname: '',
       lastname: '',
       password: '',
+      menu: null,
       gender: ["Masculino","Femenino","Prefiero no indicar"],
       date: '',
       email: '',
@@ -216,8 +217,21 @@ export default {
       try {
         console.log(this.date)
         this.date = new Date(this.date.toString()).getTime()
+        if (this.gender === "Prefiero no indicar") {
+          this.gender = 'other'
+        } else if (this.gender === "Masculino") {
+          this.gender = 'male'
+        } else if (this.gender === "Femenino") {
+          this.gender = 'female'
+        } else {
+          this.gender = ''
+        }
+
+        console.log(this.gender)
+        console.log(this.date)
+
         this.image = URL.createObjectURL(this.image)
-        const credentials = new RegisterCredentials(this.username, this.password, this.firstName, this.lastName, this.gender, this.date, this.email, this.phone, this.image, this.metadata)
+        const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, this.date, this.email, this.phone, this.image, this.metadata)
         console.log(JSON.stringify(credentials))
         await this.$register({credentials, rememberMe: true })
         await router.push('/')

@@ -1,5 +1,6 @@
 <template>
   <v-app-bar app clipped-left class="secondary py-0">
+    <button @click="logout">LOGOUT</button>
     <v-container fluid fill-height>
       <v-row class="align-center">
         <v-avatar
@@ -46,16 +47,39 @@
 
 -->
 
-
 <script>
+
 export default {
   name: "TopBar",
-
   data: () => ({
     profileRoute: 'Profile',
     username: null,
     profile_pic: "@/assets/Juani.jpeg",
   }),
+
+  computed: {
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn'
+    }),
+    ...mapActions('security', {
+      $getCurrentUser: 'getCurrentUser',
+      $logout: 'logout',
+    }),
+  },
+
+  async beforeCreate() {
+    console.log(await this.$getCurrentUser)
+    if (this.$isLoggedIn) {
+      this.username = await this.$getCurrentUser.firstName
+      this.profile_pic = await this.$getCurrentUser.avatarUrl // TODO: Metadata?
+    }
+  },
+
+  methods: {
+    async logout() {
+      await this.$logout()
+    },
+  },
 }
 </script>
 
