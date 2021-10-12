@@ -29,11 +29,13 @@ const routes = [
     {
         path: '/favorites',
         name: 'Favorites',
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "favorites" */ '../views/Favorites.vue')
     },
     {
         path: '/myroutines',
         name: 'MyRoutines',
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "my_routines" */ '../views/MyRoutines.vue')
     },
     {
