@@ -1,13 +1,17 @@
 <template>
   <span class="go-back">
     <v-btn
-        fab
+        tile
+        class="rounded-lg"
         color=primary
         @click="goBack"
     >
-      <v-icon color="white">
-        mdi-close
+      <v-icon color="white" left>
+        mdi-arrow-left
       </v-icon>
+      <div class="text-decoration-underline">
+      Volver
+      </div>
     </v-btn>
   </span>
 </template>
@@ -24,5 +28,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
