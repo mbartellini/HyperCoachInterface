@@ -22,8 +22,10 @@
             <v-img :alt="'Foto de perfil de {{username}}'" src="@/assets/Juani.jpeg"></v-img>
           </v-avatar>
         </v-card>
-        <v-card v-else flat class="d-flex align-center justify-center pa-1" color="transparent" :to="profileRoute">
-          <p class="ma-3 hidden-sm-and-down white--text">Iniciar Sesión / Registrarse</p>
+        <v-card v-else flat class="d-flex align-center justify-center pa-1" color="transparent">
+          <router-link class="ma-2 hidden-sm-and-down white--text" :to="{name: 'Login'}">Iniciar Sesión</router-link>
+          <p class="ma-2 hidden-sm-and-down white--text">/</p>
+          <router-link class="ma-2 hidden-sm-and-down white--text" :to="{name: 'Registration'}">Registrarme</router-link>
           <v-avatar
               size="50"
           >
@@ -58,21 +60,5 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  color: white;
-  font-weight: bolder;
-}
-
-.profilepic {
-  margin-right: 100px;
-  border-radius: 50%;
-  border: 1px solid white;
-  height: 32px;
-  width: 32px;
-}
-
-.loginprompt {
-  color: white;
-}
 
 </style>
