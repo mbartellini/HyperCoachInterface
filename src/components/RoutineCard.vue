@@ -3,6 +3,9 @@
         elevation="6"
         max-width="200"
         class="rounded-card"
+        :to="{ name: 'RoutineDetail', params: {
+          id: 0
+        }}"
     >
       <v-img
           :src="routine.img_src"
