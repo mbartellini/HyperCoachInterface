@@ -46,6 +46,11 @@ export default {
             dispatch('updateToken', { token: result.token, rememberMe })
             return result
         },
+        async register({dispatch}, {credentials, rememberMe}) {
+            const result = await UserApi.register(credentials)
+            dispatch('updateToken', { token: result.token, rememberMe })
+            return result
+        },
         async logout({dispatch}) {
             await UserApi.logout()
             dispatch('removeToken')

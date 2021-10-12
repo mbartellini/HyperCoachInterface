@@ -14,7 +14,12 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+        component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+    },
+    {
+        path: '/register',
+        name: 'Registration',
+        component: () => import(/* webpackChunkName: "Registration" */ '../views/Registration.vue')
     },
     {
         path: '/LoginQuestions',
@@ -90,7 +95,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(route => route.meta.requiresAuth) && !store.user) {
-        next({name: "Login", query: { redirect: to.fullPath }});
+        next({name: "LoginPrompt", query: { redirect: to.fullPath }});
     } else {
         next();
     }
