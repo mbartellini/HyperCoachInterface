@@ -9,7 +9,7 @@
 <!--            <h1 class="text-left font-bold mb-5 font-montserrat">Username</h1>-->
 <!--            <input type="text" v-model="username"/>-->
         <v-col cols="8" sm="6" md="3" align="center" offset="4">
-          <v-text-field outlined label="Usuario" clearable></v-text-field>
+          <v-text-field v-model="username" outlined label="Usuario" clearable></v-text-field>
         </v-col>
 <!--            <h1 class="text-left font-bold mb-5 font-montserrat">Password</h1>-->
 <!--            <input type="password" v-model="password">-->
