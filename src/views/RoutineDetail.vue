@@ -16,6 +16,7 @@
               class="justify-center ma-auto"
               lazy-src="@/assets/loading.gif"
               width="500px"
+              :alt="routine.detail"
               :src="routine.metadata.imgSrc"
               contain
           ></v-img>
@@ -29,18 +30,32 @@
           lg="4"
           xl="4"
       >
-        <v-row>
+        <v-row class="d-flex align-center">
            <h1 class="increment">{{ routine.name }}</h1>
           <v-spacer/>
-            <v-icon
-                color="secondary"
-                size="30px"
-            > mdi-share-variant-outline </v-icon>
-            <v-icon
-                color="secondary"
-                size="30px"
-                style="margin-left: 25px"
-            > mdi-star-outline </v-icon>
+          <div class="mx-2">
+            <v-btn
+                round
+                outline
+                icon
+            >
+              <v-icon
+                  color="secondary"
+                  size="30px"
+              > mdi-share-variant-outline </v-icon>
+            </v-btn>
+            <v-btn
+                round
+                outline
+                icon
+                @click="is_fav = !is_fav"
+            >
+              <v-icon
+                  color="secondary"
+                  size="30px"
+              >{{is_fav ? 'mdi-star' : 'mdi-star-outline'}}</v-icon>
+            </v-btn>
+          </div>
         </v-row>
         <v-divider class="my-5"/>
         <v-row dense class="ma-0 pa-0">
@@ -85,7 +100,6 @@
       >
         <CycleCard :routine-id="routine.id" :cycle-id="cycle.id" class="ma-auto"></CycleCard>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -108,6 +122,7 @@ export default {
     GoBackButton
   },
   data: () => ({
+    is_fav: false,
     routine: {
       "id": 1,
       "name": "7 x 4 Challenge",
