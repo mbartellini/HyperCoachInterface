@@ -14,17 +14,17 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+        component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
     },
     {
         path: '/register',
         name: 'Registration',
-        component: () => import(/* webpackChunkName: "Registration" */ '../views/Registration.vue')
+        component: () => import(/* webpackChunkName: "registration" */ '../views/Registration.vue')
     },
     {
         path: '/LoginQuestions',
         name: 'LoginQuestions',
-        component: () => import(/* webpackChunkName: "LoginQuestions" */ '../views/LoginQuestions.vue')
+        component: () => import(/* webpackChunkName: "login_questions" */ '../views/LoginQuestions.vue')
     },
     {
         path: '/favorites',
@@ -34,7 +34,7 @@ const routes = [
     {
         path: '/myroutines',
         name: 'MyRoutines',
-        component: () => import(/* webpackChunkName: "myroutines" */ '../views/MyRoutines.vue')
+        component: () => import(/* webpackChunkName: "my_routines" */ '../views/MyRoutines.vue')
     },
     {
         path: '/search',
@@ -55,7 +55,7 @@ const routes = [
         path: '/routine/:id',
         name: 'RoutineDetail',
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
-        component: () => import(/* webpackChunkName: "routinedetail" */ '../views/RoutineDetail.vue'),
+        component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
         beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
                 routine => routine.id === to.params.id
@@ -68,14 +68,9 @@ const routes = [
         },
     },
     {
-        path: '/login',
-        name: 'Login',
-        component: () => import(/* webpackChunkName: "login" */ '../views/Login')
-    },
-    {
         path: 'loginprompt',
         name: 'LoginPrompt',
-        component: () => import(/* webpackChunkName: "loginprompt" */ '../views/LoginPrompt')
+        component: () => import(/* webpackChunkName: "login_prompt" */ '../views/LoginPrompt')
     },
     {
         path: '/profile',
@@ -87,7 +82,7 @@ const routes = [
         path: '/notfound',
         alias: '*',
         name: 'NotFound',
-        component: () => import(/* webpackChunkName: "notfound" */ '../views/NotFound.vue')
+        component: () => import(/* webpackChunkName: "not_found" */ '../views/NotFound.vue')
     },
 ]
 
