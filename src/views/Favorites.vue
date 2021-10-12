@@ -4,25 +4,26 @@
       <v-row class="text-h5 ma-3">
         <h1>Favoritos</h1>
       </v-row>
-      <v-row class="text-h6 ma-3 pt-5">
-        <p>
-          ¡Estas son las rutinas que marcaste como favoritas!
-        </p>
-      </v-row>
+      <div v-if="favorites">
+        <v-row class="text-h6 ma-3 pt-5">
+          <p>
+            ¡Estas son las rutinas que marcaste como favoritas!
+          </p>
+        </v-row>
 
-      <v-row dense justify="space-between">
-        <v-col
-            v-for="(routine, i) in favorites"
-            :key="i"
-            xs="12"
-            sm="12"
-            md="3"
-            lg="2"
-            xl="2"
-        >
-          <RoutineCard :routine="routine"/>
-        </v-col>
-      </v-row>
+        <v-row fluid>
+          <RoutinesCardsGrid :routines="favorites" />
+        </v-row>
+      </div>
+
+      <div v-else>
+        <v-row class="text-h6 ma-3 pt-5">
+          <p>
+            Todavía no marcaste ninguna rutina como favorita. <router-link :to="{name: 'Home'}">¿Querés explorarlas para encontrar la indicada?</router-link>
+          </p>
+        </v-row>
+      </div>
+
     </v-container>
   </div>
 </template>
@@ -30,13 +31,13 @@
 
 
 <script>
-import RoutineCard from '@/components/RoutineCard'
+import RoutinesCardsGrid from "../components/RoutinesCardsGrid";
 
 export default {
   name: 'Favorites',
 
   components: {
-    RoutineCard,
+    RoutinesCardsGrid,
   },
 
   data: () => ({

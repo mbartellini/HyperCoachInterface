@@ -41,6 +41,9 @@ export default {
             commit('setToken', null)
             Api.token = null
         },
+        removeUser({commit}) {
+            commit('setUser', null)
+        },
         async login({dispatch}, {credentials, rememberMe}) {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })
@@ -52,15 +55,25 @@ export default {
             return result
         },
         async logout({dispatch}) {
-            await UserApi.logout()
+            console.log("ja")
             dispatch('removeToken')
+            dispatch('removeUser')
+            try {
+                await UserApi.logout()
+            } catch (e) {
+                console.log(e)
+            }
+            console.log("jas")
         },
         async getCurrentUser({state, commit}) {
-            if (state.user)
+            if (state.user) {
+                console.log(state.user.firstName)
                 return state.user
+            }
 
             const result = await UserApi.get()
             commit('setUser', result)
+            return result
         }
     },
 }

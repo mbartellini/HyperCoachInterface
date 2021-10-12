@@ -1,5 +1,6 @@
 <template>
-  <v-app-bar app clipped-left class="secondary py-0">
+  <v-app-bar app clipped-left class="secondary py-0" :key="reload">
+    <button @click="logout">PRESS</button>
     <v-container fluid fill-height>
       <v-row class="align-center">
         <v-avatar
@@ -42,20 +43,61 @@
 </template>
 
 
-<!--
-
--->
-
-
 <script>
+import {mapGetters, mapActions} from 'vuex'
+
+
 export default {
+
   name: "TopBar",
 
   data: () => ({
     profileRoute: 'Profile',
     username: null,
+    reload: false,
     profile_pic: "@/assets/Juani.jpeg",
   }),
+
+  computed: {
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn'
+    }),
+  },
+
+  methods: {
+    ...mapActions('security', {
+      $logout: 'logout',
+      $getCurrentUser: 'getCurrentUser',
+    }),
+    async logout() {
+      console.log("2")
+      await this.$logout()
+      this.username = null
+      this.reload = !this.reload
+    },
+    async getCurrent() {
+      console.log("1")
+      if (this.$isLoggedIn) {
+        let aux = await this.$getCurrentUser()
+        if (!aux) {
+          return null;
+        }
+        this.profile_pic = aux.avatarUrl
+        this.username = aux.firstName
+        return aux;
+      }
+      return null;
+    },
+  },
+
+  beforeMount() {
+    this.getCurrent()
+  },
+
+  beforeUpdate() {
+    this.getCurrent()
+  }
+
 }
 </script>
 
