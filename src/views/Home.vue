@@ -5,45 +5,28 @@
         <h1>Recientes</h1>
       </v-row>
 
-      <v-row dense >
-        <v-col
-            v-for="(card, i) in recent"
-            :key="i"
-            xs="12"
-            sm="12"
-            md="3"
-            lg="2"
-            xl="2"
-        >
-          <RoutineCard :routine="card"/>
-        </v-col>
+      <v-row fluid>
+        <RoutinesCardsGrid :routines="recent" />
       </v-row>
+
       <v-row class="text-h5 ma-3 mt-15">
         <h1>Todas las rutinas</h1>
       </v-row>
-      <v-row dense >
-        <v-col
-            v-for="(card, i) in all"
-            :key="i"
-            xs="12"
-            sm="12"
-            md="3"
-            lg="2"
-            xl="2"
-        >
-          <RoutineCard :routine="card"/>
-        </v-col>
+
+      <v-row fluid>
+        <RoutinesCardsGrid :routines="all" />
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-import RoutineCard from '../components/RoutineCard'
+import RoutinesCardsGrid from "../components/RoutinesCardsGrid"
+
 export default {
   name: 'Home',
   components: {
-    RoutineCard,
+    RoutinesCardsGrid,
   },
   data: () => ({
     recent: [

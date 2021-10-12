@@ -9,19 +9,8 @@
           ¡Estas son las rutinas que creaste!
         </p>
       </v-row>
-
-      <v-row dense class="d-flex flex-wrap">
-        <v-col
-            v-for="(routine, i) in myRoutines"
-            :key="i"
-            xs="12"
-            sm="12"
-            md="3"
-            lg="2"
-            xl="2"
-        >
-          <RoutineCard :routine="routine"/>
-        </v-col>
+      <v-row fluid>
+        <RoutinesCardsGrid :routines="myRoutines" />
       </v-row>
     </v-container>
   </div>
@@ -30,13 +19,13 @@
 
 
 <script>
-import RoutineCard from "@/components/RoutineCard";
+import RoutinesCardsGrid from "../components/RoutinesCardsGrid";
 
 export default {
   name: 'MyRoutines',
 
   components: {
-    RoutineCard,
+    RoutinesCardsGrid,
   },
 
   data: () => ({
