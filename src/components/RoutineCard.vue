@@ -8,7 +8,7 @@
           :src="routine.img_src"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
-      <v-card-title class = "justify-center">
+      <v-card-title class="justify-center" max-width="200">
         {{ routine.title }}
       </v-card-title>
     </v-card>
