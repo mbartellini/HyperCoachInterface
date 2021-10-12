@@ -54,12 +54,14 @@
         </v-row>
         <v-row>
           <h4 class="text">{{'hola'}}</h4>
-          <h4 class="text" style="margin-left: 70px">{{'hola'}}</h4>
+          <v-spacer/>
+          <h4 class="text">{{'hola'}}</h4>
+          <v-spacer/>
           <div v-if="routine.metadata.equipment">
-            <h4 class="text" style="margin-left: 70px">Requiere equipamiento.</h4>
+            <h4 class="text">Requiere equipamiento.</h4>
           </div>
           <div v-else>
-            <h4 class="text" style="margin-left: 70px">No requiere equipamiento.</h4>
+            <h4 class="text">No requiere equipamiento.</h4>
           </div>
         </v-row>
        </v-col>
