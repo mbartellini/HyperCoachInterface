@@ -41,7 +41,6 @@
                         md="3"
                     >
                       <v-autocomplete
-                          @change="pirulana"
                           ref="gender"
                           v-model="gender"
                           :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
@@ -147,10 +146,30 @@
                   >
                     <v-text-field
                         v-model="password"
-                        outlined
-                        clearable
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show ? 'text' : 'password'"
+                        name="input-10-2"
                         label="Contraseña"
-                    />
+                        outlined
+                        @click:append="show = !show"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
+                  >
+                    <v-text-field
+                        v-model="passwordConfirmation"
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show ? 'text' : 'password'"
+                        name="input-10-2"
+                        label="Confirme contraseña"
+                        outlined
+                        @click:append="show = !show"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -184,6 +203,7 @@ export default {
       firstname: '',
       lastname: '',
       password: '',
+      passwordConfirmation: '',
       menu: null,
       gender: ["Masculino","Femenino","Prefiero no indicar"],
       date: '',
@@ -226,7 +246,10 @@ export default {
         } else {
           this.gender = ''
         }
-
+        if(this.password != this.passwordConfirmation){
+          this.error = true
+          return
+        }
         console.log(this.gender)
         console.log(this.date)
 
@@ -240,9 +263,6 @@ export default {
         this.errorMsg = error // TODO: beautify this output
         this.password = ''
       }
-    },
-    pirulana(){
-      console.log(this.gender)
     },
   }
 }
