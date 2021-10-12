@@ -3,7 +3,7 @@
     <v-row class="justify-left mb-3">
       <GoBackButton/>
     </v-row>
-    <v-row class="ma-3 mb-5 justify-space-around align-center">
+    <v-row class="ma-3 mb-5 justify-center align-start">
       <v-col class="d-flex justify-xs-center justify-sm-center justify-md-center"
           xs="12"
           sm="12"
@@ -22,6 +22,7 @@
         </v-card>
       </v-col>
       <v-col
+          class="ml-10 mt-2"
           xs="12"
           sm="12"
           md="12"
@@ -29,7 +30,7 @@
           xl="4"
       >
         <v-row>
-          <h1 class="increment">{{ routine.name }}</h1>
+           <h1 class="increment">{{ routine.name }}</h1>
           <v-spacer/>
             <v-icon
                 color="secondary"
@@ -42,27 +43,32 @@
             > mdi-star-outline </v-icon>
         </v-row>
         <v-divider class="my-5"/>
-        <v-row>
-          <p class="text">{{routine.metadata.duration}} min.</p>
-          <v-spacer/>
-          <p class="text">{{routine.difficulty}}</p>
-          <v-spacer/>
-          <!-- <div>
-            <v-icon style="margin-left: 70px"> mdi-heart </v-icon>
-          </div> -->
-          <p class="text">{{'hola'}}</p>
-        </v-row>
-        <v-row>
-          <h4 class="text">{{'hola'}}</h4>
-          <v-spacer/>
-          <h4 class="text">{{'hola'}}</h4>
-          <v-spacer/>
-          <div v-if="routine.metadata.equipment">
-            <h4 class="text">Requiere equipamiento.</h4>
-          </div>
-          <div v-else>
-            <h4 class="text">No requiere equipamiento.</h4>
-          </div>
+        <v-row dense class="ma-0 pa-0">
+          <v-col dense class="ma-0 pa-0">
+            <v-row dense>
+            <h4 class="text">{{routine.metadata.duration}} min.</h4>
+            </v-row>
+            <v-row dense>
+            <h4 class="text">{{routine.difficulty}}</h4>
+            </v-row>
+            <v-row dense>
+              <h4 class="text">{{'hola'}}</h4>
+            </v-row>
+            <v-row dense>
+              <h4 class="text">{{'hola'}}</h4>
+            </v-row>
+            <v-row dense>
+              <h4 class="text">{{'hola'}}</h4>
+            </v-row>
+            <v-row dense>
+              <div v-if="routine.metadata.equipment">
+                <h4 class="text">Requiere equipamiento.</h4>
+              </div>
+              <div v-else>
+                <h4 class="text">No requiere equipamiento.</h4>
+              </div>
+            </v-row>
+          </v-col>
         </v-row>
        </v-col>
       </v-row>
@@ -231,7 +237,6 @@ export default {
 h4.text{
   font-weight: normal;
   font-size: medium;
-  margin-top: 20px;
 }
 h4.text2 {
   font-weight: normal;
