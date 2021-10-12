@@ -1,29 +1,49 @@
 <template>
-  <v-app-bar app clipped-left class="secondary align-center">
-    <v-img src="@/assets/hci.png" alt="Logo" :max-height="50" :max-width="50" />
-    <!-- <v-app-bar-nav-icon v-if="!permanent" @click.stop="drawer = !drawer" /> -->
-    <v-app-bar-title class="title" >Hyper Coach Interface</v-app-bar-title>
-    <v-spacer/>
-    <div v-if="username"> <!-- Logged in -->
-      <router-link class="profile" :to="{name: profileRoute}">
-        {{username}}
-      </router-link>
-      <figure >
-        <router-link class="profilepic" :to="{name: profileRoute}" >
-          <img :src="profile_pic" :height="32" :width="32" class="profilepic" alt="Profile picture"/>
-        </router-link>
-      </figure>
-    </div>
-    <div v-else> <!-- Not logged in -->
-      <router-link :to="{name: 'Login'}">
-        Iniciar sesión /
-      </router-link>
-      <router-link :to="{name: 'Registration'}" >
-        Registrarse
-      </router-link>
-    </div>
+  <v-app-bar app clipped-left class="secondary py-0">
+    <v-container fluid fill-height>
+      <v-row class="align-center">
+        <v-avatar
+            class="mr-10"
+            color="white"
+            size="50"
+        >
+          <v-img alt="Logo de Hyper Coach Interface" src="@/assets/hci.png"/>
+        </v-avatar>
+        <v-toolbar-title class="white--text font-weight-bold text-lg-h4 text-md-h4">Hyper Coach Interface</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+
+        <v-card v-if="username" flat class="d-flex align-center justify-center pa-1" color="transparent" :to="profileRoute">
+          <p class="ma-3 hidden-sm-and-down white--text">{{username}}</p>
+          <v-avatar
+              size="50"
+          >
+            <v-img :alt="'Foto de perfil de {{username}}'" src="@/assets/Juani.jpeg"></v-img>
+          </v-avatar>
+        </v-card>
+        <v-card v-else flat class="d-flex align-center justify-center pa-1" color="transparent" :to="profileRoute">
+          <p class="ma-3 hidden-sm-and-down white--text">Iniciar Sesión / Registrarse</p>
+          <v-avatar
+              size="50"
+          >
+            <v-icon large color="white">
+              mdi-account-circle
+            </v-icon>
+          </v-avatar>
+        </v-card>
+      </v-row>
+    </v-container>
+
   </v-app-bar>
+
 </template>
+
+
+<!--
+
+-->
+
 
 <script>
 export default {
@@ -31,7 +51,7 @@ export default {
 
   data: () => ({
     profileRoute: 'Profile',
-    username: 'Juan',
+    username: null,
     profile_pic: "@/assets/Juani.jpeg",
   }),
 }
@@ -41,22 +61,18 @@ export default {
 .title {
   color: white;
   font-weight: bolder;
-  padding: 10px;
-}
-
-.profile {
-  color: white;
-  text-decoration: underline;
-  position: absolute;
-  right: 80px;
-  padding: 10px;
 }
 
 .profilepic {
-  position: absolute;
-  right: 10px;
+  margin-right: 100px;
   border-radius: 50%;
   border: 1px solid white;
+  height: 32px;
+  width: 32px;
+}
+
+.loginprompt {
+  color: white;
 }
 
 </style>

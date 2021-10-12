@@ -25,7 +25,7 @@
   </v-container>
 </template>
 
-<style>
+<style scoped>
   h1.increase {
     font-size : 200%;
   }

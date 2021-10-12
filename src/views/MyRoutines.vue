@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <h1>My Routines</h1>
-  </v-container>
+  <h1>My Routines</h1>
 </template>
 
 
