@@ -45,7 +45,7 @@
         <v-row>
           <p class="text">{{routine.metadata.duration}} min.</p>
           <v-spacer/>
-          <p class="text" style="margin-left: 70px">{{routine.difficulty}}</p>
+          <p class="text">{{routine.difficulty}}</p>
           <v-spacer/>
           <!-- <div>
             <v-icon style="margin-left: 70px"> mdi-heart </v-icon>
@@ -66,11 +66,16 @@
         </v-row>
        </v-col>
       </v-row>
-    <v-row>
+    <v-row class="d-flex justify-center">
       <v-col
           v-for="(cycle, i) in routineCycles.content"
           :key="i"
-          cols="12"
+          class="pa-lg-10 pa-lg-10"
+          xs="12"
+          sm="12"
+          md="12"
+          lg="5"
+          xl="4"
       >
         <CycleCard :routine-id="routine.id" :cycle-id="cycle.id" class="ma-auto"></CycleCard>
       </v-col>
