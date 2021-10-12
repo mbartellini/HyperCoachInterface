@@ -6,7 +6,6 @@
             cols="12"
             sm="6"
         >
-
           <v-text-field
               v-model="last"
               label="Buscar"

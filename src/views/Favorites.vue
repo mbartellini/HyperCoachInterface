@@ -3,8 +3,8 @@
   <h1>Favorites</h1>
     <v-container fluid >
       <v-row dense >
-        <v-col v-for="routine in favorites" :key="routine">
-          <RoutineCard :img_src="routine.src">{{routine.title}}</RoutineCard>
+        <v-col v-for="(routine, i) in favorites" :key="i">
+          <RoutineCard :routine="routine"/>
         </v-col>
       </v-row>
     </v-container>
