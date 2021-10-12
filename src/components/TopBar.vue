@@ -8,7 +8,7 @@
             color="white"
             size="50"
         >
-          <v-img alt="Logo de Hyper Coach Interface" src="@/assets/HCI.png"/>
+          <v-img alt="Logo de Hyper Coach Interface" src="@/assets/hci.png"/>
         </v-avatar>
         <v-toolbar-title class="white--text font-weight-bold text-lg-h4 text-md-h4">Hyper Coach Interface</v-toolbar-title>
 
