@@ -16,7 +16,7 @@ class UserApi {
     }
 
     static async modify(credentials, controller) {
-        return await Api.put(UserApi.getUrl('current'), false, credentials, controller)
+        return await Api.put(UserApi.getUrl('current'), true, credentials, controller)
     }
 
     static async logout(controller) {
@@ -51,10 +51,11 @@ class RegisterCredentials {
 }
 
 export class ModifyCredentials {
-    constructor(firstName, lastName, gender, phone, birthdate, avatarUrl, metadata) {
+    constructor(firstName, lastName, gender, birthdate, avatarUrl, metadata) {
         this.firstName = firstName
         this.lastName = lastName
         this.gender = gender
+        this.phone = ''
         this.birthdate = birthdate
         this.phone = ''
         this.avatarUrl = avatarUrl

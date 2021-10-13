@@ -1,7 +1,7 @@
 export { Api }
 
 class Api {
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYzNDEzODg3NDk0NiwiZXhwIjoxNjM0MTQxNDY2OTQ2fQ.sEJwo2Dz597TKR4SB04eHELxuBiYnOpprTlTGhTTAks"
+  static token
 
   static get baseUrl() {
     return 'http://127.0.0.1:8080/api'
@@ -12,7 +12,7 @@ class Api {
   }
 
   static async fetch(url, secure, init = {}, controller) {
-    alert(Api.token)
+    // alert(Api.token)
     if (secure && Api.token) {
       if (!init.headers)
         init.headers = {}
