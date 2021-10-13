@@ -35,8 +35,6 @@
           <v-spacer/>
           <div class="mx-2">
             <v-btn
-                round
-                outline
                 icon
             >
               <v-icon
@@ -45,8 +43,6 @@
               > mdi-share-variant-outline </v-icon>
             </v-btn>
             <v-btn
-                round
-                outline
                 icon
                 @click="is_fav = !is_fav"
             >
@@ -82,31 +78,20 @@
               <div v-else>
                 <h4 class="text">No requiere equipamiento.</h4>
               </div>
-              <v-spacer/>
-              <div class="mx-2">
-                <v-btn
-                    rounded
-                    color="red"
-                >
-                  <v-icon left>
-                    mdi-delete
-                  </v-icon>
-                  <div class="text-decoration-underline">
-                    Eliminar
-                  </div>
-                </v-btn>
-                <v-btn
-                    rounded
-                    color="primary"
-                  >
-                  <v-icon left>
-                    mdi-pencil
-                  </v-icon>
-                  <div class="text-decoration-underline">
-                    Editar
-                  </div>
-                </v-btn>
-              </div>
+            </v-row>
+            <v-row class="justify-space-between">
+              <v-btn tile class="rounded-lg" large color="error">
+                <v-icon dark>mdi-delete</v-icon>
+                <div class="text-decoration-underline">
+                  Eliminar
+                </div>
+              </v-btn>
+              <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditRoutine', params: { id: id } }" >
+                <v-icon dark>mdi-content-save</v-icon>
+                <div class="text-decoration-underline">
+                  Editar
+                </div>
+              </v-btn>
             </v-row>
           </v-col>
         </v-row>
