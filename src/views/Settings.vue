@@ -14,7 +14,7 @@
               style="margin-bottom: 15px"
           >
             <v-img
-                :src="user.img"
+                :src="preview"
                 class="mx-auto"
                 max-width="250"
                 height="250"
@@ -22,96 +22,76 @@
             />
           </v-avatar>
         </div>
-        <div style="margin-bottom: 10px">
-          <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image"/>
-          <v-img :src="preview" :height="300" :width="300" class="profilepic" alt="Profile picture"></v-img>
-          <v-btn>
-            <label @change="PreviewImage" for="file-upload">Cambiar foto</label>
-          </v-btn>
-        </div>
-        <div>
-          <h1>Nombre</h1>
-          <v-text-field
-              clearable
-              outlined
-              :value="user.name"
-          />
-        </div>
-        <div>
-          <h1>Usuario</h1>
-          <v-text-field
-              clearable
-              outlined
-              :value="user.username"
-          />
-        </div>
-        <div>
-          <h1>E-mail</h1>
-          <v-text-field
-              clearable
-              outlined
-              :value="user.email"
-          />
-        </div>
-        <div>
-          <h1>Sexo</h1>
-          <v-autocomplete
-              ref="gender"
-              v-model="gender"
-              :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
-              :label="user.sex"
-              placeholder="Select..."
-              required
-              outlined
-          ></v-autocomplete>
-        </div>
-        <div>
-          <h1>Fecha de nacimiento</h1>
-          <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :return-value.sync="date"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-          >
-            <v-date-picker
-                v-model="date"
-                no-title
-                scrollable
-            >
-              <v-spacer></v-spacer>
-              <v-btn
-                  text
-                  color="primary"
-                  @click="menu = false"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                  text
-                  color="primary"
-                  @click="$refs.menu.save(date)"
-              >
-                OK
-              </v-btn>
-            </v-date-picker>
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                  v-model="date"
-                  :label="user.date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                  outlined
-              ></v-text-field>
-            </template>
-          </v-menu>
-        </div>
       </v-col>
     </v-row>
+    <form @submit="login">
+      <v-row>
+        <v-col>
+          <div class="my-5">
+            <v-row>
+              <v-col
+                  cols="8"
+                  sm="6"
+                  md="3"
+              >
+                <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" style="margin: 0px"/>
+                <v-btn>
+                  <label @change="PreviewImage" for="file-upload">Actualizar foto de perfil</label>
+                </v-btn>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                  cols="8"
+                  sm="6"
+                  md="3"
+              >
+                <v-text-field
+                    v-model="name"
+                    outlined
+                    clearable
+                    label="Nombre"
+                />
+              </v-col>
+              <v-col
+                  cols="8"
+                  sm="6"
+                  md="3"
+              >
+                <v-text-field
+                    v-model="lastname"
+                    outlined
+                    label="Apellido"
+                    clearable
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                  cols="8"
+                  sm="6"
+                  md="3"
+              >
+                <v-autocomplete
+                    ref="gender"
+                    v-model="gender"
+                    :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
+                    label="Genero"
+                    placeholder="Select..."
+                    required
+                    outlined
+                ></v-autocomplete>
+              </v-col>
+            </v-row>
+            <v-row>
+              <button type="submit" class="bg-green-400 p-5 text-white" style="margin-left:15px">
+                Modificar datos
+              </button>
+            </v-row>
+          </div>
+        </v-col>
+      </v-row>
+    </form>
   </v-container>
 </template>
 
@@ -125,19 +105,83 @@
 </style>
 
 <script>
+import {mapActions, mapGetters, mapState} from "vuex";
+import {ModifyCredentials} from "@/api/user";
+import router from "@/router";
+
 export default {
-  name: 'Profile',
+  name: 'Settings',
 
   data: () => ({
-    user: {
-      name: "Juan Ignacio Garcia Matwieiszyn",
-      img: "../assets/Juani.jpeg",
-      username: "juano",
-      email: "juanigarcia@itba.edu.ar",
-      sex: "Por favor",
-      age: 20,
-      date: '20-10-2020',
-    },
+    name: "Juan Ignacio Garcia Matwieiszyn",
+    lastname: "Juan Ignacio Garcia Matwieiszyn",
+    image: [],
+    username: "juano",
+    email: "juanigarcia@itba.edu.ar",
+    gender: "Masculino",
+    age: 20,
+    password: '',
+    preview: null,
+    passwordConfirmation: '',
+    menu: null,
   }),
+  computed: {
+    ...mapState('security', {
+      $user: state => state.user,
+    }),
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn',
+      $getCurrentUser: 'getCurrentUser',
+    })
+  },
+  methods: {
+    PreviewImage() {
+      this.preview = URL.createObjectURL(this.image)
+    },
+    ...mapActions('security', {
+      $register: 'register',
+      $modify: 'modify',
+    }),
+    async login(e) {
+      e.preventDefault()
+      try {
+        if (this.gender === "Prefiero no indicar") {
+          this.gender = 'other'
+        } else if (this.gender === "Masculino") {
+          this.gender = 'male'
+        } else if (this.gender === "Femenino") {
+          this.gender = 'female'
+        } else {
+          this.gender = ''
+        }
+        if (this.password !== this.passwordConfirmation) {
+          this.error = true
+          return
+        }
+        console.log(this.gender)
+
+        this.image = URL.createObjectURL(this.image)
+        const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, this.image, this.metadata)
+        console.log(JSON.stringify(credentials))
+        await this.$modify({credentials, rememberMe: true})
+        await router.push('/')
+      } catch (error) {
+        this.error = true
+        this.errorMsg = error // TODO: beautify this output
+        this.password = ''
+      }
+    },
+    async getData() {
+      let user = await this.$getCurrentUser
+      this.name = user.firstName
+      this.lastname = user.lastName
+      this.image = user.avatarUrl
+      this.gender = user.gender
+    }
+  },
+  async beforeMount() {
+    await this.getData()
+  },
+
 }
 </script>

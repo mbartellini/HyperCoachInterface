@@ -247,7 +247,6 @@ export default {
       this.preview = URL.createObjectURL(this.image)
     },
     ...mapActions('security', {
-      $getCurrentUser: 'getCurrentUser',
       $register: 'register',
     }),
     async login(e) {

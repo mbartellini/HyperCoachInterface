@@ -4,6 +4,7 @@ import {Api} from "../api";
 const SECURITY_TOKEN_KEY = 'security-token'
 
 export default {
+    name: 'security',
     namespaced: true,
     state: {
         token: null,
@@ -12,6 +13,16 @@ export default {
     getters: {
         isLoggedIn(state) {
             return state.token != null
+        },
+        async getCurrentUser(state) {
+            if (state.user) {
+                console.log(state.user.firstName)
+                return state.user
+            }
+
+            const result = await UserApi.get()
+            state.user = result
+            return result
         }
     },
     mutations: {
@@ -54,6 +65,11 @@ export default {
             dispatch('updateToken', { token: result.token, rememberMe })
             return result
         },
+        async modify({dispatch}, {credentials, rememberMe}) {
+            const result = await UserApi.modify(credentials)
+            dispatch('updateToken', { token: result.token, rememberMe })
+            return result
+        },
         async logout({dispatch}) {
             console.log("ja")
             dispatch('removeToken')
@@ -65,15 +81,5 @@ export default {
             }
             console.log("jas")
         },
-        async getCurrentUser({state, commit}) {
-            if (state.user) {
-                console.log(state.user.firstName)
-                return state.user
-            }
-
-            const result = await UserApi.get()
-            commit('setUser', result)
-            return result
-        }
     },
 }
