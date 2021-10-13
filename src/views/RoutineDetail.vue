@@ -85,7 +85,7 @@
               <v-spacer/>
               <div class="mx-2">
                 <v-btn
-                    class="rounded-lg"
+                    rounded
                     color="red"
                 >
                   <v-icon left>

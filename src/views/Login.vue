@@ -12,7 +12,7 @@
         <div class="text-h6 mb-4">
           Iniciar sesión
         </div>
-
+        <form @submit="login">
         <v-text-field
             v-model="username"
             outlined label="Usuario"
@@ -27,25 +27,24 @@
             outlined
             @click:append="show = !show"
         />
-
-        <div class="text-decoration-underline">
-          <v-btn
-              class="ma-2"
-              color="primary"
-              :to="{name: 'Login'}"
-          >
-            Iniciar sesión
-          </v-btn>
-
-          <v-btn
-              class="ma-2"
-              plain
-              outlined
-              :to="{name: 'Registration'}"
-          >
-            Registrarme
-          </v-btn>
-        </div>
+          <div class="text-decoration-underline">
+            <v-btn
+                type="submit"
+                class="ma-2"
+                color="primary"
+            >
+              Iniciar sesión
+            </v-btn>
+            <v-btn
+                class="ma-2"
+                plain
+                outlined
+                :to="{name: 'Registration'}"
+            >
+              Registrarme
+            </v-btn>
+          </div>
+        </form>
         <div class="text-decoration-underline">
           <v-btn
               class="ma-2"
@@ -104,6 +103,7 @@ export default {
         const credentials = new LoginCredentials(this.username, this.password)
         await this.$login({credentials, rememberMe: true})
         await router.push('/')
+        await router.go()
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output

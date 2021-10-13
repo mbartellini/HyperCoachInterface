@@ -32,6 +32,7 @@ export default {
       {name: 'Inicio', route: 'Home', icon: 'mdi-home'},
       {name: 'Favoritos', route: 'Favorites', icon:'mdi-star'},
       {name: 'Mis rutinas', route: 'MyRoutines', icon: 'mdi-folder'},
+      {name: 'Mis ejercicios', route: 'MyExercises', icon: 'mdi-weight-lifter'},
       {name: 'Buscar', route: 'Search', icon: 'mdi-card-search'},
       {name: 'Configuración', route: 'Settings', icon: 'mdi-cog'},
     // TODO: make active icon to only have outline.
