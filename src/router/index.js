@@ -39,12 +39,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "my_routines" */ '../views/MyRoutines.vue')
     },
     {
-        path: '/myexercises',
-        name: 'MyExercises',
-        // meta: { requiresAuth: true },
-        component: () => import(/* webpackChunkName: "my_exercises" */ '../views/MyExercises')
-    },
-    {
         path: '/search',
         name: 'Search',
         component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
@@ -61,42 +55,10 @@ const routes = [
         component: () => import(/* webpackChunkName: "info" */ '../views/Info.vue')
     },
     {
-        path: '/routineedit/:id?',
-        name: 'EditRoutine',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || null}),
-        component: () => import(/* webpackChunkName: "edit_routine" */ '../views/EditRoutine.vue'),
-        /* beforeEnter: (to, from, next) => {
-            const exists = store.routines.find(
-                routine => routine.id === to.params.id
-            )
-            if (exists) {
-                next()
-            } else {
-                next({name: 'NotFound'})
-            }
-        }, */
-    },
-    {
         path: '/routine/:id',
         name: 'RoutineDetail',
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
-        /* beforeEnter: (to, from, next) => {
-            const exists = store.routines.find(
-                routine => routine.id === to.params.id
-            )
-            if (exists) {
-                next()
-            } else {
-                next({name: 'NotFound'})
-            }
-        }, */
-    },
-    {
-        path: '/exercise/:id',
-        name: 'ExerciseDetail',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
-        component: () => import(/* webpackChunkName: "exercise_detail" */ '../views/ExerciseDetail.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
                 routine => routine.id === to.params.id
@@ -126,6 +88,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "not_found" */ '../views/NotFound.vue')
     },
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
