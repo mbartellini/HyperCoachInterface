@@ -1,17 +1,15 @@
 <template>
   <v-container fluid>
-    <v-container fluid>
-      <v-row class="text-h5 ma-3">
-        <h1>Editar perfil</h1>
-      </v-row>
-    </v-container>
+    <v-row class="text-h5 ma-3">
+      <h1>Editar perfil</h1>
+    </v-row>
     <v-row class="text-center">
       <v-col cols="6">
         <div style="margin-top:40px">
           <v-avatar
               color="primary"
               size="250"
-              style="margin-bottom: 15px"
+              style="margin-bottom: 10px"
           >
             <v-img
                 :src="preview"
@@ -30,11 +28,12 @@
           <div class="my-5">
             <v-row>
               <v-col
+                  class="align-content-center"
                   cols="8"
                   sm="6"
                   md="3"
               >
-                <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" style="margin: 0px"/>
+                <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" />
                 <v-btn>
                   <label @change="PreviewImage" for="file-upload">Actualizar foto de perfil</label>
                 </v-btn>
