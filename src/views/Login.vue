@@ -89,12 +89,12 @@ export default {
       $user: state => state.user,
     }),
     ...mapGetters('security', {
-      $isLoggedIn: 'isLoggedIn'
+      $isLoggedIn: 'isLoggedIn',
+      $getCurrentUser: 'getCurrentUser',
     })
   },
   methods: {
     ...mapActions('security', {
-      $getCurrentUser: 'getCurrentUser',
       $login: 'login',
       $logout: 'logout',
     }),

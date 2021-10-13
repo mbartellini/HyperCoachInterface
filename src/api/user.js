@@ -15,6 +15,10 @@ class UserApi {
         return await Api.post(UserApi.getUrl(''), false, credentials, controller)
     }
 
+    static async modify(credentials, controller) {
+        return await Api.put(UserApi.getUrl('current'), false, credentials, controller)
+    }
+
     static async logout(controller) {
         await Api.post(UserApi.getUrl('logout'), true, controller)
     }
@@ -41,6 +45,18 @@ class RegisterCredentials {
         this.birthdate = birthdate
         this.email = email
         this.phone = phone
+        this.avatarUrl = avatarUrl
+        this.metadata = metadata
+    }
+}
+
+export class ModifyCredentials {
+    constructor(firstName, lastName, gender, phone, birthdate, avatarUrl, metadata) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.gender = gender
+        this.birthdate = birthdate
+        this.phone = ''
         this.avatarUrl = avatarUrl
         this.metadata = metadata
     }

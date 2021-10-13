@@ -60,14 +60,14 @@ export default {
 
   computed: {
     ...mapGetters('security', {
-      $isLoggedIn: 'isLoggedIn'
+      $isLoggedIn: 'isLoggedIn',
+      $getCurrentUser: 'getCurrentUser',
     }),
   },
 
   methods: {
     ...mapActions('security', {
       $logout: 'logout',
-      $getCurrentUser: 'getCurrentUser',
     }),
     async logout() {
       console.log("2")
@@ -78,7 +78,7 @@ export default {
     async getCurrent() {
       console.log("1")
       if (this.$isLoggedIn) {
-        let aux = await this.$getCurrentUser()
+        let aux = await this.$getCurrentUser
         if (!aux) {
           return null;
         }

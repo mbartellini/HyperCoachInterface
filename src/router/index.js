@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import store from '@/store.js'
+import security from '@/api/module/security'
 
 Vue.use(VueRouter)
 
@@ -97,7 +97,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(route => route.meta.requiresAuth) && !store.user) {
+    console.log(to.matched.some(route => route.meta.requiresAuth) && !security.state.user)
+    console.log(security.state.user)
+    if (to.matched.some(route => route.meta.requiresAuth) && !security.state.user) {
         next({name: "LoginPrompt", query: { redirect: to.fullPath }});
     } else {
         next();
