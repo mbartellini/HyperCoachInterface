@@ -1,17 +1,21 @@
 <template>
   <v-form>
     <v-container>
+      <v-row class="text-h5 ma-3">
+        <h1>Buscar</h1>
+      </v-row>
       <v-row>
         <v-col
             cols="12"
             sm="6"
+            class="mt-2"
         >
           <v-text-field
               v-model="last"
               label="Buscar"
               prepend-inner-icon="mdi-magnify"
               solo-inverted
-              rounded
+              class="ma-2"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -32,7 +36,7 @@
           <v-select
               :items="difficulty"
               label="Dificultad"
-              rounded
+              class="ma-2"
               solo-inverted
           >
           </v-select>
@@ -44,7 +48,7 @@
           <v-select
               :items="categories"
               label="Categorias"
-              rounded
+              class="ma-2"
               solo-inverted
           />
         </v-col>
@@ -70,7 +74,7 @@
 <style>
 .text{
   margin-left: 10px;
-  margin-top: -10px;
+  margin-top: -20px;
 }
 </style>
 
