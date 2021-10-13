@@ -1,6 +1,7 @@
 <template>
   <div class="flex items-center justify-center h-screen">
     <h1>Registro</h1>
+    (*): campos obligatorios.
     <div class="sm:w-1/2">
       <div class="p-5 w-4/5 mx-auto text-left font-raleway">
         <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
@@ -8,28 +9,48 @@
           <v-row>
             <v-col>
               <div class="my-5">
+                <v-row justify="center">
+                  <v-col cols="8">
+                    <v-img
+                        :src="preview"
+                        height="150"
+                        width="150"
+                        max-width="150"
+                        max-height="150"
+                        class="rounded-circle profilepic"
+                        alt="Profile picture"/>
+                  </v-col>
+                <!-- TODO: center this -->
+                </v-row>
+                <v-row justify="center">
+                  <v-col cols="8">
+                    <v-btn>
+                      <label @change="PreviewImage" for="file-upload">Subir foto de perfil</label>
+                    </v-btn>
+                  </v-col>
+                </v-row>
                 <v-row>
                     <v-col
-                        cols="8"
-                        sm="6"
-                        md="3"
+                      cols="8"
+                      sm="6"
+                      md="3"
                     >
                       <v-text-field
-                          v-model="firstname"
-                          outlined
-                          clearable
-                          label="Nombre"
+                        v-model="firstname"
+                        outlined
+                        clearable
+                        label="Nombre*"
                       />
                     </v-col>
                     <v-col
-                        cols="8"
-                        sm="6"
-                        md="3"
+                      cols="8"
+                      sm="6"
+                      md="3"
                     >
                       <v-text-field
                           v-model="lastname"
                           outlined
-                          label="Apellido"
+                          label="Apellido*"
                           clearable
                       ></v-text-field>
                     </v-col>
@@ -44,8 +65,8 @@
                           ref="gender"
                           v-model="gender"
                           :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
-                          label="Genero"
-                          placeholder="Select..."
+                          label="Género*"
+                          placeholder="Seleccionar..."
                           required
                           outlined
                       ></v-autocomplete>
@@ -88,7 +109,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                               v-model="date"
-                              label="Fecha de nacimiento"
+                              label="Fecha de nacimiento*"
                               prepend-icon="mdi-calendar"
                               readonly
                               v-bind="attrs"
@@ -108,23 +129,19 @@
                       <v-text-field
                           v-model="email"
                           outlined
-                          label="E-mail"
+                          label="E-mail*"
                           clearable
                       ></v-text-field>
                     </v-col>
                   </v-row>
                 <v-row>
-                    <v-col
-                        cols="8"
-                        sm="6"
-                        md="3"
-                    >
-                      <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" style="margin: 0px"/>
-                      <v-img :src="preview" :height="300" :width="300" class="profilepic" alt="Profile picture"></v-img>
-                      <v-btn>
-                        <label @change="PreviewImage" for="file-upload">Subir foto de perfil</label>
-                      </v-btn>
-                    </v-col>
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
+                  >
+                    <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" style="margin: 0px"/>
+                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col
@@ -135,7 +152,7 @@
                     <v-text-field
                         v-model="username"
                         outlined
-                        label="Usuario"
+                        label="Usuario*"
                         clearable
                     ></v-text-field>
                   </v-col>
@@ -149,7 +166,7 @@
                         :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="show ? 'text' : 'password'"
                         name="input-10-2"
-                        label="Contraseña"
+                        label="Contraseña*"
                         outlined
                         @click:append="show = !show"
                     ></v-text-field>
@@ -166,7 +183,7 @@
                         :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="show ? 'text' : 'password'"
                         name="input-10-2"
-                        label="Confirme contraseña"
+                        label="Confirmar contraseña*"
                         outlined
                         @click:append="show = !show"
                     ></v-text-field>
@@ -176,11 +193,6 @@
                   <button type="submit" :disabled="password.length < 3" class="bg-green-400 p-5 text-white" style="margin-left:15px">
                     Registrarse
                   </button>
-                </v-row>
-                <v-row>
-                  <p class="my-2" style="margin-left:15px">
-                    <router-link to="" >Olvidaste tu contraseña?</router-link>
-                  </p>
                 </v-row>
               </div>
             </v-col>
@@ -200,6 +212,7 @@ export default {
   data() {
     return {
       username: '',
+      preview: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
       firstname: '',
       lastname: '',
       password: '',
@@ -208,7 +221,6 @@ export default {
       gender: ["Masculino","Femenino","Prefiero no indicar"],
       date: '',
       email: '',
-      preview: null,
       image: null,
       phone: '',
       metadata: null,
@@ -276,9 +288,8 @@ input[type="email"] { padding: 2px; border: 4px solid gray }
 input[type="date"] { padding: 2px; border: 4px solid gray }
 
 .profilepic {
-  position: absolute;
-  right: 15px;
   border-radius: 50%;
-  border: 1px solid white;
+  outline: solid black 2px;
 }
+
 </style>
