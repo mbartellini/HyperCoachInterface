@@ -82,18 +82,21 @@
               <div v-else>
                 <h4 class="text">No requiere equipamiento.</h4>
               </div>
+              <v-spacer/>
+              <div class="mx-2">
+                <v-btn
+                    rounded
+                    color="red"
+                >
+                  <v-icon left>
+                    mdi-delete
+                  </v-icon>
+                  <div class="text-decoration-underline">
+                    Eliminar rutina
+                  </div>
+                </v-btn>
+              </div>
             </v-row>
-            <v-col offset="md-9" style="margin-bottom: -50px">
-              <v-btn
-                  rounded
-                  color="red"
-              >
-                <v-icon left>
-                  mdi-delete
-                </v-icon>
-                Eliminar rutina
-              </v-btn>
-            </v-col>
           </v-col>
         </v-row>
        </v-col>
