@@ -13,7 +13,7 @@
           No has iniciado sesión :(
         </div>
         <div class="text-body-2 mb-4">
-          Para acceeder a esta funcionalidad debes iniciar sesión.
+          Para acceder a esta funcionalidad debes iniciar sesión.
         </div>
 
         <div class="text-decoration-underline">
