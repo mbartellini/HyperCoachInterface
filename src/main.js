@@ -6,6 +6,7 @@ import router from './router'
 import Vuesax from 'vuesax'
 
 import 'vuesax/dist/vuesax.css'
+import {mapGetters} from "vuex";
 
 Vue.config.productionTip = false
 
@@ -25,6 +26,11 @@ new Vue({
   router,
   async beforeCreate() {
     await this.$store.dispatch('security/initialize')
+  },
+  computed: {
+    ...mapGetters({
+      $isLoggedIn: 'isLoggedIn',
+    })
   },
   render: h => h(App)
 }).$mount('#app')

@@ -92,7 +92,18 @@
                     mdi-delete
                   </v-icon>
                   <div class="text-decoration-underline">
-                    Eliminar rutina
+                    Eliminar
+                  </div>
+                </v-btn>
+                <v-btn
+                    rounded
+                    color="primary"
+                  >
+                  <v-icon left>
+                    mdi-pencil
+                  </v-icon>
+                  <div class="text-decoration-underline">
+                    Editar
                   </div>
                 </v-btn>
               </div>
@@ -128,7 +139,7 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true,
+      required: false,
     }
   },
   components: {

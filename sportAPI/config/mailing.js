@@ -4,8 +4,8 @@ module.exports = {
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false,
-        user: 'candice.runolfsson67@ethereal.email',
-        password: '3pV8C35qMWBR9P6Kp9'
+        user: 'eloise.cremin93@ethereal.email',
+        password: '9GaqXT1SH4CFzq4GFG'
     },
     registerVerification: {
         from: 'Exercise <noreply@exercise.com>',
