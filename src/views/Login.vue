@@ -95,7 +95,6 @@ export default {
   methods: {
     ...mapActions('security', {
       $login: 'login',
-      $logout: 'logout',
     }),
     async login(e) {
       e.preventDefault()
