@@ -88,6 +88,11 @@
                 Modificar datos
               </button>
             </v-row>
+            <v-row>
+              <button @click="logout" class="bg-green-400 p-5 text-white" style="margin-left:15px">
+                Salir de la cuenta
+              </button>
+            </v-row>
           </div>
         </v-col>
       </v-row>
@@ -141,7 +146,14 @@ export default {
     ...mapActions('security', {
       $register: 'register',
       $modify: 'modify',
+      $logout: 'logout',
     }),
+    async logout() {
+      console.log("2")
+      await this.$logout()
+      await router.push('/')
+      await router.go()
+    },
     async login(e) {
       e.preventDefault()
       try {
@@ -164,7 +176,8 @@ export default {
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, this.image, this.metadata)
         console.log(JSON.stringify(credentials))
         await this.$modify({credentials, rememberMe: true})
-        await router.push('/')
+            await router.push('/')
+            await router.go()
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output
