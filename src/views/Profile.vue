@@ -159,7 +159,6 @@ export default {
 
     async getData() {
       let user = await this.$getCurrentUser
-      console.log(user)
       this.firstname = user.firstName
       this.lastname = user.lastName
       this.username = user.username
