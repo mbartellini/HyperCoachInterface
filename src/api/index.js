@@ -4,6 +4,7 @@ import security from '@/api/module/security';
 import sport from '@/api/module/sport';
 import exercise from '@/api/module/exercise'
 import category from '@/api/module/category'
+import routine from '@/api/module/routine'
 
 Vue.use(Vuex)
 
@@ -19,5 +20,6 @@ export default new Vuex.Store({
     sport,
     exercise,
     category,
+    routine,
   }
 })

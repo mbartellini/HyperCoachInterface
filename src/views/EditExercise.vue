@@ -126,7 +126,6 @@ export default {
       if (this.newExercise) {
         this.postExercise()
       } else {
-
         this.putExercise()
       }
       this.$router.push({name: 'MyExercises'})

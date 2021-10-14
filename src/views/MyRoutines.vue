@@ -14,7 +14,9 @@
             large
             class="rounded-lg"
             color="success"
-            :to="{name: 'EditRoutine'}"
+            :to="{name: 'EditRoutine', params: {
+              id: null
+            }}"
         ><v-icon left outlined> mdi-plus </v-icon>
           <div class="text-decoration-underline">Crear</div>
         </v-btn>

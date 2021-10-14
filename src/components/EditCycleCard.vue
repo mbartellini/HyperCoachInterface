@@ -11,7 +11,6 @@
                 dense
                 v-model="cycle.name"
                 outlined
-                clearable
                 label="Título del ciclo"
                 color="white"
                 class="pb-n10"
@@ -22,10 +21,9 @@
               <p class="my-0">Repeticiones: </p>
               <div class="pa-0 ma-0">
                 <v-text-field
-                    fluid
+                    dense
                     v-model="cycle.repetitions"
                     outlined
-                    clearable
                     width="50"
                     type="number"
                     label="Cantidad de repeticiones"
