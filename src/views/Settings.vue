@@ -94,10 +94,46 @@
                   sm="6"
                   md="3"
               >
-                <v-btn type="submit" tile class="rounded-lg" large color="success">
+                <v-btn
+                    type="submit"
+                    tile
+                    class="rounded-lg"
+                    large
+                    color="success"
+                    @click.stop="dialog = true"
+                >
                   <v-icon dark>mdi-content-save</v-icon>
                   <div class="text-decoration-underline"> Guardar </div>
                 </v-btn>
+                <v-dialog
+                    v-model="dialog"
+                    width="500"
+                    persistent
+                >
+                  <v-card>
+                    <v-card-title class="text-h5">
+                      {{error? errorMsg : successMsg}}
+                    </v-card-title>
+
+                    <v-card-text
+                        v-show="error"
+                    >
+                      {{errorDetails}}
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn
+                          :color="error? 'error' : 'success'"
+                          text
+                          @click="finishDialog"
+                      >
+                        {{error? 'Reintentar' : 'Volver a mi perfil'}}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-col>
             </v-row>
           </div>
@@ -106,15 +142,6 @@
     </form>
   </v-container>
 </template>
-
-<style>
-.profilepic {
-  position: absolute;
-  right: 15px;
-  border-radius: 50%;
-  border: 1px solid white;
-}
-</style>
 
 <script>
 import {mapActions, mapGetters, mapState} from "vuex";
@@ -125,6 +152,10 @@ export default {
   name: 'Settings',
 
   data: () => ({
+    error: false,
+    errorMsg: 'Ha ocurrido un error.',
+    successMsg: 'Tus cambios fueron guardados.',
+    dialog: false,
     name: "Juan Ignacio Garcia Matwieiszyn",
     lastname: "Juan Ignacio Garcia Matwieiszyn",
     image: null,
@@ -194,7 +225,6 @@ export default {
 
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
-        await router.push('/')
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output
@@ -207,8 +237,17 @@ export default {
       this.lastname = user.lastName
       this.preview = user.metadata.img_src
       this.gender = user.gender
-    }
+    },
+    finishDialog() {
+      if(this.error){
+        router.push('/settings')
+      } else {
+        router.push('/profile')
+      }
+      router.go(0)
+    },
   },
+
   async beforeMount() {
     await this.getData()
   },
