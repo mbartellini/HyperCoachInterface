@@ -12,7 +12,11 @@ export default {
     },
     getters: {
         isLoggedIn(state) {
-            return state.token != null && state.token.toString() !== "undefined"
+            if (state.token == null) {
+                return false
+            }
+            return state.token.toString() !== "undefined";
+
         },
         tok(state) {
             return state.token
