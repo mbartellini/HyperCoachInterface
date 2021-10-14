@@ -2,8 +2,8 @@
 
 ## Requirements
 To run the tests you should first install the project requirements.
-- <a href="https://www.python.org/">npm >= 7.24.1</a>
-- <a href="https://python-poetry.org/">nodejs >= 16.11.1</a>
+- <a href="https://docs.npmjs.com/">npm >= 7.24.1</a>
+- <a href="https://nodejs.org/en/">nodejs >= 16.11.1</a>
 
 If you do not have this installed, you can do so by running the following commands.
 
