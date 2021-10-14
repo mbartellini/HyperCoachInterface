@@ -275,7 +275,7 @@ export default {
       await this.getRoutine()
       for (let i in this.difficultiesAvailable) {
         if (this.difficultiesAvailable[i].name === this.routine.difficulty) {
-          this.routine = this.difficultiesAvailable[i]
+          this.routine.difficulty = this.difficultiesAvailable[i]
           break
         }
       }
