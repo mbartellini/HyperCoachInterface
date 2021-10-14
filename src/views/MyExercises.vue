@@ -5,7 +5,10 @@
         <h1>Mis ejercicios</h1>
       </v-row>
       <v-row class="text-h6 ma-3 pt-5">
-        <p>
+        <p v-show="is_empty">
+          Aún no has creado ejercicios. ¡Tocá el botón de crear para comenzar!
+        </p>
+        <p v-show="!is_empty">
           ¡Estos son los ejercicios que creaste!
         </p>
         <v-spacer></v-spacer>
@@ -37,6 +40,7 @@ export default {
   },
   data: () => ({
     exercises: [],
+    is_empty: true,
   }),
   methods: {
     ...mapActions('exercise', {
@@ -44,7 +48,8 @@ export default {
     }),
     async getExercises() {
       try {
-        const result = await this.$getExercises();
+        let result = await this.$getExercises();
+        this.is_empty = result.totalCount === 0
         this.exercises = result.content
       } catch(e) {
         alert(e)

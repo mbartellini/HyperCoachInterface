@@ -66,7 +66,8 @@ export default {
         },
         async getAll({commit}, controller) {
             const preview = await ExerciseApi.getPage(0, 1)
-            const result = await ExerciseApi.getPage(0, preview.totalCount, controller)
+            let pageSize = Math.max(preview.totalCount, 1)
+            const result = await ExerciseApi.getPage(0, pageSize, controller)
             commit('replaceAll', result.content)
             return result
         }

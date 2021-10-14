@@ -28,17 +28,44 @@
               @click:append="show = !show"
           />
           <div class="text-decoration-underline">
-            <v-btn
-                type="submit"
-                class="ma-2 text-decoration-underline"
-                color="primary"
+            <v-dialog
+                v-model="dialog"
+                width="500"
             >
-              Iniciar sesión
-            </v-btn>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                    type="submit"
+                    class="ma-2 text-decoration-underline"
+                    color="primary"
+                    v-bind="attrs"
+                    v-on="on"
+                >
+                  Iniciar sesión
+                </v-btn>
+              </template>
+
+              <v-card class="align-content-center">
+                <v-card-title
+                    class="text-h5">
+                  Has iniciado sesión correctamente.
+                </v-card-title>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      color="success"
+                      text
+                      :to="{name: 'Inicio'}"
+                      class="text-decoration-underline"
+                  >
+                    Volver al inicio
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
             <v-btn
                 class="ma-2 text-decoration-underline"
                 plain
-                :to="{name: 'Registration'}"
+                @click="sendHome"
             >
               Registrarme
             </v-btn>
@@ -65,6 +92,7 @@ export default {
 
   data() {
     return {
+      dialog: false,
       show: false,
       username: '',
       password: '',
@@ -91,14 +119,17 @@ export default {
       try {
         const credentials = new LoginCredentials(this.username, this.password)
         await this.$login({credentials, rememberMe: true})
-        await router.push('/')
-        await router.go()
+
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output
         this.password = ''
       }
     },
+    sendHome() {
+      router.push('/')
+      router.go()
+    }
   }
 }
 </script>
