@@ -64,5 +64,10 @@ export default {
             commit('replaceAll', result.content)
             return result
         },
+        async getFavoritesPage({commit}, {pageNumber, pageSize}) {
+            const result = await RoutineApi.getFavoritesPage(pageNumber, pageSize)
+            commit('replaceAll', result.content)
+            return result
+        },
     },
 }

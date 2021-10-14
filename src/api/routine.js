@@ -26,6 +26,7 @@ class RoutineApi {
     static async getPage(pageNumber=0, pageSize=10, controller) {
         return await Api.get(RoutineApi.getUrl('?' + 'page=' + pageNumber + '&size=' + pageSize), true, controller)
     }
+
 }
 
 class Routine {
