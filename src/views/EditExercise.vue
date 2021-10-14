@@ -15,7 +15,7 @@
         <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
           <v-img
               class="justify-center ma-auto"
-              lazy-src="@/assets/loading.gif"
+              lazy-src="@/assets/no_img.png"
               width="500px"
               :alt="exercise.detail"
               :src="exercise.metadata.img_src"
@@ -56,10 +56,47 @@
         />
         </v-row>
         <v-row class="justify-end">
-          <v-btn type="submit" tile class="rounded-lg" large color="success">
+          <v-btn
+              type="submit"
+              tile
+              class="rounded-lg"
+              large
+              color="success"
+              @click.stop="dialog = true"
+              img="AAAAAAA"
+          >
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
+          <v-dialog
+              v-model="dialog"
+              width="500"
+              persistent
+          >
+            <v-card>
+              <v-card-title class="text-h5">
+                {{error? errorMsg : successMsg}}
+              </v-card-title>
+
+              <v-card-text
+                  v-show="error"
+              >
+                {{errorDetails}}
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    :color="error? 'error' : 'success'"
+                    text
+                    @click="finishDialog"
+                >
+                  {{error? 'Reintentar' : 'Volver a mi perfil'}}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-row>
       </v-col>
     </v-row>
@@ -70,9 +107,11 @@
 <script>
 import {mapActions} from 'vuex'
 import GoBackButton from "../components/GoBackButton";
+import router from "@/router";
 
 export default {
   name: "EditExercise",
+  dialog: true,
   props: {
     id: {
       type: Number,
@@ -92,6 +131,10 @@ export default {
         img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0",
       },
     },
+    error: false,
+    errorMsg: 'Ha ocurrido un error.',
+    successMsg: 'Ejercicio creado correctamente.',
+    errorDetails: ''
   }),
   methods: {
     ...mapActions('exercise', {
@@ -112,14 +155,16 @@ export default {
       try {
         this.exercise = await this.$postExercise(this.exercise)
       } catch(e) {
-        alert(e)
+        this.error = true
+        this.errorDetails = e.details[0] // TODO: beautify this output
       }
     },
     async putExercise() {
       try {
         this.exercise = await this.$putExercise(this.exercise)
       } catch(e) {
-        alert(e)
+        this.error = true
+        this.errorDetails = e.details[0] // TODO: beautify this output
       }
     },
      save() {
@@ -128,8 +173,15 @@ export default {
       } else {
         this.putExercise()
       }
-      this.$router.push({name: 'MyExercises'})
-    }
+    },
+    finishDialog() {
+      if(this.error){
+        this.dialog = false
+      } else {
+        router.push('/profile')
+      }
+      router.go(0)
+    },
   },
   created() {
     if (this.id) {

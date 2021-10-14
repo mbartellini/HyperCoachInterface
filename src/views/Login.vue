@@ -65,6 +65,7 @@
                   >
                     {{error? 'Reintentar' : 'Volver al inicio'}}
                   </v-btn>
+
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -104,7 +105,7 @@ export default {
       password: '',
       error: false,
       errorMsg: 'Ha ocurrido un error.',
-      errorDetails: 'Ha ocurrido un error.',
+      errorDetails: '',
       successMsg: 'Has iniciado sesión correctamente.',
       entireError: null
     }
