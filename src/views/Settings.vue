@@ -83,6 +83,7 @@
                     class="rounded-lg"
                     large
                     color="success"
+                    @click.stop="dialog = true"
                 >
                   <v-icon dark>mdi-content-save</v-icon>
                   <div class="text-decoration-underline"> Guardar </div>
@@ -241,10 +242,11 @@ export default {
       this.gender = user.gender
     },
     finishDialog() {
+      this.dialog = false
       if(!this.error) {
         router.push('/profile')
+        router.go(0)
       }
-      router.go(0)
     },
   },
 
