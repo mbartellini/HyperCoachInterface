@@ -70,7 +70,7 @@
             <v-btn
                 class="ma-2 text-decoration-underline"
                 plain
-                :to="{name: 'Register'}"
+                :to="{name: 'Registration'}"
             >
               Registrarme
             </v-btn>
@@ -103,6 +103,7 @@ export default {
       password: '',
       error: false,
       errorMsg: 'Ha ocurrido un error.',
+      errorDetails: 'Ha ocurrido un error.',
       successMsg: 'Has iniciado sesión correctamente.',
       entireError: null
     }

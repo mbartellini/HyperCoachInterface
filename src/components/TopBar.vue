@@ -97,6 +97,14 @@ export default {
 
   beforeUpdate() {
     this.getCurrent()
+  },
+
+  beforeRouteUpdate() {
+    this.getCurrent()
+  },
+
+  beforeRouteEnter() {
+    this.getCurrent()
   }
 
 }

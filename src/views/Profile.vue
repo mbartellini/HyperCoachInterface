@@ -182,11 +182,9 @@ export default {
     }
   },
 
-
-  async beforeMount() {
-    await this.getData()
+  beforeMount() {
+    this.getData()
   },
-
 }
 </script>
 

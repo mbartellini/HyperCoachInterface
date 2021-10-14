@@ -17,6 +17,9 @@
                       v-model="firstname"
                       outlined
                       clearable
+                      counter="50"
+                      :rules="nameRules"
+                      required
                       label="Nombre*"
                   />
                 </v-col>
@@ -28,7 +31,10 @@
                   <v-text-field
                       v-model="lastname"
                       outlined
+                      counter="50"
+                      :rules="nameRules"
                       label="Apellido*"
+                      required
                       clearable
                   ></v-text-field>
                 </v-col>
@@ -90,6 +96,7 @@
                           label="Fecha de nacimiento*"
                           prepend-icon="mdi-calendar"
                           readonly
+                          required
                           v-bind="attrs"
                           v-on="on"
                           outlined
@@ -107,7 +114,10 @@
                   <v-text-field
                       v-model="email"
                       outlined
+                      counter="100"
+                      :rules="mailRules"
                       label="E-mail*"
+                      required
                       clearable
                   ></v-text-field>
                 </v-col>
@@ -149,7 +159,10 @@
                   <v-text-field
                       v-model="username"
                       outlined
+                      counter="50"
+                      :rules="nameRules"
                       label="Usuario*"
+                      required
                       clearable
                   ></v-text-field>
                 </v-col>
@@ -164,6 +177,9 @@
                       :type="show ? 'text' : 'password'"
                       name="input-10-2"
                       label="Contraseña*"
+                      counter="50"
+                      :rules="nameRules"
+                      required
                       outlined
                       @click:append="show = !show"
                   ></v-text-field>
@@ -222,6 +238,14 @@ export default {
       firstname: '',
       lastname: '',
       password: '',
+      nameRules: [
+        (v) => !!v || "Este campo es obligatorio",
+        (v) => (v && v.length <= 50) ||
+            "Maximo 50 caracteres",],
+      mailRules: [
+        (v) => !!v || "Este campo es obligatorio",
+        (v) => (v && v.length <= 100) ||
+            "Maximo 100 caracteres",],
       passwordConfirmation: '',
       menu: null,
       gender: ["Masculino","Femenino","Prefiero no indicar"],

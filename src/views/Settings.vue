@@ -48,6 +48,9 @@
                 <v-text-field
                     v-model="name"
                     outlined
+                    counter="50"
+                    :rules="nameRules"
+                    required
                     clearable
                     label="Nombre"
                 />
@@ -61,6 +64,9 @@
                     v-model="lastname"
                     outlined
                     label="Apellido"
+                    counter="50"
+                    :rules="nameRules"
+                    required
                     clearable
                 ></v-text-field>
               </v-col>
@@ -118,6 +124,10 @@ export default {
     username: "juano",
     email: "juanigarcia@itba.edu.ar",
     gender: "Masculino",
+    nameRules: [
+      (v) => !!v || "Este campo es obligatorio",
+      (v) => (v && v.length <= 50) ||
+          "Maximo 50 caracteres",],
     age: 20,
     password: '',
     preview: null,
