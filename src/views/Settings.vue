@@ -173,7 +173,7 @@ export default {
       let user = await this.$getCurrentUser
       this.name = user.firstName
       this.lastname = user.lastName
-      this.image = user.avatarUrl
+      this.image = user.metadata.img_src
       this.gender = user.gender
     }
   },
