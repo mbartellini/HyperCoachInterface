@@ -163,7 +163,7 @@ export default {
       this.firstname = user.firstName
       this.lastname = user.lastName
       this.username = user.username
-      this.image = user.avatarUrl
+      this.image = user.metadata.img_src
       this.gender = user.gender
       this.email = user.email
       this.birthdate = new Date(user.birthdate).toString()

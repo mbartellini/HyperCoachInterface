@@ -67,7 +67,6 @@ export default {
   methods: {
     async getCurrent() {
       if (this.$isLoggedIn) {
-        console.log("Yo no tendria que estar aca")
         let aux = await this.$getCurrentUser
         if (!aux) {
           return null;
