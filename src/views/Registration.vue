@@ -266,8 +266,7 @@ export default {
           this.error = true
           return
         }
-        this.image = URL.createObjectURL(this.image).toString()
-        const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, new Date(this.date.toString()).getTime(), this.email, this.phone, this.image, this.metadata)
+        const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, new Date(this.date.toString()).getTime(), this.email, this.phone, URL.createObjectURL(this.image).toString(), this.metadata)
         await this.$register({credentials, rememberMe: true })
         await router.push('/')
       } catch(error) {
