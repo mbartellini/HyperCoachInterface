@@ -45,7 +45,7 @@
         <v-card-text class="mx-auto py-0" dense>
           <v-row class="py-0 pt-3 my-0 pa-3">
             <v-autocomplete
-                v-model="exercise.ref"
+                v-model="exercise.id"
                 :hint="`${exercise.name}`"
                 :items="exercises"
                 item-text="name"
