@@ -162,32 +162,6 @@ export default {
     EditCycleCard,
   },
   data: () => ({
-    testExercise: {
-      id: {id: 0},
-      limit: 5,
-      limitType: 'repeticiones',
-    },
-    testCycle: {
-      name: "Ciclo",
-      repetitions: 1,
-      exercises: [
-        {
-          id: {id: 0},
-          limit: 5,
-          limitType: 'repeticiones',
-        },
-        {
-          id: {id: 0},
-          limit: 5,
-          limitType: 'repeticiones',
-        },
-        {
-          id: {id: 0},
-          limit: 5,
-          limitType: 'repeticiones',
-        },
-      ]
-    },
     newRoutine: true,
     exercises: [],
     routine: {
@@ -201,9 +175,67 @@ export default {
         duration: 0,
         equipment: false,
         cycles: [
-          Object.assign({}, this.testCycle),
-          Object.assign({}, this.testCycle),
-          Object.assign({}, this.testCycle),
+          {
+            name: "Ciclo de calentamiento",
+            repetitions: 1,
+            exercises: [
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+            ]
+          },{
+            name: "Ciclo principal",
+            repetitions: 1,
+            exercises: [
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+            ]
+          },{
+            name: "Ciclo de enfriamiento",
+            repetitions: 1,
+            exercises: [
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+              {
+                id: { id: 1 },
+                limit: 5,
+                limitType: 'repeticiones',
+              },
+            ]
+          },
         ],
       },
     },
@@ -293,7 +325,6 @@ export default {
     },
   },
   async created() {
-    alert(JSON.stringify(this.routine))
     await this.getExercises();
     if (this.id != null) {
       this.newRoutine = false
