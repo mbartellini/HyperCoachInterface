@@ -20,11 +20,13 @@ For Windows installation you can follow the [Node documentation](https://nodejs.
 ## Setting up the API
 ```bash
 cd sportAPI
+npm install
+cd ..
 ````
 
 ## Running the API
 ```bash
-npm install
+cd sportAPI
 npm start
 ```
 
