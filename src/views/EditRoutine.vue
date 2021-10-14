@@ -92,15 +92,15 @@
             cols="12"
         >
           <v-row fluid class="d-flex justify-center">
-            <v-col cols="2">
+            <v-col cols="1">
               <v-btn fab color="error" class="d-flex justify-center" @click="deleteCycle(i)">
                 <v-icon>
                   mdi-delete
                 </v-icon>
               </v-btn>
             </v-col>
-            <v-col cols="10">
-              <EditCycleCard :cycle="cycle" class="ma-auto"></EditCycleCard>
+            <v-col xl="4" lg="6" md="8" sm="9" xs="9">
+              <EditCycleCard :cycle="cycle" :exercises="exercises" class="ma-auto"></EditCycleCard>
             </v-col>
           </v-row>
         </v-col>
@@ -131,6 +131,7 @@ export default {
   },
   data: () => ({
     newRoutine: true,
+    exercises: [],
     routine: {
       name: '',
       detail: '',
@@ -247,7 +248,18 @@ export default {
         this.putRoutine()
       }
       this.$router.push({name: 'MyRoutines'})
-    }
+    },
+    ...mapActions('exercise', {
+      $getExercises: 'getAll',
+    }),
+    async getExercises() {
+      try {
+        let result = await this.$getExercises();
+        this.exercises = result.content
+      } catch(e) {
+        alert(e)
+      }
+    },
   },
   computed: {
     difficultiesAvailable() {
@@ -266,6 +278,7 @@ export default {
     },
   },
   async created() {
+    await this.getExercises();
     if (this.id !== null) {
       this.newRoutine = false
       await this.getRoutine()
