@@ -39,7 +39,6 @@ export default {
       try {
         let category = new Category(null, categoryName, "")
         await this.$postCategory(category)
-        alert(JSON.stringify(category))
       } catch (e) {
         alert(e)
       }
