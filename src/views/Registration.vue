@@ -8,113 +8,113 @@
           <div class="my-5">
             <v-container>
               <v-row>
-                <v-col
-                    cols="8"
-                    sm="6"
-                    md="3"
-                >
-                  <v-text-field
-                      v-model="firstname"
-                      outlined
-                      clearable
-                      label="Nombre*"
-                  />
-                </v-col>
-                <v-col
-                    cols="8"
-                    sm="6"
-                    md="3"
-                >
-                  <v-text-field
-                      v-model="lastname"
-                      outlined
-                      label="Apellido*"
-                      clearable
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col
-                    cols="8"
-                    sm="6"
-                    md="3"
-                >
-                  <v-autocomplete
-                      ref="gender"
-                      v-model="gender"
-                      :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
-                      label="Género*"
-                      placeholder="Seleccionar..."
-                      required
-                      outlined
-                  ></v-autocomplete>
-                </v-col>
-                <v-col
-                    cols="8"
-                    sm="6"
-                    md="3"
-                >
-                  <v-menu
-                      ref="menu"
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :return-value.sync="date"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
                   >
-                    <v-date-picker
-                        v-model="date"
-                        no-title
-                        scrollable
-                    >
-                      <v-spacer></v-spacer>
-                      <v-btn
-                          text
-                          color="primary"
-                          @click="menu = false"
-                      >
-                        Cancel
-                      </v-btn>
-                      <v-btn
-                          text
-                          color="primary"
-                          @click="$refs.menu.save(date)"
-                      >
-                        OK
-                      </v-btn>
-                    </v-date-picker>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                          v-model="date"
-                          label="Fecha de nacimiento*"
-                          prepend-icon="mdi-calendar"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                          outlined
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
+                    <v-text-field
+                        v-model="firstname"
+                        outlined
+                        clearable
+                        label="Nombre*"
+                    />
+                  </v-col>
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
+                  >
+                    <v-text-field
+                        v-model="lastname"
+                        outlined
+                        label="Apellido*"
+                        clearable
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
               <v-row>
-                <v-col
-                    cols="12"
-                    sm="10"
-                    md="6"
-                >
-                  <v-text-field
-                      v-model="email"
-                      outlined
-                      label="E-mail*"
-                      clearable
-                  ></v-text-field>
-                </v-col>
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
+                  >
+                    <v-autocomplete
+                        ref="gender"
+                        v-model="gender"
+                        :items="['Masculino', 'Femenino', 'Prefiero no indicar']"
+                        label="Género*"
+                        placeholder="Seleccionar..."
+                        required
+                        outlined
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col
+                      cols="8"
+                      sm="6"
+                      md="3"
+                  >
+                    <v-menu
+                        ref="menu"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        :return-value.sync="date"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                      <v-date-picker
+                          v-model="date"
+                          no-title
+                          scrollable
+                      >
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="menu = false"
+                        >
+                          Cancel
+                        </v-btn>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="$refs.menu.save(date)"
+                        >
+                          OK
+                        </v-btn>
+                      </v-date-picker>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="date"
+                            label="Fecha de nacimiento*"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            outlined
+                        ></v-text-field>
+                      </template>
+                    </v-menu>
+                  </v-col>
+                </v-row>
+              <v-row>
+                  <v-col
+                      cols="12"
+                      sm="10"
+                      md="6"
+                  >
+                    <v-text-field
+                        v-model="email"
+                        outlined
+                        label="E-mail*"
+                        clearable
+                    ></v-text-field>
+                  </v-col>
               </v-row>
 
               <v-row
-                  align="center"
+                align="center"
               >
                 <v-col
                     cols="6"
@@ -160,12 +160,12 @@
                 >
                   <v-text-field
                       v-model="password"
-                      :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="showPass ? 'text' : 'password'"
+                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                      :type="show ? 'text' : 'password'"
                       name="input-10-2"
                       label="Contraseña*"
                       outlined
-                      @click:append="showPass = !showPass"
+                      @click:append="show = !show"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -177,12 +177,12 @@
                 >
                   <v-text-field
                       v-model="passwordConfirmation"
-                      :append-icon="showPassConf ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="showPassConf ? 'text' : 'password'"
+                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                      :type="show ? 'text' : 'password'"
                       name="input-10-2"
                       label="Confirmar contraseña*"
                       outlined
-                      @click:append="showPassConf = !showPassConf"
+                      @click:append="show = !show"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -217,8 +217,7 @@ export default {
   name: 'Registration',
   data() {
     return {
-      showPass: false,
-      showPassConf: false,
+      show: false,
       username: '',
       firstname: '',
       lastname: '',
@@ -255,7 +254,6 @@ export default {
       e.preventDefault()
       try {
         console.log(this.date)
-        this.date = new Date(this.date.toString()).getTime()
         if (this.gender === "Prefiero no indicar") {
           this.gender = 'other'
         } else if (this.gender === "Masculino") {
@@ -271,8 +269,8 @@ export default {
         }
         console.log(this.gender)
         console.log(this.date)
-        this.image = ""; // URL.createObjectURL(this.image)
-        const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, this.date, this.email, this.phone, this.image, this.metadata)
+        this.image = URL.createObjectURL(this.image)
+        const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, new Date(this.date.toString()).getTime(), this.email, this.phone, this.image, this.metadata)
         console.log(JSON.stringify(credentials))
         await this.$register({credentials, rememberMe: true })
         await router.push('/')
