@@ -89,9 +89,16 @@
               </v-col>
             </v-row>
             <v-row>
-              <button type="submit" class="bg-green-400 p-5 text-white" style="margin-left:15px">
-                Modificar datos
-              </button>
+              <v-col
+                  cols="8"
+                  sm="6"
+                  md="3"
+              >
+                <v-btn type="submit" tile class="rounded-lg" large color="success">
+                  <v-icon dark>mdi-content-save</v-icon>
+                  <div class="text-decoration-underline"> Guardar </div>
+                </v-btn>
+              </v-col>
             </v-row>
           </div>
         </v-col>
