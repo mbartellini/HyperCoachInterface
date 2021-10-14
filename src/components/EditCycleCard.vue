@@ -45,7 +45,7 @@
         <v-card-text class="mx-auto py-0" dense>
           <v-row class="py-0 pt-3 my-0 pa-3">
             <v-autocomplete
-                v-model="exercise.ref"
+                v-model="exercise.id"
                 :hint="`${exercise.name}`"
                 :items="exercises"
                 item-text="name"
@@ -82,13 +82,13 @@
         </v-card-text>
       </v-row>
       <v-card-actions>
-        <v-btn icon @click="deleteExercise()">
+        <v-btn outlined icon @click="deleteExercise()">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="addExercise()">
+        <v-btn outlined icon @click="addExercise()">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-actions>

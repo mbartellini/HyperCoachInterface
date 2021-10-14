@@ -3,6 +3,11 @@
     <v-row class="text-h5 ma-3">
       <h1>Editar perfil</h1>
     </v-row>
+    <v-row class="text-h6 ma-3 pt-5">
+      <p>
+        Modificá tu información personal.
+      </p>
+    </v-row>
     <v-row class="text-center" align="center">
       <v-col cols="2" offset="5">
        <v-row class="text-center">
@@ -78,7 +83,6 @@
                     class="rounded-lg"
                     large
                     color="success"
-                    @click.stop="dialog = true"
                 >
                   <v-icon dark>mdi-content-save</v-icon>
                   <div class="text-decoration-underline"> Guardar </div>
@@ -212,6 +216,7 @@ export default {
         console.log(this.metadata)
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
+        this.dialog = true
       } catch (error) {
         this.error = true
         console.log(error)
@@ -232,6 +237,7 @@ export default {
       this.name = user.firstName
       this.lastname = user.lastName
       this.preview = user.metadata.img_src
+      this.metadata = user.metadata
       this.gender = user.gender
     },
     finishDialog() {
