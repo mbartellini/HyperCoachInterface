@@ -149,59 +149,57 @@ export default {
               {
                 id: 0,
                 limit: 5,
-                limitType: 'repetitions',
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
             ]
-          },
-          {
+          },{
             name: "Ciclo principal",
             repetitions: 1,
             exercises: [
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
             ]
-          },
-          {
+          },{
             name: "Ciclo de enfriamiento",
             repetitions: 1,
             exercises: [
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repeticiones',
               },
             ]
           },
@@ -222,8 +220,6 @@ export default {
       try {
         let routine = {id: this.id}
         this.routine = await this.$getRoutine(routine);
-        alert(JSON.stringify(this.routine))
-        alert(this.routine.metadata.img_src)
       } catch(e) {
         alert(e)
       }
