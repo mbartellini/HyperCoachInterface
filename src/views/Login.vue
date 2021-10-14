@@ -47,17 +47,22 @@
               <v-card class="align-content-center">
                 <v-card-title
                     class="text-h5">
-                  Has iniciado sesión correctamente.
+                  {{error? errorMsg : successMsg}}
                 </v-card-title>
+                <v-card-text
+                    v-show="error"
+                >
+                  Detalles: {{errorDetails}}
+                </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                      color="success"
+                      :color="error? 'error' : 'success'"
                       text
-                      :to="{name: 'Home'}"
+                      @click="finishDialog"
                       class="text-decoration-underline"
                   >
-                    Volver al inicio
+                    {{error? 'Reintentar' : 'Volver al inicio'}}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -65,7 +70,7 @@
             <v-btn
                 class="ma-2 text-decoration-underline"
                 plain
-                @click="sendHome"
+                :to="{name: 'Register'}"
             >
               Registrarme
             </v-btn>
@@ -97,7 +102,9 @@ export default {
       username: '',
       password: '',
       error: false,
-      errorMsg: `An error occurred, please try again`
+      errorMsg: 'Ha ocurrido un error.',
+      successMsg: 'Has iniciado sesión correctamente.',
+      entireError: null
     }
   },
   computed: {
@@ -121,15 +128,20 @@ export default {
         await this.$login({credentials, rememberMe: true})
 
       } catch (error) {
+        this.entireError = error
         this.error = true
-        this.errorMsg = error // TODO: beautify this output
+        this.errorDetails = error.details[0] // TODO: beautify this output
         this.password = ''
       }
     },
-    sendHome() {
-      router.push('/')
-      router.go()
-    }
+    finishDialog() {
+      if(this.error){
+        router.push('/login')
+      } else {
+        router.push('/')
+      }
+      router.go(0)
+    },
   }
 }
 </script>

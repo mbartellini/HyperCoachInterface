@@ -19,7 +19,7 @@
           <v-avatar
               size="50"
           >
-            <v-img :alt="'Foto de perfil de {{username}}'" src="@/assets/Juani.jpeg"></v-img>
+            <v-img :alt="'Foto de perfil de {{username}}'" :src="profile_pic"></v-img>
           </v-avatar>
         </v-card>
         <v-card v-else flat class="d-flex align-center justify-center pa-1" color="transparent">
@@ -67,12 +67,11 @@ export default {
   methods: {
     async getCurrent() {
       if (this.$isLoggedIn) {
-        console.log("Yo no tendria que estar aca")
         let aux = await this.$getCurrentUser
         if (!aux) {
           return null;
         }
-        this.profile_pic = aux.avatarUrl
+        this.profile_pic = aux.metadata.img_src
         this.username = aux.firstName
         return aux;
       }

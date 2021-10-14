@@ -74,7 +74,7 @@
                           color="primary"
                           @click="menu = false"
                       >
-                        Cancel
+                        Cancelar
                       </v-btn>
                       <v-btn
                           text

@@ -98,24 +98,22 @@
         >
           <p class="text-center"> {{birthdate}} </p>
         </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col @click="logout" cols="2" offset="5" justify="center">
-        <v-btn
-            class = "mx-md-auto rounded-lg mt-5"
-            color="error"
-            elevation = "3"
-            large
-        >
-          <v-icon left>
-            mdi-arrow-left-bold-box-outline
-          </v-icon>
-          <v-spacer/>
-          <div class="text-decoration-underline">
-            Cerrar sesión
-          </div>
-        </v-btn>
+        <v-col @click="logout" cols="3" offset="5" class="mx-md-auto">
+          <v-btn
+              class = "mx-md-auto rounded-lg mt-5"
+              color="error"
+              elevation = "3"
+              large
+          >
+            <v-icon left>
+              mdi-arrow-left-bold-box-outline
+            </v-icon>
+            <v-spacer/>
+            <div class="text-decoration-underline">
+              Cerrar sesión
+            </div>
+          </v-btn>
+        </v-col>
       </v-col>
     </v-row>
   </v-container>
@@ -161,15 +159,13 @@ export default {
 
     async getData() {
       let user = await this.$getCurrentUser
-      console.log(user)
       this.firstname = user.firstName
       this.lastname = user.lastName
       this.username = user.username
-      this.image = user.avatarUrl
+      this.image = user.metadata.img_src
       this.gender = user.gender
       this.email = user.email
-      this.birthdate = new Date(user.birthdate).toString()
-      console.log(this.birthdate)
+      this.birthdate = new Date(user.birthdate).toLocaleDateString()
     },
 
     async edit () {

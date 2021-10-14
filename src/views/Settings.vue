@@ -33,9 +33,9 @@
                   sm="6"
                   md="3"
               >
-                <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" />
+                <v-file-input @change="handleImage" v-show="false" id="file-upload" v-model="image" />
                 <v-btn>
-                  <label @change="PreviewImage" for="file-upload">Actualizar foto de perfil</label>
+                  <label for="file-upload">Subir nueva foto de perfil</label>
                 </v-btn>
               </v-col>
             </v-row>
@@ -141,7 +141,23 @@ export default {
       $register: 'register',
       $modify: 'modify',
     }),
+    handleImage() {
+      if (this.image) {
+        this.PreviewImage();
+        const aux = this.getImg();
+        aux.then(data => this.metadata = {img_src: data});
+      }
+    },
+    getImg() {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(this.image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    },
     async login(e) {
+      this.handleImage()
       e.preventDefault()
       try {
         if (this.gender === "Prefiero no indicar") {
@@ -162,7 +178,6 @@ export default {
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, this.image, this.metadata)
         await this.$modify({credentials})
         await router.push('/')
-        await router.go()
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output
@@ -173,7 +188,7 @@ export default {
       let user = await this.$getCurrentUser
       this.name = user.firstName
       this.lastname = user.lastName
-      this.image = user.metadata.img_src
+      this.preview = user.metadata.img_src
       this.gender = user.gender
     }
   },
