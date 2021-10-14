@@ -153,55 +153,53 @@ export default {
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
             ]
-          },
-          {
+          },{
             name: "Ciclo principal",
             repetitions: 1,
             exercises: [
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
             ]
-          },
-          {
+          },{
             name: "Ciclo de enfriamiento",
             repetitions: 1,
             exercises: [
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
               {
                 id: 0,
-                repetitions: 5,
-                duration: 30,
+                limit: 5,
+                limitType: 'repetitions',
               },
             ]
           },
