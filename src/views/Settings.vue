@@ -209,12 +209,21 @@ export default {
           this.error = true
           return
         }
-
+        console.log(this.metadata)
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
       } catch (error) {
         this.error = true
-        this.errorMsg = error // TODO: beautify this output
+        console.log(error)
+        if (error.message) {
+          this.errorMsg = error.message
+        } else if (error.details) {
+          this.errorMsg = error.details
+        } else if (error.description) {
+          this.errorMsg = error.description
+        } else {
+          this.errorMsg = error
+        }
         this.password = ''
       }
     },
@@ -226,9 +235,7 @@ export default {
       this.gender = user.gender
     },
     finishDialog() {
-      if(this.error){
-        router.push('/settings')
-      } else {
+      if(!this.error) {
         router.push('/profile')
       }
       router.go(0)
