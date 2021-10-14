@@ -222,6 +222,8 @@ export default {
       try {
         let routine = {id: this.id}
         this.routine = await this.$getRoutine(routine);
+        alert(JSON.stringify(this.routine))
+        alert(this.routine.metadata.img_src)
       } catch(e) {
         alert(e)
       }
@@ -243,14 +245,11 @@ export default {
       }
     },
     save() {
-      alert("GUARDAR")
       if (this.newRoutine) {
         this.postRoutine()
       } else {
-        alert("PUT")
         this.putRoutine()
       }
-      alert("ya pasé")
       this.$router.push({name: 'MyRoutines'})
     }
   },
@@ -274,6 +273,12 @@ export default {
     if (this.id !== null) {
       this.newRoutine = false
       await this.getRoutine()
+      for (let i in this.difficultiesAvailable) {
+        if (this.difficultiesAvailable[i].name === this.routine.difficulty) {
+          this.routine = this.difficultiesAvailable[i]
+          break
+        }
+      }
     }
   },
 }
