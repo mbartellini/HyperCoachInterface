@@ -157,6 +157,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     console.log(store.getters["security/isLoggedIn"])
+    console.log(store.getters["security/tok"])
     console.log(to.matched.some(route => route.meta.requiresAuth))
     if (to.matched.some(route => route.meta.requiresAuth) && !store.getters['security/isLoggedIn']) {
         next({name: "LoginPrompt", query: { redirect: to.fullPath }});

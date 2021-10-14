@@ -12,7 +12,10 @@ export default {
     },
     getters: {
         isLoggedIn(state) {
-            return state.token != null
+            return state.token != null && state.token.toString() !== "undefined"
+        },
+        tok(state) {
+            return state.token
         },
         async getCurrentUser(state) {
             if (state.user) {
