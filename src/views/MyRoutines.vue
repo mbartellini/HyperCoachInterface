@@ -5,9 +5,9 @@
         <h1>Mis ejercicios</h1>
       </v-row>
       <v-row class="text-h6 ma-3 pt-5">
-        <v-h6>
-          ¡Estas son las rutinas que creas!
-        </v-h6>
+        <p>
+          ¡Estas son las rutinas que creaste!
+        </p>
         <v-spacer></v-spacer>
         <v-btn
             rounded

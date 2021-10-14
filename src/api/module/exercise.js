@@ -1,4 +1,4 @@
-import {SportApi} from "../sport";
+import { ExerciseApi } from "../exercise";
 
 export default {
     namespaced: true,
@@ -13,50 +13,50 @@ export default {
         },
     },
     mutations: {
-        push(state, sport) {
-            state.exercises.push(sport)
+        push(state, exercise) {
+            state.exercises.push(exercise)
         },
-        replace(state, index, sport) {
-            state.exercises[index] = sport
+        replace(state, index, exercise) {
+            state.exercises[index] = exercise
         },
         splice(state, index) {
             state.exercises.splice(index, 1)
         },
-        replaceAll(state, sports) {
-            state.exercises = sports
+        replaceAll(state, exercises) {
+            state.exercises = exercises
         }
     },
     actions: {
-        async create({getters, commit}, sport) {
-            const result = await SportApi.add(sport)
+        async create({getters, commit}, exercise) {
+            const result = await ExerciseApi.add(exercise)
             if (!getters.findIndex(result))
                 commit('push', result)
             return result
         },
-        async modify({getters, commit}, sport) {
-            const result = await SportApi.modify(sport)
+        async modify({getters, commit}, exercise) {
+            const result = await ExerciseApi.modify(exercise)
             const index = getters.findIndex(result)
             if (index >= 0)
                 commit('replace', index, result)
             return result
         },
-        async delete({getters, commit}, sport) {
-            await SportApi.delete(sport.id)
-            const index = getters.findIndex(sport)
+        async delete({getters, commit}, exercise) {
+            await ExerciseApi.delete(exercise.id)
+            const index = getters.findIndex(exercise)
             if (index >= 0)
                 commit('splice', index)
         },
-        async get({state, getters, commit}, sport) {
-            const index = getters.findIndex(sport)
+        async get({state, getters, commit}, exercise) {
+            const index = getters.findIndex(exercise)
             if (index >= 0)
                 return state.exercises[index]
 
-            const result = await SportApi.get()
+            const result = await ExerciseApi.get()
             commit('push', result)
             return result
         },
         async getAll({commit}, controller) {
-            const result = await SportApi.getAll(controller)
+            const result = await ExerciseApi.getAll(controller)
             commit('replaceAll', result)
             return result
         }

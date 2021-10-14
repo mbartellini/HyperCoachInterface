@@ -60,7 +60,7 @@
             </div>
           </v-btn>
           <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditExercise', params: { id: id } }" >
-            <v-icon dark>mdi-content-save</v-icon>
+            <v-icon dark>mdi-pencil</v-icon>
             <div class="text-decoration-underline">
               Editar
             </div>

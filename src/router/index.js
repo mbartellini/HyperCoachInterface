@@ -41,7 +41,7 @@ const routes = [
     {
         path: '/myexercises',
         name: 'MyExercises',
-        // meta: { requiresAuth: true },
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "my_exercises" */ '../views/MyExercises')
     },
     {

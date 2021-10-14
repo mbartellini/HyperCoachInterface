@@ -16,8 +16,8 @@
               class="justify-center ma-auto"
               lazy-src="@/assets/loading.gif"
               width="500px"
-              :alt="detail"
-              :src="img_src"
+              :alt="exercise.detail"
+              :src="exercise.metadata.img_src"
               contain
           >
             <v-btn fab class="primary">
@@ -35,7 +35,7 @@
       >
         <v-row class="d-flex align-center mx-0 mb-1">
           <v-text-field
-              v-model="name"
+              v-model="exercise.name"
               hide-details
               dense
               outlined
@@ -47,7 +47,7 @@
         <v-divider class="my-5" />
         <v-row class="ma-auto">
         <v-text-field
-          v-model="detail"
+          v-model="exercise.detail"
           dense
           outlined
           clearable
@@ -57,7 +57,7 @@
         <v-row class="justify-end">
           <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditExercise', params: { id: id } }" >
             <v-icon dark>mdi-content-save</v-icon>
-            Guardar
+            <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
         </v-row>
       </v-col>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import GoBackButton from "../components/GoBackButton";
 
 export default {
@@ -79,11 +80,37 @@ export default {
   components: {
     GoBackButton,
   },
+  methods: {
+    ...mapActions('exercise', {
+      $getExercise: 'get',
+    }),
+    setResult(result){
+      this.result = JSON.stringify(result, null, 2)
+      alert(this.result)
+    },
+    async getExercise() {
+      console.log("AAAAAA")
+      try {
+        await this.$getExercise(this.sport.id);
+        this.setResult(this.sport)
+      } catch(e) {
+        alert(e)
+      }
+    },
   data: () => ({
-    name: "",
-    detail: "",
+    exercise: this.id !== null ? this.getExercise() : {
+      name: 'AHAHAH',
+      detail: 'BHBHBH',
+      metadata: {
+        img_src: 'CHCHCH',
+      },
+    },
+    result: null,
+    name: this.id == null ? '' : 'Nombre',
+    detail: this.id == null ? '' : 'Detalle',
     img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
   }),
+  },
 }
 </script>
 

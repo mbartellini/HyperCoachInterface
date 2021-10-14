@@ -7,13 +7,13 @@
         <div style="margin-top:70px">
           <v-avatar
               color="primary"
-              size="300"
+              size="150"
           >
             <v-img
                 :src="require('../assets/Juani.jpeg')"
                 class="mx-auto"
-                max-width="300"
-                height="300"
+                max-width="150"
+                height="150"
                 rounded
             />
           </v-avatar>
