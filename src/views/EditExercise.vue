@@ -3,6 +3,7 @@
     <v-row class="justify-left mb-3">
       <GoBackButton/>
     </v-row>
+    <form @submit="save()">
     <v-row class="ma-3 mb-5 justify-center align-start">
       <v-col class="d-flex justify-xs-center justify-sm-center justify-md-center"
              xs="12"
@@ -55,13 +56,14 @@
         />
         </v-row>
         <v-row class="justify-end">
-          <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditExercise', params: { id: id } }" >
+          <v-btn type="submit" tile class="rounded-lg" large color="success" @click="save()" :to="{ name: 'EditExercise', params: { id: id } }" >
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
         </v-row>
       </v-col>
     </v-row>
+    </form>
   </v-container>
 </template>
 
@@ -80,37 +82,52 @@ export default {
   components: {
     GoBackButton,
   },
+  data: () => ({
+    newExercise: true,
+    exercise: {
+      name: '',
+      detail: '',
+      type: 'exercise',
+      metadata: {
+        img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0",
+      },
+    },
+  }),
   methods: {
     ...mapActions('exercise', {
+      $postExercise: 'create',
       $getExercise: 'get',
     }),
-    setResult(result){
-      this.result = JSON.stringify(result, null, 2)
-      alert(this.result)
-    },
     async getExercise() {
-      console.log("AAAAAA")
       try {
-        await this.$getExercise(this.sport.id);
-        this.setResult(this.sport)
+        this.exercise = {id: this.id}
+        this.exercise = await this.$getExercise(this.exercise);
+        this.exercise.metadata = {img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0"}
       } catch(e) {
         alert(e)
       }
     },
-  data: () => ({
-    exercise: this.id !== null ? this.getExercise() : {
-      name: 'AHAHAH',
-      detail: 'BHBHBH',
-      metadata: {
-        img_src: 'CHCHCH',
-      },
+    async postExercise() {
+      try {
+        this.exercise = await this.$postExercise(this.exercise)
+      } catch(e) {
+        alert(e)
+      }
     },
-    result: null,
-    name: this.id == null ? '' : 'Nombre',
-    detail: this.id == null ? '' : 'Detalle',
-    img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
-  }),
+    save() {
+      if (this.newExercise) {
+        this.postExercise(this.exercise)
+      } else {
+        alert("S")
+      }
+    }
   },
+  created() {
+    if (this.id) {
+      this.newExercise = false
+      this.getExercise()
+    }
+  }
 }
 </script>
 

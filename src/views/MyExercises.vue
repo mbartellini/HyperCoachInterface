@@ -20,13 +20,14 @@
         </v-btn>
       </v-row>
       <v-row fluid>
-        <ExercisesCardsGrid :exercises="myExercises" />
+        <ExercisesCardsGrid :exercises="exercises" />
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import ExercisesCardsGrid from '../components/ExercisesCardsGrid'
 
 export default {
@@ -34,51 +35,25 @@ export default {
   components: {
     ExercisesCardsGrid,
   },
-
   data: () => ({
-    myExercises: [
-      {
-        "id": 1,
-        "name": "Jumping Jacks",
-        "detail": "Jumping Jacks",
-        "type": "exercise",
-        "date": 1620062203228,
-        "metadata": {
-          img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
-        }
-      },
-      {
-        "id": 1,
-        "name": "Jumping Jacks",
-        "detail": "Jumping Jacks",
-        "type": "exercise",
-        "date": 1620062203228,
-        "metadata": {
-          img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
-        }
-      },
-      {
-        "id": 1,
-        "name": "Jumping Jacks",
-        "detail": "Jumping Jacks",
-        "type": "exercise",
-        "date": 1620062203228,
-        "metadata": {
-          img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
-        }
-      },
-      {
-        "id": 1,
-        "name": "Jumping Jacks",
-        "detail": "Jumping Jacks",
-        "type": "exercise",
-        "date": 1620062203228,
-        "metadata": {
-          img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
-        }
-      },
-    ]
+    exercises: [],
   }),
+  methods: {
+    ...mapActions('exercise', {
+      $getExercises: 'getAll',
+    }),
+    async getExercises() {
+      try {
+        const result = await this.$getExercises();
+        this.exercises = result.content
+      } catch(e) {
+        alert(e)
+      }
+    },
+  },
+  created() {
+    this.getExercises();
+  }
 }
 </script>
 

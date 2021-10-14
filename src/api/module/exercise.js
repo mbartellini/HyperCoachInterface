@@ -7,8 +7,12 @@ export default {
     },
     getters: {
         findIndex(state) {
-            return (query) => {
-                return state.exercises.findIndex(exercise => exercise.id === query.id)
+            return (exercise) => {
+                for (let i = 0; i < state.exercises.length; i++) {
+                    if (state.exercises[i].id === exercise.id)
+                        return i
+                }
+                return false;
             }
         },
     },
@@ -43,21 +47,27 @@ export default {
         async delete({getters, commit}, exercise) {
             await ExerciseApi.delete(exercise.id)
             const index = getters.findIndex(exercise)
-            if (index >= 0)
+            if (index && index >= 0)
                 commit('splice', index)
         },
         async get({state, getters, commit}, exercise) {
             const index = getters.findIndex(exercise)
-            if (index >= 0)
+            if (index && index >= 0)
                 return state.exercises[index]
 
-            const result = await ExerciseApi.get()
+            const result = await ExerciseApi.get(exercise.id)
             commit('push', result)
             return result
         },
+        async getPage({commit}, {pageNumber, pageSize}) {
+            const result = await ExerciseApi.getPage(pageNumber, pageSize)
+            commit('replaceAll', result.content)
+            return result
+        },
         async getAll({commit}, controller) {
-            const result = await ExerciseApi.getAll(controller)
-            commit('replaceAll', result)
+            const preview = await ExerciseApi.getPage(0, 1)
+            const result = await ExerciseApi.getPage(0, preview.totalCount, controller)
+            commit('replaceAll', result.content)
             return result
         }
     },

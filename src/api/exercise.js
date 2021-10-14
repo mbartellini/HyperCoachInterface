@@ -23,8 +23,8 @@ class ExerciseApi {
         return await Api.get(ExerciseApi.getUrl(id),true,  controller)
     }
 
-    static async getAll(pageSize, controller) {
-        return await Api.get(ExerciseApi.getUrl('?' + 'page=' + pageSize), true, controller)
+    static async getPage(pageNumber=0, pageSize=10, controller) {
+        return await Api.get(ExerciseApi.getUrl('?' + 'page=' + pageNumber + '&size=' + pageSize), true, controller)
     }
 }
 

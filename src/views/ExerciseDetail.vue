@@ -53,7 +53,7 @@
           </p>
         </v-row>
         <v-row class="justify-space-between">
-          <v-btn tile class="rounded-lg" large color="error">
+          <v-btn tile class="rounded-lg" large color="error" @click="deleteExercise()">
             <v-icon dark>mdi-delete</v-icon>
             <div class="text-decoration-underline">
               Eliminar
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import GoBackButton from "../components/GoBackButton";
 
 export default {
@@ -81,25 +82,48 @@ export default {
   props: {
     id: {
       type: Number,
-      required: false,
+      required: true,
     }
   },
   components: {
     GoBackButton
   },
   data: () => ({
-    is_fav: false,
     exercise: {
-      "id": 1,
-      "name": "Jumping Jacks",
-      "detail": "Jumping Jacks",
+      "name": "Nombre del Ejercicio",
+      "detail": "Detalle del ejercicio",
       "type": "exercise",
-      "date": 1620062203228,
       "metadata": {
         img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
       }
     },
   }),
+  methods: {
+    ...mapActions('exercise', {
+      $getExercise: 'get',
+      $deleteExercise: 'delete',
+    }),
+    async getExercise() {
+      try {
+        this.exercise = {id: this.id}
+        this.exercise = await this.$getExercise(this.exercise);
+        this.exercise.metadata = {img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720"}
+      } catch(e) {
+        alert(e)
+      }
+    },
+    async deleteExercise() {
+      try {
+        await this.$deleteExercise(this.exercise);
+      } catch(e) {
+        alert(e)
+      }
+    },
+  },
+  created() {
+    if (this.id !== null)
+      this.getExercise();
+  },
 }
 </script>
 
