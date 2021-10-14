@@ -253,7 +253,6 @@ export default {
     async login(e) {
       e.preventDefault()
       try {
-        console.log(this.date)
         if (this.gender === "Prefiero no indicar") {
           this.gender = 'other'
         } else if (this.gender === "Masculino") {
@@ -267,11 +266,8 @@ export default {
           this.error = true
           return
         }
-        console.log(this.gender)
-        console.log(this.date)
-        this.image = URL.createObjectURL(this.image)
+        this.image = URL.createObjectURL(this.image).toString()
         const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, new Date(this.date.toString()).getTime(), this.email, this.phone, this.image, this.metadata)
-        console.log(JSON.stringify(credentials))
         await this.$register({credentials, rememberMe: true })
         await router.push('/')
       } catch(error) {

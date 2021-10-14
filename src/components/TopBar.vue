@@ -1,6 +1,5 @@
 <template>
   <v-app-bar app clipped-left class="secondary py-0" :key="reload">
-    <button @click="logout">PRESS</button>
     <v-container fluid fill-height>
       <v-row class="align-center">
         <v-avatar
@@ -44,7 +43,7 @@
 
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 
 export default {
@@ -66,17 +65,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('security', {
-      $logout: 'logout',
-    }),
-    async logout() {
-      console.log("2")
-      await this.$logout()
-      this.username = null
-      this.reload = !this.reload
-    },
     async getCurrent() {
-      console.log("1")
       if (this.$isLoggedIn) {
         let aux = await this.$getCurrentUser
         if (!aux) {

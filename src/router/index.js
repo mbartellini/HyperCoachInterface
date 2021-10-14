@@ -150,8 +150,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to.matched.some(route => route.meta.requiresAuth) && !security.state.user)
-    console.log(security.state.user)
     if (to.matched.some(route => route.meta.requiresAuth) && !security.state.user) {
         next({name: "LoginPrompt", query: { redirect: to.fullPath }});
     } else {

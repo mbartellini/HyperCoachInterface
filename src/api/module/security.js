@@ -16,7 +16,6 @@ export default {
         },
         async getCurrentUser(state) {
             if (state.user) {
-                console.log(state.user.firstName)
                 return state.user
             }
 
@@ -47,6 +46,9 @@ export default {
             commit('setToken', token)
             Api.token = token
         },
+        updateUser({commit}, {user}) {
+            commit('setUser', user)
+        },
         removeToken({commit}) {
             localStorage.removeItem(SECURITY_TOKEN_KEY)
             commit('setToken', null)
@@ -65,13 +67,12 @@ export default {
             dispatch('updateToken', { token: result.token, rememberMe })
             return result
         },
-        async modify({dispatch}, {credentials, rememberMe}) {
+        async modify({dispatch}, {credentials}) {
             const result = await UserApi.modify(credentials)
-            dispatch('updateToken', { token: result.token, rememberMe })
+            dispatch('updateUser', { user: await UserApi.get() })
             return result
         },
         async logout({dispatch}) {
-            console.log("ja")
             dispatch('removeToken')
             dispatch('removeUser')
             try {
@@ -79,7 +80,6 @@ export default {
             } catch (e) {
                 console.log(e)
             }
-            console.log("jas")
         },
     },
 }

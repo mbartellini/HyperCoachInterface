@@ -148,7 +148,6 @@ export default {
       $logout: 'logout',
     }),
     async logout() {
-      console.log("2")
       await this.$logout()
       await router.push('/')
       await router.go()
@@ -169,14 +168,12 @@ export default {
           this.error = true
           return
         }
-        console.log(this.gender)
 
         this.image = URL.createObjectURL(this.image)
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, this.image, this.metadata)
-        console.log(JSON.stringify(credentials))
-        await this.$modify({credentials, rememberMe: true})
-            await router.push('/')
-            await router.go()
+        await this.$modify({credentials})
+        await router.push('/')
+        await router.go()
       } catch (error) {
         this.error = true
         this.errorMsg = error // TODO: beautify this output
