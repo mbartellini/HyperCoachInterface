@@ -4,8 +4,8 @@ module.exports = {
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false,
-        user: 'eloise.cremin93@ethereal.email',
-        password: '9GaqXT1SH4CFzq4GFG'
+        user: 'gayle.mohr12@ethereal.email',
+        password: '3qTfaucUz52RPtZdu4'
     },
     registerVerification: {
         from: 'Hyper Coach Interface <noreply@hci.com>',
