@@ -13,30 +13,30 @@
           Iniciar sesión
         </div>
         <form @submit="login">
-        <v-text-field
-            v-model="username"
-            outlined label="Usuario"
-            clearable />
+          <v-text-field
+              v-model="username"
+              outlined label="Usuario"
+              clearable />
 
-        <v-text-field
-            v-model="password"
-            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show ? 'text' : 'password'"
-            name="input-10-2"
-            label="Contraseña"
-            outlined
-            @click:append="show = !show"
-        />
+          <v-text-field
+              v-model="password"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show ? 'text' : 'password'"
+              name="input-10-2"
+              label="Contraseña"
+              outlined
+              @click:append="show = !show"
+          />
           <div class="text-decoration-underline">
             <v-btn
                 type="submit"
-                class="ma-2"
+                class="ma-2 text-decoration-underline"
                 color="primary"
             >
               Iniciar sesión
             </v-btn>
             <v-btn
-                class="ma-2"
+                class="ma-2 text-decoration-underline"
                 plain
                 outlined
                 :to="{name: 'Registration'}"
@@ -95,6 +95,7 @@ export default {
   methods: {
     ...mapActions('security', {
       $login: 'login',
+      $logout: 'logout',
     }),
     async login(e) {
       e.preventDefault()

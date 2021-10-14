@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 #main {
-  background: url('https://s1.1zoom.me/b5050/585/Texture_Brick_Wall_White_545270_2560x1440.jpg') no-repeat center center fixed !important;
+  /*background: url('https://s1.1zoom.me/b5050/585/Texture_Brick_Wall_White_545270_2560x1440.jpg') no-repeat center center fixed !important;*/
   background-size: cover;
 }
 </style>
