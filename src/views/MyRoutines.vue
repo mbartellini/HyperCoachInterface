@@ -2,11 +2,14 @@
   <div>
     <v-container fluid>
       <v-row class="text-h5 ma-3">
-        <h1>Mis ejercicios</h1>
+        <h1>Mis rutinas</h1>
       </v-row>
       <v-row class="text-h6 ma-3 pt-5">
-        <p>
+        <p v-if="!routines_empty">
           ¡Estas son las rutinas que creaste!
+        </p>
+        <p v-else>
+          Aún no has creado rutinas. ¡Tocá el botón de crear para comenzar!
         </p>
         <v-spacer></v-spacer>
         <v-btn

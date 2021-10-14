@@ -13,6 +13,7 @@
         </p>
         <v-spacer></v-spacer>
         <v-btn
+            large
             class="rounded-lg"
             color="success"
             :to="{name: 'EditExercise', params: {

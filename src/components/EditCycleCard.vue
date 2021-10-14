@@ -50,7 +50,7 @@
                   outlined
                   clearable
                   label="Ejercicio"
-                  class="mx-3"
+                  class="mx-3 py-0"
               />
           </v-row>
           <v-row class="my-0 pa-3">
@@ -95,67 +95,6 @@ export default {
       { hint: 'repeticiones', name: 'repetitions' },
       { hint: 'segundos', name: 'duration' },
     ],
-    routineCycle: {
-      "id": 1,
-      "name": "Fast Warmup",
-      "detail": "Fast Warmup",
-      "type": "warmup",
-      "order": 1,
-      "repetitions": 1,
-      "metadata": null,
-    },
-    cyclesExercises: {
-      "totalCount": 1,
-      "orderBy": "order",
-      "direction": "asc",
-      "content": [
-        {
-          "exercise": {
-            "id": 1,
-            "name": "A",
-            "detail": "Fast Warmup",
-            "type": "warmup",
-            "date": 1620062203228,
-            "order": 1
-          },
-          "order": 1,
-          "duration": null,
-          "repetitions": 1,
-          "metadata": null
-        },
-        {
-          "exercise": {
-            "id": 1,
-            "name": "B",
-            "detail": "Fast Warmup",
-            "type": "warmup",
-            "date": 1620062203228,
-            "order": 1
-          },
-          "order": 2,
-          "duration": 30,
-          "repetitions": 1,
-          "metadata": null
-        },
-        {
-          "exercise": {
-            "id": 1,
-            "name": "C",
-            "detail": "Fast Warmup",
-            "type": "warmup",
-            "date": 1620062203228,
-            "order": 1
-          },
-          "order": 3,
-          "duration": 30,
-          "repetitions": 1,
-          "metadata": null
-        }
-      ],
-      "size": 10,
-      "page": 0,
-      "isLastPage": true
-    }
   }),
 }
 </script>
