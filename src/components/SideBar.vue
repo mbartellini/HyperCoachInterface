@@ -34,7 +34,7 @@ export default {
       {name: 'Mis rutinas', route: 'MyRoutines', icon: 'mdi-folder'},
       {name: 'Mis ejercicios', route: 'MyExercises', icon: 'mdi-weight-lifter'},
       {name: 'Buscar', route: 'Search', icon: 'mdi-card-search'},
-      {name: 'Configuración', route: 'Settings', icon: 'mdi-cog'},
+      {name: 'Perfil', route: 'Profile', icon: 'mdi-account'},
     // TODO: make active icon to only have outline.
     ],
     selectedItem: null,

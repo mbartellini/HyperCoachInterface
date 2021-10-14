@@ -1,10 +1,16 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="4">
-      </v-col>
-      <v-col cols="4">
-        <div style="margin-top:70px">
+  <v-container fluid>
+    <v-row class="text-h5 ma-3">
+      <h1>Perfil</h1>
+    </v-row>
+    <v-row class="text-h6 ma-3 pt-5">
+      <p>
+        Aquí puedes ver y modificar tu información personal.
+      </p>
+    </v-row>
+    <v-row class="text-center" align="center">
+      <v-col cols="2" offset="5">
+        <div>
           <v-avatar
               color="primary"
               size="150"
@@ -19,73 +25,97 @@
           </v-avatar>
         </div>
       </v-col>
-        <v-col cols="4" style="margin-top: 15px">
-          <v-btn
-              class = "my-3 white--text"
-              color="grey darken-1"
-              elevation = "3"
-              large
-              rounded
-          >
-            <v-icon left>
-              mdi-pencil
-            </v-icon>
+      <v-col cols="2" style="margin-top: 15px">
+        <v-btn
+            class = "my-3 white--text rounded-lg"
+            color="success"
+            elevation = "3"
+            large
+        >
+          <v-icon left>
+            mdi-pencil
+          </v-icon>
+          <div class="text-decoration-underline">
             Editar perfil
-          </v-btn>
-        </v-col>
+          </div>
+        </v-btn>
+      </v-col>
     </v-row>
-    <v-col class="text-center">
-      <h1>Nombre</h1>
-      <v-card
-          elevation="2"
-          class ="ma-auto"
-          height="40"
-          width="400"
-      >
-        <subtitle-1 class="text-center"> {{user.name}} </subtitle-1>
-      </v-card>
-      <h1>Usuario</h1>
-      <v-card
-          elevation="2"
-          class ="mx-md-auto"
-          height="40"
-          width="400"
-      >
-        <subtitle-1 class="text-center"> {{user.username}} </subtitle-1>
-      </v-card>
-      <h1>E-mail</h1>
-      <v-card
-          elevation="2"
-          class ="mx-md-auto"
-          height="40"
-          width="400"
-      >
-        <subtitle-1 class="text-center"> {{user.email}} </subtitle-1>
-      </v-card>
-      <h1>Sexo</h1>
-      <v-card
-          elevation="2"
-          class ="mx-md-auto"
-          height="40"
-          width="400"
-      >
-        <subtitle-1 class="text-center"> {{user.sex}} </subtitle-1>
-      </v-card>
-      <h1>Edad</h1>
-      <v-card
-          elevation="2"
-          class ="mx-md-auto"
-          height="40"
-          width="400"
-      >
-        <subtitle-1 class="text-center"> {{user.age}} </subtitle-1>
-      </v-card>
-    </v-col>
+    <v-row>
+      <v-col class="text-center my-5">
+        <h2>Nombre</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{user.name}} </p>
+        </v-card>
+        <h2>Usuario</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{user.username}} </p>
+        </v-card>
+        <h2>E-mail</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{user.email}} </p>
+        </v-card>
+        <h2>Sexo</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{user.sex}} </p>
+        </v-card>
+        <h2>Edad</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{user.age}} </p>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="2" offset="5" justify="center">
+        <v-btn
+            class = "mx-md-auto rounded-lg mt-5"
+            color="error"
+            elevation = "3"
+            large
+            @click="logout"
+        >
+          <v-icon left>
+            mdi-arrow-left-bold-box-outline
+          </v-icon>
+          <v-spacer/>
+          <div class="text-decoration-underline">
+            Cerrar sesión
+          </div>
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 
 <script>
+import router from "@/router";
+import {mapGetters, mapState} from "vuex";
 
 export default {
   name: 'Profile',
@@ -99,5 +129,23 @@ export default {
       age: 20,
     },
   }),
+
+  computed: {
+    ...mapState('security', {
+      $user: state => state.user,
+    }),
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn',
+      $getCurrentUser: 'getCurrentUser',
+    })
+  },
+
+  methods: {
+    async logout() {
+      await this.$logout()
+      await router.push('/')
+      await router.go()
+    },
+  }
 }
 </script>
