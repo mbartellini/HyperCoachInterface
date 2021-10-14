@@ -3,7 +3,9 @@
     <v-row class="text-h5 ma-3">
       <h1>Editar perfil</h1>
     </v-row>
-    <v-row class="text-center">
+    <v-row class="text-center" align="center">
+      <v-col cols="2" offset="5">
+       <v-row class="text-center">
       <v-col cols="6">
         <div style="margin-top:40px">
           <v-avatar
@@ -22,7 +24,7 @@
         </div>
       </v-col>
     </v-row>
-    <form @submit="login">
+       <form @submit="login">
       <v-row>
         <v-col>
           <div class="my-5">
@@ -41,9 +43,7 @@
             </v-row>
             <v-row>
               <v-col
-                  cols="8"
-                  sm="6"
-                  md="3"
+                  class="text-center my-5"
               >
                 <v-text-field
                     v-model="name"
@@ -54,12 +54,6 @@
                     clearable
                     label="Nombre"
                 />
-              </v-col>
-              <v-col
-                  cols="8"
-                  sm="6"
-                  md="3"
-              >
                 <v-text-field
                     v-model="lastname"
                     outlined
@@ -69,14 +63,6 @@
                     required
                     clearable
                 ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col
-                  cols="8"
-                  sm="6"
-                  md="3"
-              >
                 <v-autocomplete
                     ref="gender"
                     v-model="gender"
@@ -86,14 +72,6 @@
                     required
                     outlined
                 ></v-autocomplete>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col
-                  cols="8"
-                  sm="6"
-                  md="3"
-              >
                 <v-btn
                     type="submit"
                     tile
@@ -105,6 +83,12 @@
                   <v-icon dark>mdi-content-save</v-icon>
                   <div class="text-decoration-underline"> Guardar </div>
                 </v-btn>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                  class="text-center my-5"
+              >
                 <v-dialog
                     v-model="dialog"
                     width="500"
@@ -140,6 +124,8 @@
         </v-col>
       </v-row>
     </form>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -155,6 +141,7 @@ export default {
     error: false,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Tus cambios fueron guardados.',
+    errorDetails:'',
     dialog: false,
     name: "Juan Ignacio Garcia Matwieiszyn",
     lastname: "Juan Ignacio Garcia Matwieiszyn",
