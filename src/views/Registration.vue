@@ -122,7 +122,7 @@
                     md="2"
                 >
                   <v-file-input @change="PreviewImage" v-show="false" id="file-upload" v-model="image" style="margin: 0"/>
-                  <v-btn class="pa-5">
+                  <v-btn class="pa-5 text-decoration-underline">
                     <label @change="PreviewImage" for="file-upload">Subir foto de perfil</label>
                   </v-btn>
                 </v-col>
@@ -195,7 +195,7 @@
                   <v-btn
                       type="submit"
                       :disabled="password.length < 3 && password !== passwordConfirmation"
-                      class="bg-green-400 p-5 text-white"
+                      class="bg-green-400 p-5 text-white text-decoration-underline"
                   >
                     Registrarse
                   </v-btn>

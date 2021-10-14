@@ -57,27 +57,18 @@
         <v-row dense class="ma-0 pa-0">
           <v-col dense class="ma-0 pa-0">
             <v-row dense>
-            <h4 class="text">{{routine.metadata.duration}} min.</h4>
-            </v-row>
-            <v-row dense>
-            <h4 class="text">{{routine.difficulty}}</h4>
-            </v-row>
-            <v-row dense>
-              <h4 class="text">{{'hola'}}</h4>
-            </v-row>
-            <v-row dense>
-              <h4 class="text">{{'hola'}}</h4>
-            </v-row>
-            <v-row dense>
-              <h4 class="text">{{'hola'}}</h4>
-            </v-row>
-            <v-row dense>
-              <div v-if="routine.metadata.equipment">
-                <h4 class="text">Requiere equipamiento.</h4>
-              </div>
-              <div v-else>
-                <h4 class="text">No requiere equipamiento.</h4>
-              </div>
+              <v-col>
+                <h4 class="text">Duración: {{routine.metadata.duration}} min.</h4>
+                <h4 class="text">Dificultad: {{routine.difficulty}}</h4>
+                <h4 class="text">Detalle: {{routine.detail}}</h4>
+                <h4 class="text">Categoría: {{routine.category.name}}</h4>
+                <div v-if="routine.metadata.equipment">
+                  <h4 class="text">Requiere equipamiento.</h4>
+                </div>
+                <div v-else>
+                  <h4 class="text">No requiere equipamiento.</h4>
+                </div>
+              </v-col>
             </v-row>
             <v-row class="justify-space-between">
               <v-btn tile class="rounded-lg" large color="error">

@@ -38,23 +38,12 @@
             <v-btn
                 class="ma-2 text-decoration-underline"
                 plain
-                outlined
                 :to="{name: 'Registration'}"
             >
               Registrarme
             </v-btn>
           </div>
         </form>
-        <div class="text-decoration-underline">
-          <v-btn
-              class="ma-2"
-              plain
-              fab
-              :to="{name: 'Registration'}"
-          >
-            Olvidé mi contraseña
-          </v-btn>
-        </div>
       </v-sheet>
     </v-container>
   </div>
