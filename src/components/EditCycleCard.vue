@@ -82,13 +82,13 @@
         </v-card-text>
       </v-row>
       <v-card-actions>
-        <v-btn icon @click="deleteExercise()">
+        <v-btn outlined icon @click="deleteExercise()">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="addExercise()">
+        <v-btn outlined icon @click="addExercise()">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-actions>

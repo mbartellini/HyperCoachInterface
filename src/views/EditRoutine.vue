@@ -106,6 +106,38 @@
         </v-col>
 
       </v-row>
+
+      <v-row class="d-flex justify-center align-content-center">
+        <template>
+          <v-card
+              elevation="6"
+              max-width="500"
+              class="rounded-card pb-3"
+          >
+            <v-card-title class = "pb-0 d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row secondary mb-3 white--text">
+              <v-container>
+                <v-row>
+                  <v-text-field
+                      dense
+                      outlined
+                      disabled
+                      label="Nuevo ciclo"
+                      color="white"
+                      class="pb-n10"
+                  />
+                </v-row>
+              </v-container>
+            </v-card-title>
+
+            <v-card-actions class="d-flex justify-center align-content-center">
+              <v-btn center outlined icon @click="addCycle()">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-row>
+
     </form>
 
   </v-container>
@@ -130,6 +162,27 @@ export default {
     EditCycleCard,
   },
   data: () => ({
+    testCycle: {
+      name: "Ciclo",
+      repetitions: 1,
+      exercises: [
+        {
+          id: 0,
+          limit: 5,
+          limitType: 'repeticiones',
+        },
+        {
+          id: 0,
+          limit: 5,
+          limitType: 'repeticiones',
+        },
+        {
+          id: 0,
+          limit: 5,
+          limitType: 'repeticiones',
+        },
+      ]
+    },
     newRoutine: true,
     exercises: [],
     routine: {
@@ -214,13 +267,21 @@ export default {
       $getRoutine: 'get',
       $putRoutine: 'modify',
     }),
+    addCycle() {
+      this.routine.metadata.cycles.push(
+          Object.assign({}, this.testCycle)
+      )
+    },
     deleteCycle(index) {
-      alert(index)
+      if (this.routine.metadata.cycles.length > 3)
+        this.routine.metadata.cycles.splice(index, 1)
     },
     async getRoutine() {
       try {
         let routine = {id: this.id}
-        this.routine = await this.$getRoutine(routine);
+        let result = await this.$getRoutine(routine)
+        if (!result.content)
+          this.routine = result
       } catch(e) {
         alert(e)
       }
@@ -242,12 +303,14 @@ export default {
       }
     },
     save() {
+      alert(JSON.stringify(this.routine))
+      /*
       if (this.newRoutine) {
         this.postRoutine()
       } else {
         this.putRoutine()
       }
-      this.$router.push({name: 'MyRoutines'})
+      this.$router.push({name: 'MyRoutines'})*/
     },
     ...mapActions('exercise', {
       $getExercises: 'getAll',
@@ -279,7 +342,7 @@ export default {
   },
   async created() {
     await this.getExercises();
-    if (this.id !== null) {
+    if (this.id != null) {
       this.newRoutine = false
       await this.getRoutine()
       for (let i in this.difficultiesAvailable) {
