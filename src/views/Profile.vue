@@ -166,8 +166,7 @@ export default {
       this.image = user.metadata.img_src
       this.gender = user.gender
       this.email = user.email
-      this.birthdate = new Date(user.birthdate).toString()
-      console.log(this.birthdate)
+      this.birthdate = new Date(user.birthdate).toLocaleDateString()
     },
 
     async edit () {
