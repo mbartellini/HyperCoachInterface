@@ -31,6 +31,7 @@
             <v-dialog
                 v-model="dialog"
                 width="500"
+                persistent
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -70,7 +71,7 @@
             <v-btn
                 class="ma-2 text-decoration-underline"
                 plain
-                :to="{name: 'Register'}"
+                @click="sendToRegistration"
             >
               Registrarme
             </v-btn>
@@ -128,7 +129,6 @@ export default {
         await this.$login({credentials, rememberMe: true})
 
       } catch (error) {
-        this.entireError = error
         this.error = true
         this.errorDetails = error.details[0] // TODO: beautify this output
         this.password = ''
@@ -142,6 +142,10 @@ export default {
       }
       router.go(0)
     },
+    sendToRegistration() {
+      router.push('/register')
+      router.go(0)
+    }
   }
 }
 </script>
