@@ -19,7 +19,7 @@
         <v-row class="pa-0">
           <v-col>
             <v-card-text class="textSize">
-              {{getExerciseName(i)}}
+              {{AHAH}}
             </v-card-text>
           </v-col>
           <div>

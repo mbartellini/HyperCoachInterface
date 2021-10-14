@@ -27,7 +27,7 @@
                     width="50"
                     type="number"
                     label="Cantidad de repeticiones"
-                    class="ma-0"
+                    class="ma-0 py-0"
                     color="white"
                 />
               </div>
@@ -43,41 +43,55 @@
       >
         <v-divider class="mx-5"></v-divider>
         <v-card-text class="mx-auto py-0" dense>
-          <v-row class="my-0 pa-3">
-              <v-text-field
-                  dense
-                  v-model="exercise.id"
-                  outlined
-                  clearable
-                  label="Ejercicio"
-                  class="mx-3 py-0"
-              />
+          <v-row class="py-0 pt-3 my-0 pa-3">
+            <v-autocomplete
+                v-model="exercise.ref"
+                :hint="`${exercise.name}`"
+                :items="exercises"
+                item-text="name"
+                item-value="id"
+                label="Ejercicio"
+                dense
+                outlined
+                return-object
+                single-line
+            ></v-autocomplete>
           </v-row>
-          <v-row class="my-0 pa-3">
+          <v-row class="py-0 my-0 pa-3">
             <v-text-field
                 dense
                 v-model="exercise.limit"
                 outlined
-                clearable
                 label="Cantidad"
-                class="mt-3 mb-0 ml-3"
+                type="number"
+                class="mt-3 mb-0 ml-1"
             />
-            <v-select
-                dense
-                v-model="exercise.limitType"
-                :items="selRepOrDur"
-                outlined
-                label="Tipo"
-                class="mt-3 mb-0 ml-3"
-            />
+            <v-autocomplete
+              v-model="exercise.limitType"
+              :items="selRepOrDur"
+              item-text="hint"
+              item-value="id"
+              label="Duración"
+              dense
+              outlined
+              return-object
+              single-line
+              class="mt-3 mb-0 ml-3"
+          ></v-autocomplete>
           </v-row>
         </v-card-text>
       </v-row>
-      <v-row>
-        <v-btn icon large>
+      <v-card-actions>
+        <v-btn icon @click="deleteExercise()">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
-      </v-row>
+
+        <v-spacer></v-spacer>
+
+        <v-btn icon @click="addExercise()">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </v-card-actions>
     </v-card>
 </template>
 
@@ -88,7 +102,11 @@ export default {
     cycle: {
       type: Object,
       required: true,
-    }
+    },
+    exercises: {
+      type: Array,
+      required: true,
+    },
   },
   data: () => ({
     selRepOrDur: [
@@ -96,6 +114,19 @@ export default {
       { hint: 'segundos', name: 'duration' },
     ],
   }),
+  methods: {
+    addExercise() {
+      this.cycle.exercises.push({
+        id: 0,
+        limit: 5,
+        limitType: { hint: 'repeticiones', name: 'repetitions' },
+      })
+    },
+    deleteExercise() {
+      if (this.cycle.exercises.length > 1)
+        this.cycle.exercises.pop()
+    }
+  }
 }
 </script>
 
