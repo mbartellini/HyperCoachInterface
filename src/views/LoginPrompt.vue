@@ -24,10 +24,9 @@
           >
             Iniciar sesión
           </v-btn>
-
           <v-btn
-              class="ma-2"
-              outlined
+              class="ma-2 text-decoration-underline"
+              plain
               :to="{name: 'Registration'}"
           >
             Registrarme
