@@ -54,7 +54,7 @@
                   <v-btn
                       color="success"
                       text
-                      :to="{name: 'Inicio'}"
+                      :to="{name: 'Home'}"
                       class="text-decoration-underline"
                   >
                     Volver al inicio
