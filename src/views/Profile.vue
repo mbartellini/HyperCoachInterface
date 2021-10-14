@@ -47,56 +47,56 @@
         <h2>Nombre</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{firstname}} </p>
+          <p class="centertext"> {{firstname}} </p>
         </v-card>
         <h2>Apellido</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{lastname}} </p>
+          <p class="centertext"> {{lastname}} </p>
         </v-card>
         <h2>Usuario</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{username}} </p>
+          <p class="centertext"> {{username}} </p>
         </v-card>
         <h2>E-mail</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{email}} </p>
+          <p class="centertext"> {{email}} </p>
         </v-card>
         <h2>Sexo</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{gender}} </p>
+          <p class="centertext"> {{gender}} </p>
         </v-card>
         <h2>Fecha de nacimiento</h2>
         <v-card
             elevation="2"
-            class ="mx-md-auto"
+            class ="mx-md-auto centerdiv"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{birthdate}} </p>
+          <p class="centertext"> {{birthdate}} </p>
         </v-card>
         <v-col @click="logout" cols="3" offset="5" class="mx-md-auto">
           <v-btn
@@ -189,3 +189,17 @@ export default {
 
 }
 </script>
+
+<style scoped>
+
+.centertext {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.centerdiv {
+  display: table;
+}
+
+</style>
