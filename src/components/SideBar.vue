@@ -35,6 +35,7 @@ export default {
       {name: 'Mis ejercicios', route: 'MyExercises', icon: 'mdi-weight-lifter'},
       {name: 'Buscar', route: 'Search', icon: 'mdi-card-search'},
       {name: 'Perfil', route: 'Profile', icon: 'mdi-account'},
+      {name: '[Iniciar]', route: 'Initialization', icon: 'mdi-restart'},
     // TODO: make active icon to only have outline.
     ],
     selectedItem: null,

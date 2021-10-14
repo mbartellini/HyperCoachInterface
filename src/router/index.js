@@ -136,6 +136,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile')
     },
     {
+        path: '/init',
+        name: 'Initialization',
+        meta: { requiresAuth: true },
+        component: () => import(/* webpackChunkName: "init" */ '../views/Initialization.vue')
+    },
+    {
         path: '/not_found',
         alias: '*',
         name: 'NotFound',
