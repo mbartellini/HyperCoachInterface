@@ -8,11 +8,14 @@ export default {
     namespaced: true,
     state: {
         token: null,
-        user: null
+        user: null,
     },
     getters: {
         isLoggedIn(state) {
             return state.token != null
+        },
+        logged() {
+            return this.state.token != null
         },
         async getCurrentUser(state) {
             if (state.user) {
@@ -22,7 +25,7 @@ export default {
             const result = await UserApi.get()
             state.user = result
             return result
-        }
+        },
     },
     mutations: {
         setUser(state, user) {
@@ -60,6 +63,7 @@ export default {
         async login({dispatch}, {credentials, rememberMe}) {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })
+            dispatch('updateUser', { user: result})
             return result
         },
         async register({dispatch}, {credentials, rememberMe}) {

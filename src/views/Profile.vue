@@ -16,7 +16,7 @@
               size="150"
           >
             <v-img
-                :src="require('../assets/Juani.jpeg')"
+                :src="image"
                 class="mx-auto"
                 max-width="150"
                 height="150"
@@ -27,6 +27,7 @@
       </v-col>
       <v-col cols="2" style="margin-top: 15px">
         <v-btn
+            @click = "edit"
             class = "my-3 white--text rounded-lg"
             color="success"
             elevation = "3"
@@ -50,7 +51,16 @@
             height="40"
             width="400"
         >
-          <p class="text-center"> {{user.name}} </p>
+          <p class="text-center"> {{firstname}} </p>
+        </v-card>
+        <h2>Apellido</h2>
+        <v-card
+            elevation="2"
+            class ="mx-md-auto"
+            height="40"
+            width="400"
+        >
+          <p class="text-center"> {{lastname}} </p>
         </v-card>
         <h2>Usuario</h2>
         <v-card
@@ -59,7 +69,7 @@
             height="40"
             width="400"
         >
-          <p class="text-center"> {{user.username}} </p>
+          <p class="text-center"> {{username}} </p>
         </v-card>
         <h2>E-mail</h2>
         <v-card
@@ -68,7 +78,7 @@
             height="40"
             width="400"
         >
-          <p class="text-center"> {{user.email}} </p>
+          <p class="text-center"> {{email}} </p>
         </v-card>
         <h2>Sexo</h2>
         <v-card
@@ -77,27 +87,26 @@
             height="40"
             width="400"
         >
-          <p class="text-center"> {{user.sex}} </p>
+          <p class="text-center"> {{gender}} </p>
         </v-card>
-        <h2>Edad</h2>
+        <h2>Fecha de nacimiento</h2>
         <v-card
             elevation="2"
             class ="mx-md-auto"
             height="40"
             width="400"
         >
-          <p class="text-center"> {{user.age}} </p>
+          <p class="text-center"> {{birthdate}} </p>
         </v-card>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="2" offset="5" justify="center">
+      <v-col @click="logout" cols="2" offset="5" justify="center">
         <v-btn
             class = "mx-md-auto rounded-lg mt-5"
             color="error"
             elevation = "3"
             large
-            @click="logout"
         >
           <v-icon left>
             mdi-arrow-left-bold-box-outline
@@ -115,19 +124,19 @@
 
 <script>
 import router from "@/router";
-import {mapGetters, mapState} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   name: 'Profile',
 
   data: () => ({
-    user: {
-      name: "Juan Ignacio Garcia Matwieiszyn",
-      username: "juano",
-      email: "juanigarcia@itba.edu.ar",
-      sex: "Por favor",
-      age: 20,
-    },
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      gender: "",
+      image: null,
+      birthdate: "",
   }),
 
   computed: {
@@ -141,11 +150,40 @@ export default {
   },
 
   methods: {
+    ...mapActions('security', {
+      $logout: 'logout',
+    }),
     async logout() {
       await this.$logout()
       await router.push('/')
       await router.go()
     },
-  }
+
+    async getData() {
+      let user = await this.$getCurrentUser
+      console.log(user)
+      this.firstname = user.firstName
+      this.lastname = user.lastName
+      this.username = user.username
+      this.image = user.avatarUrl
+      this.gender = user.gender
+      this.email = user.email
+      this.birthdate = new Date(user.birthdate).toString()
+      console.log(this.birthdate)
+    },
+
+    async edit () {
+      await router.push('/settings')
+    }
+  },
+
+
+  async beforeMount() {
+    await this.getData()
+  },
+
+  async beforeUpdate() {
+    await this.getData()
+  },
 }
 </script>
