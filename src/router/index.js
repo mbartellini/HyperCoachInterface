@@ -22,7 +22,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "registration" */ '../views/Registration.vue')
     },
     {
-        path: '/LoginQuestions',
+        path: '/login_questions',
         name: 'LoginQuestions',
         component: () => import(/* webpackChunkName: "login_questions" */ '../views/LoginQuestions.vue')
     },
@@ -33,13 +33,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "favorites" */ '../views/Favorites.vue')
     },
     {
-        path: '/myroutines',
+        path: '/my_routines',
         name: 'MyRoutines',
         meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "my_routines" */ '../views/MyRoutines.vue')
     },
     {
-        path: '/myexercises',
+        path: '/my_exercises',
         name: 'MyExercises',
         meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "my_exercises" */ '../views/MyExercises')
@@ -63,7 +63,7 @@ const routes = [
     {
         path: '/routine/:id',
         name: 'RoutineDetail',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
+        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
@@ -77,9 +77,9 @@ const routes = [
         }, */
     },
     {
-        path: '/routineedit/:id?',
+        path: '/routine_edit/:id?',
         name: 'EditRoutine',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || null}),
+        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "edit_routine" */ '../views/EditRoutine.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
@@ -95,7 +95,7 @@ const routes = [
     {
         path: '/exercise/:id',
         name: 'ExerciseDetail',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
+        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "exercise_detail" */ '../views/ExerciseDetail.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
@@ -109,7 +109,7 @@ const routes = [
         }, */
     },
     {
-        path: '/edit_exercise/:id?',
+        path: '/exercise_edit/:id?',
         name: 'EditExercise',
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || null}),
         component: () => import(/* webpackChunkName: "edit_exercise" */ '../views/EditExercise.vue'),
@@ -125,7 +125,7 @@ const routes = [
         }, */
     },
     {
-        path: '/loginprompt',
+        path: '/login_prompt',
         name: 'LoginPrompt',
         component: () => import(/* webpackChunkName: "login_prompt" */ '../views/LoginPrompt')
     },
@@ -136,7 +136,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile')
     },
     {
-        path: '/notfound',
+        path: '/not_found',
         alias: '*',
         name: 'NotFound',
         component: () => import(/* webpackChunkName: "not_found" */ '../views/NotFound.vue')
