@@ -14,9 +14,6 @@ export default {
         isLoggedIn(state) {
             return state.token != null
         },
-        logged() {
-            return this.state.token != null
-        },
         async getCurrentUser(state) {
             if (state.user) {
                 return state.user

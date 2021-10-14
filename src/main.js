@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import security from './api'
+import store from './api'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import Vuesax from 'vuesax'
@@ -21,7 +21,7 @@ Vue.use(Vuesax, {
 })
 
 new Vue({
-  security,
+  store,
   vuetify,
   router,
   async beforeCreate() {
