@@ -56,7 +56,7 @@
         />
         </v-row>
         <v-row class="justify-end">
-          <v-btn type="submit" tile class="rounded-lg" large color="success" @click="save()" :to="{ name: 'ExerciseDetail', params: { id: id } }" >
+          <v-btn type="submit" tile class="rounded-lg" large color="success">
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
@@ -122,12 +122,14 @@ export default {
         alert(e)
       }
     },
-    save() {
+     save() {
       if (this.newExercise) {
         this.postExercise()
       } else {
+
         this.putExercise()
       }
+      this.$router.push({name: 'MyExercises'})
     }
   },
   created() {

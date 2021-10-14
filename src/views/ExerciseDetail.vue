@@ -118,6 +118,7 @@ export default {
       } catch(e) {
         alert(e)
       }
+      this.$router.push({name: 'MyExercises'})
     },
   },
   created() {
