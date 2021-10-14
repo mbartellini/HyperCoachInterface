@@ -4,7 +4,7 @@
       <v-row class="text-h5 ma-3">
         <h1>Favoritos</h1>
       </v-row>
-      <div v-if="favorites">
+      <div v-if="!favorites_empty">
         <v-row class="text-h6 ma-3 pt-5">
           <p>
             ¡Estas son las rutinas que marcaste como favoritas!
@@ -32,6 +32,7 @@
 
 <script>
 import RoutinesCardsGrid from "../components/RoutinesCardsGrid";
+import {mapActions} from "vuex";
 
 export default {
   name: 'Favorites',
@@ -39,20 +40,27 @@ export default {
   components: {
     RoutinesCardsGrid,
   },
-
   data: () => ({
+    favorites: [],
+    favorites_empty: true,
   }),
-
-  computed: {
-    favorites() {
-      return [
-        { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-        { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-        { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-        { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-        { title: 'Brazos', img_src: '../assets/arms.png' }
-      ]
-    }
-  }
+  methods: {
+    ...mapActions('favorite', {
+      $getFavorites: 'getPage',
+    }),
+    async getFavorites() {
+      try {
+        let result = await this.$getFavorites({pageNumber: 0, pageSize:50});
+        alert(JSON.stringify(result))
+        this.favorites_empty = result.totalCount === 0
+        this.favorites = result.content
+      } catch(e) {
+        alert(e)
+      }
+    },
+  },
+  async created() {
+    await this.getFavorites();
+  },
 }
 </script>

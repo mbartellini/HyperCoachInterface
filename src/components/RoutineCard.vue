@@ -8,11 +8,11 @@
         }}"
     >
       <v-img
-          :src="routine.img_src"
+          :src="routine.metadata.img_src"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class="justify-center" max-width="200">
-        {{ routine.title }}
+        {{ routine.name }}
       </v-card-title>
     </v-card>
 </template>
