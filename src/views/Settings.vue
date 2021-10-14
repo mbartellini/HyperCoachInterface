@@ -83,7 +83,6 @@
                     class="rounded-lg"
                     large
                     color="success"
-                    @click.stop="dialog = true"
                 >
                   <v-icon dark>mdi-content-save</v-icon>
                   <div class="text-decoration-underline"> Guardar </div>
@@ -217,6 +216,7 @@ export default {
         console.log(this.metadata)
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
+        this.dialog = true
       } catch (error) {
         this.error = true
         console.log(error)
@@ -237,6 +237,7 @@ export default {
       this.name = user.firstName
       this.lastname = user.lastName
       this.preview = user.metadata.img_src
+      this.metadata = user.metadata
       this.gender = user.gender
     },
     finishDialog() {
