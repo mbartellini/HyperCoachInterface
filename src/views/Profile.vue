@@ -164,6 +164,15 @@ export default {
       this.username = user.username
       this.image = user.metadata.img_src
       this.gender = user.gender
+      if (this.gender === 'other') {
+        this.gender = "Prefiero no indicar"
+      } else if (this.gender === 'male') {
+        this.gender = "Masculino"
+      } else if (this.gender === 'female') {
+        this.gender = "Femenino"
+      } else {
+        this.gender = ''
+      }
       this.email = user.email
       this.birthdate = new Date(user.birthdate).toLocaleDateString()
     },
@@ -178,8 +187,5 @@ export default {
     await this.getData()
   },
 
-  async beforeUpdate() {
-    await this.getData()
-  },
 }
 </script>

@@ -114,7 +114,7 @@ export default {
   data: () => ({
     name: "Juan Ignacio Garcia Matwieiszyn",
     lastname: "Juan Ignacio Garcia Matwieiszyn",
-    image: [],
+    image: null,
     username: "juano",
     email: "juanigarcia@itba.edu.ar",
     gender: "Masculino",
@@ -122,6 +122,7 @@ export default {
     password: '',
     preview: null,
     passwordConfirmation: '',
+    metadata: {img_src: ""},
     menu: null,
   }),
   computed: {
@@ -174,8 +175,7 @@ export default {
           return
         }
 
-        this.image = URL.createObjectURL(this.image)
-        const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, this.image, this.metadata)
+        const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
         await router.push('/')
       } catch (error) {
