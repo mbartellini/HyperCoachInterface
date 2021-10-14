@@ -63,7 +63,7 @@ const routes = [
     {
         path: '/routine/:id',
         name: 'RoutineDetail',
-        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
+        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
@@ -95,7 +95,7 @@ const routes = [
     {
         path: '/exercise/:id',
         name: 'ExerciseDetail',
-        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
+        props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "exercise_detail" */ '../views/ExerciseDetail.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
@@ -111,7 +111,7 @@ const routes = [
     {
         path: '/exercise_edit/:id?',
         name: 'EditExercise',
-        props: ({params}) => ({id: Number.parseInt(params.id, 10) || null}),
+        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "edit_exercise" */ '../views/EditExercise.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(

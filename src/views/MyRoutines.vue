@@ -10,8 +10,11 @@
         </p>
         <v-spacer></v-spacer>
         <v-btn
-            rounded
+            tile
+            large
+            class="rounded-lg"
             color="success"
+            :to="{name: 'EditRoutine'}"
         ><v-icon left outlined> mdi-plus </v-icon>
           <div class="text-decoration-underline">Crear</div>
         </v-btn>

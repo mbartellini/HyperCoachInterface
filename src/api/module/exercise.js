@@ -40,7 +40,7 @@ export default {
         async modify({getters, commit}, exercise) {
             const result = await ExerciseApi.modify(exercise)
             const index = getters.findIndex(result)
-            if (index >= 0)
+            if (index && index >= 0)
                 commit('replace', index, result)
             return result
         },

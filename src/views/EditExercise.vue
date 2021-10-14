@@ -56,7 +56,7 @@
         />
         </v-row>
         <v-row class="justify-end">
-          <v-btn type="submit" tile class="rounded-lg" large color="success" @click="save()" :to="{ name: 'EditExercise', params: { id: id } }" >
+          <v-btn type="submit" tile class="rounded-lg" large color="success" @click="save()" :to="{ name: 'ExerciseDetail', params: { id: id } }" >
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
@@ -97,6 +97,7 @@ export default {
     ...mapActions('exercise', {
       $postExercise: 'create',
       $getExercise: 'get',
+      $putExercise: 'modify',
     }),
     async getExercise() {
       try {
@@ -114,11 +115,18 @@ export default {
         alert(e)
       }
     },
+    async putExercise() {
+      try {
+        this.exercise = await this.$putExercise(this.exercise)
+      } catch(e) {
+        alert(e)
+      }
+    },
     save() {
       if (this.newExercise) {
-        this.postExercise(this.exercise)
+        this.postExercise()
       } else {
-        alert("S")
+        this.putExercise()
       }
     }
   },

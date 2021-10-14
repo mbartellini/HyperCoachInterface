@@ -48,7 +48,7 @@
           <v-row class="my-0 pa-3">
               <v-text-field
                   dense
-                  v-model="exercise.name"
+                  v-model="exercise.id"
                   outlined
                   clearable
                   label="Ejercicio"
@@ -76,7 +76,9 @@
         </v-card-text>
       </v-row>
       <v-row>
-
+        <v-btn icon large>
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
       </v-row>
     </v-card>
 </template>
@@ -85,14 +87,6 @@
 export default {
   name: "CycleCard",
   props: {
-    routineId: {
-      type: Number,
-      required: true,
-    },
-    cycleId: {
-      type: Number,
-      required: true,
-    },
     cycle: {
       type: Object,
       required: true,
@@ -100,8 +94,8 @@ export default {
   },
   data: () => ({
     selRepOrDur: [
-      { hint: 'repeticiones', option: 'repetitions' },
-      { hint: 'segundos', option: 'duration' },
+      { hint: 'repeticiones', name: 'repetitions' },
+      { hint: 'segundos', name: 'duration' },
     ],
     routineCycle: {
       "id": 1,

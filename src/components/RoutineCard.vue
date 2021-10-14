@@ -4,7 +4,7 @@
         max-width="200"
         class="rounded-card"
         :to="{ name: 'RoutineDetail', params: {
-          id: 0
+          id: routine.id
         }}"
     >
       <v-img
