@@ -15,6 +15,11 @@
           Welcome to Hyper Coach Interface!!!!
         </h1>
 
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Chau pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+        <RoutineCard img_src="https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg">Hola pepe</RoutineCard>
+
         <p class="subheading font-weight-regular">
           For help and collaboration with other Vuetify developers,
           <br>please join our online
@@ -88,13 +93,46 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-card
+        elevation="1"
+        class="mx-auto"
+        max-width="344"
+    >
+      <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+          height="200px"
+      ></v-img>
+      <v-card-title>
+        Top western road trips
+      </v-card-title>
+    </v-card>
+    <div class="text-center">
+      <v-btn
+          :loading="loading3"
+          :disabled="loading3"
+          color="blue-grey"
+          class="ma-2 white--text"
+          @click="loader = 'loading3'"
+      >
+        Upload
+        <v-icon
+            right
+            dark
+        >
+          mdi-cloud-upload
+        </v-icon>
+      </v-btn>
+    </div>
   </v-container>
 </template>
-
 <script>
-  export default {
-    name: 'HelloWorld',
+import RoutineCard from "@/components/RoutineCard";
 
+export default {
+    name: 'HelloWorld',
+    components: {
+      RoutineCard,
+    },
     data: () => ({
       ecosystem: [
         {
@@ -146,6 +184,18 @@
           href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
         },
       ],
+      loader: null,
+      loading3: false,
     }),
+    watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
+    },
   }
 </script>

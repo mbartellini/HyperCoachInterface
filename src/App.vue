@@ -1,60 +1,55 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <TopBar />
+    <SideBar />
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
+    <v-main id="main">
+      <v-container fluid>
+        <router-view :key="$route.path" />
+      </v-container>
     </v-main>
+
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import router from './router/index.js';
+import SideBar from '@/components/SideBar';
+import TopBar from "@/components/TopBar";
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    TopBar,
+    SideBar
   },
 
   data: () => ({
-    //
+    router,
+    sideBarRoutes : [
+      'Home',
+      'Favorites',
+      'MyRoutines',
+      'Search',
+      'Settings',
+      'Info',
+      'Login',
+      'LoginQuestions',
+    ],
+    selectedItem: null,
+    profileRoute: 'Profile',
+    username: 'Juani Garcia',
   }),
+
+  methods: {
+  }
 };
 </script>
+
+<style scoped>
+#main {
+  /*background: url('https://s1.1zoom.me/b5050/585/Texture_Brick_Wall_White_545270_2560x1440.jpg') no-repeat center center fixed !important;*/
+  background-size: cover;
+}
+</style>

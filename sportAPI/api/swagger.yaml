@@ -1,0 +1,3711 @@
+---
+swagger: "2.0"
+info:
+  description: "This is an Exercise server.  You can find \nout more about Swagger\
+    \ at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n"
+  version: "3.0.0"
+  title: "Swagger Exercise"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api"
+tags: []
+schemes:
+- "http"
+- "https"
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+# PARAMETERS
+parameters:
+  # PATH
+  userId:
+    in: "path"
+    name: "userId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "User identifier"
+  achievementId:
+    in: "path"
+    name: "achievementId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Achievement identifier"
+  routineId:
+    in: "path"
+    name: "routineId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Routine identifier"
+  cycleId:
+    in: "path"
+    name: "cycleId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Cycle identifier"
+  exerciseId:
+    in: "path"
+    name: "exerciseId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Exercise identifier"
+  imageId:
+    in: "path"
+    name: "imageId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Image identifier"
+  videoId:
+    in: "path"
+    name: "videoId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Video identifier"
+  categoryId:
+    in: "path"
+    name: "categoryId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Category identifier"
+  sportId:
+    in: "path"
+    name: "sportId"
+    required: true
+    type: "integer"
+    format: "int64"
+    description: "Sport identifier"
+  search:
+    in: "query"
+    name: "search"
+    required: false
+    type: "string"
+    minLength: 3
+    maxLength: 50
+    description: "Search filter"
+  difficulty:
+    in: "query"
+    name: "difficulty"
+    required: false
+    type: "string"
+    enum:
+      - "rookie"
+      - "beginner"
+      - "intermediate"
+      - "advanced"
+      - "expert"
+    description: "Difficulty level"
+  score:
+    in: "query"
+    name: "score"
+    required: false
+    type: "integer"
+    format: "int32"
+    minimum: 0
+    maximum: 10
+    description: "Score"
+  categoryId2:
+    in: "query"
+    name: "categoryId"
+    required: false
+    type: "integer"
+    format: "int64"
+    description: "Category identifier"
+  userId2:
+    in: "query"
+    name: "userId"
+    required: false
+    type: "integer"
+    format: "int64"
+    description: "User identifier"
+  page:
+    in: "query"
+    name: "page"
+    required: false
+    type: "integer"
+    minimum: 0
+    default: 0
+    description: "Page number"
+  size:
+    in: "query"
+    name: "size"
+    required: false
+    type: "integer"
+    minimum: 1
+    default: 10
+    description: "Items per page"
+  direction:
+    in: "query"
+    name: "direction"
+    required: false
+    type: "string"
+    enum: [ "asc", "desc" ]
+    default: "asc"
+    description: "Order direction"
+  userOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "username", "lastName", "email" ]
+    default: "username"
+    description: "Order by"
+  achievementOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "date", "weight", "height" ]
+    default: "date"
+    description: "Order by"
+  routineOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "name", "detail", "date", "score", "difficulty", "category", "user" ]
+    default: "date"
+    description: "Order by"
+  cycleOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "name", "detail", "type", "order", "repetitions" ]
+    default: "id"
+    description: "Order by"
+  cycleExerciseOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "exerciseId", "order", "duration", "repetitions" ]
+    default: "order"
+    description: "Order by"
+  exerciseOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "name", "detail", "type" ]
+    default: "id"
+    description: "Order by"
+  imageOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "number", "url" ]
+    default: "number"
+    description: "Order by"
+  videoOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "number", "url" ]
+    default: "number"
+    description: "Order by"
+  executionOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "date", "duration", "wasModified" ]
+    default: "date"
+    description: "Order by"
+  reviewOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "date", "score" ]
+    default: "date"
+    description: "Order by"
+  categoryOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "name", "detail" ]
+    default: "name"
+    description: "Order by"
+  sportOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "name", "detail" ]
+    default: "name"
+    description: "Order by"
+  # BODY
+  user:
+    in: "body"
+    name: "body"
+    description: "User information"
+    required: true
+    schema:
+      $ref: "#/definitions/User"
+  userWithoutPassword:
+    in: "body"
+    name: "body"
+    description: "User information"
+    required: true
+    schema:
+      $ref: "#/definitions/UserWithoutPassword"
+  achievement:
+    in: "body"
+    name: "body"
+    description: "Achievement information"
+    required: true
+    schema:
+      $ref: "#/definitions/Achievement"
+  routine:
+    in: "body"
+    name: "body"
+    description: "Routine information"
+    required: true
+    schema:
+      $ref: "#/definitions/Routine"
+  cycle:
+    in: "body"
+    name: "body"
+    description: "Cycle information"
+    required: true
+    schema:
+      $ref: "#/definitions/Cycle"
+  cycleExercise:
+    in: "body"
+    name: "body"
+    description: "Cycle exercise information"
+    required: true
+    schema:
+      $ref: "#/definitions/CycleExercise"
+  exercise:
+    in: "body"
+    name: "body"
+    description: "Exercise information"
+    required: true
+    schema:
+      $ref: "#/definitions/Exercise"
+  image:
+    in: "body"
+    name: "body"
+    description: "Image information"
+    required: true
+    schema:
+      $ref: "#/definitions/Image"
+  video:
+    in: "body"
+    name: "body"
+    description: "Video information"
+    required: true
+    schema:
+      $ref: "#/definitions/Video"
+  category:
+    in: "body"
+    name: "body"
+    description: "Category information"
+    required: true
+    schema:
+      $ref: "#/definitions/Category"
+  sport:
+    in: "body"
+    name: "body"
+    description: "Sport information"
+    required: true
+    schema:
+      $ref: "#/definitions/Sport"
+  execution:
+    in: "body"
+    name: "body"
+    description: "Execution information"
+    required: true
+    schema:
+      $ref: "#/definitions/Execution"
+  review:
+    in: "body"
+    name: "body"
+    description: "Review information"
+    required: true
+    schema:
+      $ref: "#/definitions/Review"
+paths:
+# USERS
+  /users:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve users"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/userOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PublicUser"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+    post:
+      security: []
+      tags:
+      - "users"
+      summary: "Add user"
+      operationId: "add"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/user"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullUser"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+  /users/{userId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve other user"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/userId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PublicUser"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+  /users/resend_verification:
+    post:
+      security: []
+      tags:
+      - "users"
+      summary: "Resend user verification email"
+      operationId: "resendVerificationEmail"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Email resend"
+        required: true
+        schema:
+          $ref: "#/definitions/EmailResend"
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "User"
+  /users/verify_email:
+    post:
+      security: []
+      tags:
+      - "users"
+      summary: "Verify user email"
+      operationId: "verifyEmail"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Email confirmation"
+        required: true
+        schema:
+          $ref: "#/definitions/EmailConfirmation"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+  /users/login:
+    post:
+      security: []
+      tags:
+      - "users"
+      summary: "Log user in"
+      operationId: "login"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User credentials"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AuthenticationToken"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+  /users/logout:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Log user out"
+      operationId: "logout"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+  /users/current:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve current user"
+      operationId: "retrieveCurrent"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullUser"
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Modify current user"
+      operationId: "modify"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/userWithoutPassword"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullUser"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Remove current user"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
+# ACHIEVEMENTS
+  /achievements:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "achievements"
+      summary: "Retrieve achievements"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/achievementOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Achievements"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Achievement"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "achievements"
+      summary: "Add achievement"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/achievement"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullAchievement"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Achievement"
+  /achievement/{achievementId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "achievements"
+      summary: "Retrieve achievement"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+       - $ref: "#/parameters/achievementId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Achievement"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "achievements"
+      summary: "Modify achievement"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - $ref: "#/parameters/achievementId"
+      - $ref: "#/parameters/achievement"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Achievement"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "achievements"
+      summary: "Remove achievement"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/achievementId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Achievement"
+# USERS - ROUTINES
+  /users/current/routines:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve current user routines"
+      operationId: "retrieveCurrentUserRoutines"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/difficulty"
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/routineOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Routines"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+  /users/{userId}/routines:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve user routines"
+      operationId: "retrieveUserRoutines"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/userId"
+        - $ref: "#/parameters/difficulty"
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/routineOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Routines"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+# FAVOURITES
+  /favourites:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "favourites"
+      summary: "Retrieve favourite routines"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Favourites"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Favourite"
+  /favourites/{routineId}:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "favourites"
+      summary: "Mark routine as favourite"
+      operationId: "mark"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Favourite"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "favourites"
+      summary: "Unmark routine as favourite"
+      operationId: "unmark"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Favourite"
+# USERS - EXECUTIONS
+  /users/current/executions:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve current user routines executions"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/executionOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Executions"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Execution"
+# USERS - REVIEWS
+  /users/current/reviews:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve current user reviews"
+      operationId: "retrieveCurrentUserList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/reviewOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Reviews"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Review"
+# CATEGORIES
+  /categories:
+    get:
+      security: []
+      tags:
+        - "categories"
+      summary: "Retrieve categories"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/categoryOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Categories"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Category"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "categories"
+      summary: "Add category"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/category"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullCategory"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Category"
+  /categories/{categoryId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "categories"
+      summary: "Retrieve category"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/categoryId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullCategory"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Category"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "categories"
+      summary: "Modify category"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/categoryId"
+        - $ref: "#/parameters/category"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullCategory"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Category"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "categories"
+      summary: "Remove category"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/categoryId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Category"
+# SPORTS
+  /sports:
+    get:
+      security: []
+      tags:
+        - "sports"
+      summary: "Retrieve sports"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/sportOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+              $ref: "#/definitions/Sports"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Sport"
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - "sports"
+      summary: "Add sport"
+      operationId: "add"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: "#/parameters/sport"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullSport"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Sport"
+  /sports/{sportId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "sports"
+      summary: "Retrieve sport"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/sportId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullSport"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Sport"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "sports"
+      summary: "Modify sport"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/sportId"
+        - $ref: "#/parameters/sport"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullSport"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Sport"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "sports"
+      summary: "Remove sport"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/sportId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Sport"
+# ROUTINES
+  /routines:
+    get:
+      security: []
+      tags:
+        - "routines"
+      summary: "Retrieve routines"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/categoryId2"
+        - $ref: "#/parameters/userId2"
+        - $ref: "#/parameters/difficulty"
+        - $ref: "#/parameters/score"
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/routineOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Routines"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+    post:
+       security:
+        - bearerAuth: []
+       tags:
+        - "routines"
+       summary: "Add routine"
+       operationId: "add"
+       consumes:
+        - "application/json"
+       produces:
+        - "application/json"
+       parameters:
+         - $ref: "#/parameters/routine"
+       responses:
+         "201":
+           description: "Created"
+           schema:
+             $ref: "#/definitions/FullRoutine"
+         "400":
+           $ref: '#/responses/BadRequest'
+         "401":
+           $ref: '#/responses/Unauthorized'
+         "500":
+           $ref: '#/responses/Unexpected'
+       x-swagger-router-controller: "Routine"
+  /routines/{routineId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines"
+      summary: "Retrieve routine"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullRoutine"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines"
+      summary: "Modify routine"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/routine"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullRoutine"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines"
+      summary: "Remove routine"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+# ROUTINES - CYCLES
+  /routines/{routineId}/cycles:
+    get:
+      security: []
+      tags:
+        - "routines cycles"
+      summary: "Retrieve routine cycles"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/cycleOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Cycles"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines cycles"
+      summary: "Add routine cycle"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/cycle"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullCycle"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+  /routines/{routineId}/cycles/{cycleId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines cycles"
+      summary: "Retrieve routine cycle"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/cycleId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullCycle"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines cycles"
+      summary: "Modify routine cycle"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/cycle"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cycle"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines cycles"
+      summary: "Remove routine cycle"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/cycleId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+# CYCLES - EXERCISES
+  /cycles/{cycleId}/exercises:
+    get:
+      security: []
+      tags:
+        - "cycles exercises"
+      summary: "Retrieve cycle exercises"
+      operationId: "retrieveExerciseList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/cycleExerciseOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/CycleExercises"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+  /cycles/{cycleId}/exercises/{exerciseId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "cycles exercises"
+      summary: "Retrieve cycle exercise"
+      operationId: "retrieveExercise"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/exerciseId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullCycleExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "cycles exercises"
+      summary: "Add cycle exercise"
+      operationId: "addExercise"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/cycleExercise"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullCycleExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "cycles exercises"
+      summary: "Modify cycle exercise"
+      operationId: "modifyExercise"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/cycleExercise"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullCycleExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "cycles exercises"
+      summary: "Remove cycle exercise"
+      operationId: "removeExercise"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/cycleId"
+        - $ref: "#/parameters/exerciseId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Cycle"
+# EXERCISES
+  /exercises:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises"
+      summary: "Retrieve exercises"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/exerciseOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Exercises"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Exercise"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises"
+      summary: "Add exercise"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exercise"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Exercise"
+  /exercises/{exerciseId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises"
+      summary: "Retrieve exercise"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Exercise"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises"
+      summary: "Modify exercise"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/exercise"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullExercise"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Exercise"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises"
+      summary: "Remove exercise"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Exercise"
+# EXERCISES - IMAGES
+  /exercises/{exerciseId}/images:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises images"
+      summary: "Retrieve exercise images"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/imageOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Images"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Image"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises images"
+      summary: "Add exercise image"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/image"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullImage"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Image"
+  /exercises/{exerciseId}/images/{imageId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises images"
+      summary: "Retrieve exercise image"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/imageId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullImage"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Image"
+    put:
+      security:
+      - bearerAuth: []
+      tags:
+      - "exercises images"
+      summary: "Modify exercise image"
+      operationId: "modify"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/imageId"
+        - $ref: "#/parameters/image"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullImage"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Image"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises images"
+      summary: "Remove exercise image"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/imageId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Image"
+# EXERCISES - VIDEOS
+  /exercises/{exerciseId}/videos:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises videos"
+      summary: "Retrieve exercise videos"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/videoOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Videos"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Video"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises videos"
+      summary: "Add exercise video"
+      operationId: "add"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/video"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullVideo"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Video"
+  /exercises/{exerciseId}/videos/{videoId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises videos"
+      summary: "Retrieve exercise video"
+      operationId: "retrieve"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/videoId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullVideo"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Video"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises videos"
+      summary: "Modify exercise video"
+      operationId: "modify"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/videoId"
+        - $ref: "#/parameters/video"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FullVideo"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Video"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "exercises videos"
+      summary: "Remove exercise video"
+      operationId: "remove"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/exerciseId"
+        - $ref: "#/parameters/videoId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Video"
+# ROUTINES - SPORTS
+  /routines/{routineId}/sport:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines sports"
+      summary: "Retrieve routine sports"
+      operationId: "retrieveSports"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Sports'
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+  /routines/{routineId}/sport/{sportId}:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines sports"
+      summary: "Add routine sport"
+      operationId: "addSport"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/sportId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - "routines sports"
+      summary: "Remove routine sport"
+      operationId: "removeSport"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/sportId"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Routine"
+# EXECUTIONS
+  /executions/{routineId}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - "executions"
+      summary: "Retrieve routine executions"
+      operationId: "retrieveRoutineList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/executionOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Executions"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Execution"
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - "executions"
+      summary: "Add routine execution"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/execution"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullExecution"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Execution"
+# REVIEWS
+  /reviews/{routineId}:
+    get:
+      security: []
+      tags:
+        - "reviews"
+      summary: "Retrieve routine reviews"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/reviewOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Reviews2"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Review"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - "reviews"
+      summary: "Add routine review"
+      operationId: "add"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/routineId"
+        - $ref: "#/parameters/review"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/FullReview"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "404":
+          $ref: '#/responses/NotFound'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "Review"
+responses:
+  BadRequest:
+    description: "Bad Request: Request or data is invalid or has a constraint"
+  Unauthorized:
+    description: "Unauthorized: Authorization information is missing or invalid"
+  NotFound:
+    description: "Not Found: Data not found"
+  Unexpected:
+    description: "Internal Server Error: Unexpected error"
+definitions:
+  # ERROR
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      description:
+        type: "string"
+      details:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            message:
+              type: "string"
+  # USER
+  FullUser:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+        maxLength: 50
+      firtName:
+        type: "string"
+        maxLength: 50
+      lastName:
+        type: "string"
+        maxLength: 50
+      gender:
+        type: "string"
+        enum:
+          - "male"
+          - "female"
+          - "other"
+      birthdate:
+        type: "integer"
+        format: "int64"
+      email:
+        type: "string"
+        format: "email"
+        maxLength: 100
+      phone:
+        type: "string"
+        maxLength: 50
+      avatarUrl:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+      metadata:
+        type: [ "object", "null" ]
+      date:
+        type: "integer"
+        format: "int64"
+      lastActivity:
+        type: "integer"
+        format: "int64"
+      verified:
+        type: "boolean"
+    example:
+      id: 1
+      username: "johndoe"
+      firstName: "John"
+      lastName: "Doe"
+      gender: "male"
+      birthdate: 284007600000
+      email: "johndoe@email.com"
+      phone: "98295822"
+      avatarUrl: "https://flic.kr/p/3ntH2u"
+      metadata: null
+      date: 1602139940660
+      lastActivity: 1602483829035
+      verified: true
+  User:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        maxLength: 50
+      password:
+        type: "string"
+        maxLength: 50
+      firstName:
+        type: "string"
+        maxLength: 50
+      lastName:
+        type: "string"
+        maxLength: 50
+      gender:
+        type: "string"
+        enum:
+          - "male"
+          - "female"
+          - "other"
+      birthdate:
+        type: "integer"
+        format: "int64"
+      email:
+        type: "string"
+        format: "email"
+        maxLength: 100
+      phone:
+        type: "string"
+        maxLength: 50
+      avatarUrl:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+      metadata:
+        type: [ "object", "null" ]
+    required:
+      - username
+      - password
+      - email
+    example:
+      username: "johndoe"
+      password: "1234567890"
+      firstName: "John"
+      lastName: "Doe"
+      gender: "male"
+      birthdate: 284007600000
+      email: "johndoe@email.com"
+      phone: "98295822"
+      avatarUrl: "https://flic.kr/p/3ntH2u"
+      metadata: null
+  UserWithoutPassword:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
+        maxLength: 50
+      lastName:
+        type: "string"
+        maxLength: 50
+      gender:
+        type: "string"
+        enum:
+          - "male"
+          - "female"
+          - "other"
+      birthdate:
+        type: "integer"
+        format: "int64"
+      phone:
+        type: "string"
+        maxLength: 50
+      avatarUrl:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+      metadata:
+        type: [ "object", "null" ]
+    example:
+      firstName: "John"
+      lastName: "Doe"
+      gender: "male"
+      birthdate: 284007600000
+      phone: "98295822"
+      avatarUrl: "https://flic.kr/p/3ntH2u"
+      metadata: null
+  PublicUser:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+        maxLength: 50
+      gender:
+        type: "string"
+        enum:
+          - "male"
+          - "female"
+          - "other"
+      avatarUrl:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+      date:
+        type: "integer"
+        format: "int64"
+      lastActivity:
+        type: "integer"
+        format: "int64"
+    example:
+      id: 1
+      username: "johndoe"
+      gender: "male"
+      avatarUrl: "https://flic.kr/p/3ntH2u"
+      date: 1602139940660
+      lastActivity: 1602483829035
+  AuthenticationToken:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+    required:
+      - token
+    example:
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwMjU2Mjc3MTM4NiwiZXhwIjoxNjAyNTY1MzYzMzg2fQ.ilDzvJ1b77Vyi40g3Sy5mo5iyDj3T6MOhCHsH6jEfDk"
+  EmailConfirmation:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+        maxLength: 100
+      code:
+        type: "string"
+        maxLength: 10
+    required:
+      - email
+      - code
+    example:
+      email: "johndoe@email.com"
+      code: "F429F5"
+  EmailResend:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+        maxLength: 100
+    required:
+      - email
+    example:
+      email: "johndoe@email.com"
+  Credentials:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        maxLength: 50
+      password:
+        type: "string"
+        maxLength: 50
+    required:
+      - username
+      - password
+    example:
+      username: "johndoe"
+      password: "1234567890"
+  # ACHIEVEMENT
+  FullAchievement:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "integer"
+        format: "int64"
+      weight:
+        type: "number"
+        format: "float"
+        minimum: 0.1
+        maximum: 500
+      height:
+        type: "number"
+        format: "float"
+        minimum: 0.1
+        maximum: 3
+      metadata:
+        type: [ "object", "null" ]
+    example:
+      id: 1
+      date: 1602483829035
+      weight: 86.3
+      height: 1.85
+      metadata: null
+  Achievement:
+    type: "object"
+    properties:
+      date:
+        type: "integer"
+        format: "int64"
+      weight:
+        type: "number"
+        format: "float"
+        minimum: 0.1
+        maximum: 500
+      height:
+        type: "number"
+        format: "float"
+        minimum: 0.1
+        maximum: 3
+      metadata:
+        type: [ "object", "null" ]
+    required:
+      - weight
+      - height
+    example:
+      date: 1602483829035
+      weight: 86.3
+      height: 1.85
+      metadata: null
+  Achievements:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullAchievement"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          date: 1602483829035,
+          weight: 86.3,
+          height: 1.85,
+          metadata: null
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # ROUTINE
+  FullRoutine:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      date:
+        type: "integer"
+        format: "int64"
+      score:
+        type: "number"
+        format: "int32"
+      isPublic:
+        type: "boolean"
+      difficulty:
+        type: "string"
+        enum:
+          - "rookie"
+          - "beginner"
+          - "intermediate"
+          - "advanced"
+          - "expert"
+      category:
+        $ref: "#/definitions/FullCategory"
+      user:
+        $ref: "#/definitions/PublicUser"
+      metadata:
+        type: [ "object", "null" ]
+    example:
+      id: 1
+      name: "7 x 4 Challenge"
+      detail: "Full Body 7 x 4 Challenge"
+      date: 1602646871112
+      score: 5
+      isPublic: true
+      difficulty: "rookie"
+      user:
+        id: 1
+        username: "johndoe"
+        gender: "male"
+        avatarUrl: "https://flic.kr/p/3ntH2u"
+        date: 1602139940660
+        lastActivity: 1602646870971
+      category:
+        id: 1
+        name: "Full Body"
+        detail: "Full Body"
+      metadata: null
+  Routine:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      date:
+        type: "integer"
+        format: "int64"
+      score:
+        type: "number"
+        format: "int32"
+      isPublic:
+        type: "boolean"
+      category:
+        type: [ "object", "null" ]
+        properties:
+          id:
+            type: "integer"
+            format: "int64"
+      difficulty:
+        type: "string"
+        enum:
+        - "rookie"
+        - "beginner"
+        - "intermediate"
+        - "advanced"
+        - "expert"
+    required:
+      - name
+      - detail
+      - isPublic
+      - difficulty
+    example:
+      name: "7 x 4 Challenge"
+      detail: "Full Body 7 x 4 Challenge"
+      isPublic: true
+      difficulty: "rookie"
+      category:
+        id: 1
+      metadata: null
+  Routines:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullRoutine"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "7 x 4 Challenge",
+          detail: "Full Body 7 x 4 Challenge",
+          date: 1602646871112,
+          score: 0,
+          isPublic: true,
+          difficulty: "rookie",
+          user: {
+            id: 1,
+            username: johndoe,
+            gender": male,
+            avatarUrl: https://flic.kr/p/3ntH2u",
+            date: 1602139940660,
+            lastActivity: 1602710772470
+          },
+          category: {
+            id: 1,
+            name: "Full Body",
+            detail: null
+          },
+          metadata: null
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # CYCLE
+  FullCycle:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      type:
+        type: "string"
+        enum:
+          - "warmup"
+          - "exercise"
+          - "cooldown"
+      order:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 99
+      repetitions:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        maximum: 999
+      metadata:
+        type: [ "object", "null" ]
+    example:
+      id: 1
+      name: "Fast Warmup"
+      detail: "Fast Warmup"
+      type: "warmup"
+      order: 1
+      repetitions: 1
+      metadata: null
+  Cycle:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      type:
+        type: "string"
+        enum:
+        - "warmup"
+        - "exercise"
+        - "cooldown"
+      order:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 99
+      repetitions:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        maximum: 999
+    required:
+      - name
+      - detail
+      - type
+      - order
+      - repetitions
+    example:
+      name: "Fast Warmup"
+      detail: "Fast Warmup"
+      type: "warmup"
+      order: 1
+      repetitions: 1
+      metadata: null
+  Cycles:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullCycle"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "Fast Warmup",
+          detail: "Fast Warmup",
+          type: "warmup",
+          order: 1,
+          repetitions: 1,
+          metadata: null
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # CYCLE EXERCISE
+  FullCycleExercise:
+    type: "object"
+    properties:
+      order:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 99
+      duration:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 999
+      repetitions:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 999
+      exercise:
+        $ref: "#/definitions/FullExercise"
+    example:
+      order: 1
+      duration: 30
+      repetitions: 0
+      exercise:
+        id: 1
+        name: "Jumping Jacks"
+        detail: "Jumping Jacks"
+        type: "exercise"
+        date: 1620062203228
+        metadata: null
+  CycleExercise:
+    type: "object"
+    properties:
+      order:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 99
+      duration:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 999
+      repetitions:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 999
+    required:
+      - order
+      - duration
+      - repetitions
+    example:
+      order: 1
+      duration: 30
+      repetitions: 0
+  CycleExercises:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullCycleExercise"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "order"
+      direction: "asc"
+      content: [
+        {
+          exercise: {
+            id: 1,
+            name: "Fast Warmup",
+            detail: "Fast Warmup",
+            type: "warmup",
+            date: 1620062203228,
+            order: 1
+          },
+          order: 1,
+          duration: 30,
+          repetitions: 1,
+          metadata: null
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # EXERCISE
+  FullExercise:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      type:
+        type: "string"
+        enum:
+          - "exercise"
+          - "rest"
+      duration:
+        type: "integer"
+        format: "int32"
+      date:
+        type: "integer"
+        format: "int64"
+      metadata:
+          type: [ "object", "null" ]
+    example:
+      id: 1
+      name: "Jumping Jacks"
+      detail: "Jumping Jacks"
+      type: "exercise"
+      date: 1620062203228
+      metadata: null
+  Exercise:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+      type:
+        type: "string"
+        enum:
+          - "exercise"
+          - "rest"
+      metadata:
+        type: [ "object", "null" ]
+    required:
+        - name
+        - detail
+        - type
+    example:
+      name: "Jumping Jacks"
+      detail: "Jumping Jacks"
+      type: "exercise"
+      metadata: null
+  Exercises:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullExercise"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "Jumping Jacks",
+          detail: "Jumping Jacks",
+          type: "exercise",
+          date: 1620062203228,
+          metadata: null
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # IMAGE
+  FullImage:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      number:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 999
+      url:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+    example:
+      id: 1
+      number: 1
+      url: "https://flic.kr/p/23K29gx"
+  Image:
+    type: "object"
+    properties:
+      number:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 999
+      url:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+    required:
+      - number
+      - url
+    example:
+      number: 1
+      url: "https://flic.kr/p/23K29gx"
+  Images:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullImage"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          number: 1,
+          url: "https://flic.kr/p/23K29gx"
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # VIDEO
+  FullVideo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      number:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 999
+      url:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+    example:
+      id: 1
+      number: 1
+      url: "https://www.youtube.com/watch?v=XYZ"
+  Video:
+    type: "object"
+    properties:
+      number:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 999
+      url:
+        type: "string"
+        format: "uri"
+        maxLength: 255
+    required:
+      - number
+      - url
+    example:
+      number: 1
+      url: "https://www.youtube.com/watch?v=XYZ"
+  Videos:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullVideo"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          number: 1,
+          url: "https://www.youtube.com/watch?v=XYZ"
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # CATEGORY
+  FullCategory:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+    example:
+      id: 1
+      name: "Full Body"
+      detail: "Full Body"
+  Category:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+    required:
+      - name
+    example:
+      name: "Full Body"
+      detail: "Full Body"
+  Categories:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullCategory"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "Full Body",
+          detail: "Full Body"
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # SPORT
+  FullSport:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+    example:
+      id: 1
+      name: "Tennis"
+      detail: "Tennis"
+  Sport:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 100
+      detail:
+        type: "string"
+        maxLength: 200
+    required:
+      - name
+    example:
+      name: "Tennis"
+      detail: "Tennis"
+  Sports:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullSport"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "Tennis",
+          detail: "Tennis"
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # EXECUTION
+  FullExecution:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "integer"
+        format: "int64"
+      duration:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 9999
+      wasModified:
+        type: "boolean"
+      routine:
+        $ref: "#/definitions/FullRoutine"
+    example:
+      id: 1
+      date: 1602732549345
+      duration: 25
+      wasModified: false
+      routine: {
+        id: 1,
+        name: "7 x 4 Challenge",
+        detail: "Full Body 7 x 4 Challenge",
+        date: 1602646871112,
+        score: 0,
+        isPublic: true,
+        difficulty: "rookie",
+        user: {
+          id: 1,
+          username: "johndoe",
+          gender: "male",
+          avatarUrl: "https://flic.kr/p/3ntH2u",
+          date: 1602139940660,
+          lastActivity: 1602732549243
+        },
+        category: {
+          id: 1,
+          name: "Full Body",
+          detail: "Full Body"
+        }
+      }
+  Execution:
+    type: "object"
+    properties:
+      duration:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 9999
+      wasModified:
+        type: "boolean"
+    required:
+      - duration
+      - wasModified
+    example:
+      duration: 25
+      wasModified: false
+  Executions:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullExecution"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          date: 1602732549345,
+          duration: 25,
+          wasModified: false,
+          routine: {
+            id: 1,
+            name: "7 x 4 Challenge",
+            detail: "Full Body 7 x 4 Challenge",
+            date: 1602646871112,
+            score: 0,
+            isPublic: true,
+            difficulty: "rookie",
+            user: {
+              id: 1,
+              username: "johndoe",
+              gender: "male",
+              avatarUrl: "https://flic.kr/p/3ntH2u",
+              date: 1602139940660,
+              lastActivity: 1602732549243
+            },
+            category: {
+              id: 1,
+              name: "Full Body",
+              detail: "Full Body"
+            }
+          }
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # REVIEW
+  FullReview:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "integer"
+        format: "int64"
+      score:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 10
+      review:
+        type: "string"
+        maxLength: 200
+    example:
+      id: 1
+      date: 1602139940660
+      score: 10
+      review: "Best routine ever!!!"
+  FullReview1:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "integer"
+        format: "int64"
+      score:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 10
+      review:
+        type: "string"
+        maxLength: 200
+      routine:
+        $ref: "#/definitions/FullRoutine"
+    example:
+      id: 1
+      date: 1602139940660
+      score: 10
+      review: "Best routine ever!!!"
+      routine: {
+        id: 1,
+        name: "7 x 4 Challenge",
+        detail: "Full Body 7 x 4 Challenge",
+        date: 1602646871112,
+        score: 0,
+        isPublic: true,
+        difficulty: "rookie",
+        user: {
+          id: 1,
+          username: "johndoe",
+          gender: "male",
+          avatarUrl: "https://flic.kr/p/3ntH2u",
+          date: 1602139940660,
+          lastActivity: 1602732549243
+        },
+        category: {
+          id: 1,
+          name: "Full Body",
+          detail: "Full Body"
+        }
+      }
+  FullReview2:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "integer"
+        format: "int64"
+      score:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 10
+      review:
+        type: "string"
+        maxLength: 200
+      user:
+        $ref: "#/definitions/PublicUser"
+    example:
+      id: 1
+      date: 1602139940660
+      score: 10
+      review: "Best routine ever!!!"
+      user: {
+        id: 1,
+        username: "johndoe",
+        gender: "male",
+        avatarUrl: "https://flic.kr/p/3ntH2u",
+        date: 1602139940660,
+        lastActivity: 1602732549243
+      }
+  Review:
+    type: "object"
+    properties:
+      score:
+        type: "integer"
+        format: "int32"
+        minimum: 0
+        maximum: 10
+      review:
+        type: "string"
+        maxLength: 200
+    required:
+        - score
+        - review
+    example:
+      score: 10
+      review: "Best routine ever!!!"
+  Reviews:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullReview"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          date: 1602732549345,
+          score: 10,
+          review: "Best routine ever!!!",
+          routine: {
+            id: 1,
+            name: "7 x 4 Challenge",
+            detail: "Full Body 7 x 4 Challenge",
+            date: 1602646871112,
+            score: 0,
+            isPublic: true,
+            difficulty: "rookie",
+            user: {
+              id: 1,
+              username: "johndoe",
+              gender: "male",
+              avatarUrl: "https://flic.kr/p/3ntH2u",
+              date: 1602139940660,
+              lastActivity: 1602732549243
+            },
+            category: {
+              id: 1,
+              name: "Full Body",
+              detail: "Full Body"
+            }
+          }
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  Reviews2:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullReview2"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          date: 1602732549345,
+          score: 10,
+          review: "Best routine ever!!!",
+          routine: {
+            id: 1,
+            name: "7 x 4 Challenge",
+            detail: "Full Body 7 x 4 Challenge",
+            date: 1602646871112,
+            score: 0,
+            isPublic: true,
+            difficulty: "rookie",
+            user: {
+              id: 1,
+              username: "johndoe",
+              gender: "male",
+              avatarUrl: "https://flic.kr/p/3ntH2u",
+              created: 1602139940660,
+              lastActivity: 1602732549243
+            },
+            category: {
+              id: 1,
+              name: "Full Body",
+              detail: "Full Body"
+            }
+          }
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+  # FAVOURITES
+  Favourites:
+    type: "object"
+    properties:
+      totalCount:
+        type: "integer"
+        format: "int64"
+      orderBy:
+        type: "string"
+      direction:
+        type: "string"
+        enum: [ "asc", "desc" ]
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/FullRoutine"
+      size:
+        type: "integer"
+        format: "int32"
+      page:
+        type: "integer"
+        format: "int32"
+      isLastPage:
+        type: "boolean"
+    example:
+      totalCount: 1
+      orderBy: "id"
+      direction: "asc"
+      content: [
+        {
+          id: 1,
+          name: "7 x 4 Challenge",
+          detail: "Full Body 7 x 4 Challenge",
+          created: 1602646871112,
+          score: 0,
+          isPublic: true,
+          difficulty: "rookie",
+          user: {
+            id: 1,
+            username: "johndoe",
+            gender: "male",
+            avatarUrl: "https://flic.kr/p/3ntH2u",
+            date: 1602139940660,
+            lastActivity: 1602732549243
+          },
+          category: {
+            id: 1,
+            name: "Full Body",
+            detail: "Full Body"
+          }
+        }
+      ]
+      size: 10
+      page: 0
+      isLastPage: true
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
