@@ -51,7 +51,7 @@ export default {
       }
     },
   },
-  created() {
+  beforeMount() {
     this.getExercises();
   }
 }
