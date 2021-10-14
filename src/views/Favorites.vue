@@ -51,7 +51,6 @@ export default {
     async getFavorites() {
       try {
         let result = await this.$getFavorites({pageNumber: 0, pageSize:50});
-        alert(JSON.stringify(result))
         this.favorites_empty = result.totalCount === 0
         this.favorites = result.content
       } catch(e) {

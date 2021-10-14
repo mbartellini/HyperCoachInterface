@@ -22,7 +22,7 @@
         </v-btn>
       </v-row>
       <v-row fluid>
-        <RoutinesCardsGrid :routines="myRoutines" />
+        <RoutinesCardsGrid :routines="routines" />
       </v-row>
     </v-container>
   </div>
@@ -32,6 +32,7 @@
 
 <script>
 import RoutinesCardsGrid from "../components/RoutinesCardsGrid";
+import {mapActions} from "vuex";
 
 export default {
   name: 'MyRoutines',
@@ -41,33 +42,25 @@ export default {
   },
 
   data: () => ({
-    myRoutines: [
-      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', img_src: '../assets/arms.jpg' },
-      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', img_src: '../assets/arms.jpg' },
-      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', img_src: '../assets/arms.jpg' },
-      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', img_src: '../assets/arms.jpg' },
-      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', img_src: '../assets/arms.jpg' },
-    ],
+    routines: [],
+    routines_empty: true,
   }),
+  methods: {
+    ...mapActions('user', {
+      $getMyRoutines: 'getMyRoutines',
+    }),
+    async getMyRoutines() {
+      try {
+        let result = await this.$getMyRoutines( {pageNumber: 0, pageSize:50});
+        this.routines_empty = result.totalCount === 0
+        this.routines = result.content
+      } catch(e) {
+        alert(e)
+      }
+    },
+  },
+  beforeMount() {
+    this.getMyRoutines();
+  },
 }
 </script>
