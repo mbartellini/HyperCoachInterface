@@ -64,10 +64,12 @@ export default {
             commit('replaceAll', result.content)
             return result
         },
-        async getFavoritesPage({commit}, {pageNumber, pageSize}) {
-            const result = await RoutineApi.getFavoritesPage(pageNumber, pageSize)
+        async getMyRoutines({commit}, controller) {
+            const preview = await RoutineApi.getMyRoutinesPage(0, 1)
+            let pageSize = Math.max(preview.totalCount, 1)
+            const result = await RoutineApi.getMyRoutinesPage(0, pageSize, controller)
             commit('replaceAll', result.content)
             return result
-        },
+        }
     },
 }

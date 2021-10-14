@@ -27,6 +27,10 @@ class RoutineApi {
         return await Api.get(RoutineApi.getUrl('?' + 'page=' + pageNumber + '&size=' + pageSize), true, controller)
     }
 
+    static async getMyRoutinesPage(pageNumber=0, pageSize=10, controller) {
+        return await Api.get(`${Api.baseUrl}/users/current/routines` + '?' + 'page=' + pageNumber + '&size=' + pageSize, true, controller)
+    }
+
 }
 
 class Routine {

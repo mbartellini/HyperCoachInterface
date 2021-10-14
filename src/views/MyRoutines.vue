@@ -46,7 +46,7 @@ export default {
     routines_empty: true,
   }),
   methods: {
-    ...mapActions('user', {
+    ...mapActions('routine', {
       $getMyRoutines: 'getMyRoutines',
     }),
     async getMyRoutines() {
