@@ -1,6 +1,9 @@
 <template>
   <v-form>
     <v-container>
+      <v-row class="text-h5 ma-3">
+        <h1>Buscar</h1>
+      </v-row>
       <v-row>
         <v-col
             cols="12"
@@ -11,7 +14,7 @@
               label="Buscar"
               prepend-inner-icon="mdi-magnify"
               solo-inverted
-              rounded
+              class="ma-2"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -32,7 +35,7 @@
           <v-select
               :items="difficulty"
               label="Dificultad"
-              rounded
+              class="ma-2"
               solo-inverted
           >
           </v-select>
@@ -44,55 +47,62 @@
           <v-select
               :items="categories"
               label="Categorias"
-              rounded
+              class="ma-2"
               solo-inverted
           />
         </v-col>
       </v-row>
     </v-container>
-    <v-container fluid>
-      <v-row
-          v-for="n in 3"
-          :key="n"
-          dense
-      >
-        <v-col
-            v-for="card in cards"
-            :key="card.title"
-        >
-          <RoutineCard :img_src="card.src">{{card.title}}</RoutineCard>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-row fluid>
+      <RoutinesCardsGrid :routines="routines" />
+    </v-row>
   </v-form>
 </template>
 
 <style>
 .text{
   margin-left: 10px;
-  margin-top: -10px;
+  margin-top: -20px;
 }
 </style>
 
 <script>
-
-import RoutineCard from '../components/RoutineCard'
+import RoutinesCardsGrid from "../components/RoutinesCardsGrid";
 
 export default {
   name: 'Search',
 
   components: {
-    RoutineCard,
+    RoutinesCardsGrid,
   },
 
   data: () => ({
-    last: null,
-    cards: [
-      { title: 'Abdominales', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-      { title: 'Tren Superior', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-      { title: 'Piernas', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-      { title: 'Yoga', src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
-      { title: 'Brazos', src: '../assets/arms.jpg' }
+    routines: [
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: '../assets/arms.jpg' },
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: '../assets/arms.jpg' },
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: '../assets/arms.jpg' },
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: '../assets/arms.jpg' },
+      { title: 'Abdominales', img_src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+      { title: 'Tren Superior', img_src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+      { title: 'Piernas', img_src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      { title: 'Yoga', img_src: 'https://i.pinimg.com/originals/25/49/82/25498264b4b0e7bd98587789c0e4ffaa.jpg'},
+      { title: 'Brazos', img_src: '../assets/arms.jpg' },
     ],
     difficulty: ['Principiante', 'Intermedio','Avanzado'],
     categories: ['Aerobico', 'Piernas', 'Tren inferior', 'Tren superior', 'Yoga', 'Funcional'],
