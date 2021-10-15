@@ -44,7 +44,7 @@
             </v-btn>
             <v-btn
                 icon
-                @click="is_fav = !is_fav"
+                @click="favButton()"
             >
               <v-icon
                   color="secondary"
@@ -124,6 +124,7 @@ export default {
   },
   data: () => ({
     exercises: [],
+    favorites: [],
     is_fav: false,
     routine: {
       name: '',
@@ -235,11 +236,45 @@ export default {
         console.log(e)
       }
     },
+    ...mapActions('favorite', {
+      $getFavorites: 'getPage',
+      $postFavorite: 'create',
+      $deleteFavorite: 'delete',
+    }),
+    inFavorites(list, id) {
+      for (let i in list) {
+        if (list[i].id === id)
+          return true
+      }
+      return false
+    },
+    async getFavorites() {
+      try {
+        let result = await this.$getFavorites({pageNumber: 0, pageSize:50})
+        this.favorites = result.content
+        this.is_fav = this.inFavorites(this.favorites, this.id)
+      } catch(e) {
+        console.log(e)
+      }
+    },
+    async favButton() {
+      try {
+        if (this.is_fav) {
+          await this.$deleteFavorite(this.routine)
+        } else {
+          await this.$postFavorite(this.routine)
+        }
+        this.is_fav = !this.is_fav
+      } catch(e) {
+        console.log(e)
+      }
+    }
   },
-  async created() {
+  async beforeMount() {
     await this.getExercises()
+    await this.getFavorites()
     if (this.id !== null)
-      this.getRoutine();
+      await this.getRoutine();
   },
 }
 </script>
