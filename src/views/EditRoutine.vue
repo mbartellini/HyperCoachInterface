@@ -83,10 +83,39 @@
             ></v-checkbox>
           </v-row>
           <v-row class="justify-end">
-            <v-btn type="submit" tile class="rounded-lg" large color="success">
+            <v-btn type="button" @click="save" tile class="rounded-lg" large color="success">
               <v-icon dark>mdi-content-save</v-icon>
               <div class="text-decoration-underline"> Guardar </div>
             </v-btn>
+            <v-dialog
+                v-model="dialog"
+                width="500"
+                persistent
+            >
+              <v-card>
+                <v-card-title class="text-h5">
+                  {{error? errorMsg : successMsg}}
+                </v-card-title>
+
+                <v-card-text
+                    v-show="error"
+                >
+                  {{errorDetails}}
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                      :color="error? 'error' : 'success'"
+                      text
+                      @click="finishDialog"
+                  >
+                    {{error? 'Reintentar' : 'Ver todos mis ejercicios'}}
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-row>
         </v-col>
       </v-row>
@@ -154,6 +183,7 @@ import {Routine} from "@/api/routine"
 import {mapActions} from 'vuex'
 import GoBackButton from "../components/GoBackButton";
 import EditCycleCard from "../components/EditCycleCard";
+import router from "@/router";
 
 export default {
   name: "EditRoutine",
@@ -172,6 +202,11 @@ export default {
     exercises: [],
     preview: '',
     image: null,
+    dialog: false,
+    error: true,
+    errorMsg: 'Ha ocurrido un error.',
+    successMsg: 'Ejercicio creado correctamente.',
+    errorDetails: 'Hay campos obligatorios sin completar.',
     categories: [],
     routine: {
       name: '',
@@ -180,7 +215,7 @@ export default {
       category: { id: 1 },
       difficulty: { name: 'beginner', hint: 'Principiante', },
       metadata: {
-        img_src: 'https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg',
+        img_src: '@/assets/hci.png',
         duration: 0,
         equipment: false,
         cycles: [
@@ -315,6 +350,7 @@ export default {
       try {
         let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
         this.routine = await this.$postRoutine(routine)
+        this.error = false
       } catch(e) {
         console.log(e)
       }
@@ -323,11 +359,15 @@ export default {
       try {
         let routine = new Routine(this.routine.id, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
         this.routine = await this.$putRoutine(routine)
+        this.error = false
       } catch(e) {
         console.log(e)
       }
     },
-    save() {
+    save(e) {
+      e.preventDefault()
+      // TODO: Handle default like registration, login, exercises.
+      this.handleImage()
       for (let c in this.routine.metadata.cycles) {
         for (let e in this.routine.metadata.cycles[c].exercises) {
           this.routine.metadata.cycles[c].exercises[e].id = this.routine.metadata.cycles[c].exercises[e].id.id
@@ -337,6 +377,13 @@ export default {
         this.postRoutine()
       } else {
         this.putRoutine()
+      }
+      this.dialog = true
+    },
+    finishDialog() {
+      this.dialog = false
+      if(!this.error) {
+        router.push('/my_routines')
       }
     },
     ...mapActions('exercise', {
@@ -365,20 +412,36 @@ export default {
   computed: {
     difficultiesAvailable() {
       return [
-          {
-            name: 'beginner',
-            hint: 'Principiante',
-          },{
-        name: 'intermediate',
+        {
+          name: 'beginner',
+          hint: 'Principiante',
+        },
+        {
+          name: 'intermediate',
           hint: 'Intermedio',
-        },{
-        name: 'advanced',
+        },
+        {
+          name: 'advanced',
           hint: 'Avanzado',
         },
       ]
     },
   },
   async created() {
+    await this.getExercises();
+    await this.getCategories();
+    if (this.id != null) {
+      this.newRoutine = false
+      await this.getRoutine()
+      for (let i in this.difficultiesAvailable) {
+        if (this.difficultiesAvailable[i].name === this.routine.difficulty) {
+          this.routine.difficulty = this.difficultiesAvailable[i]
+          break
+        }
+      }
+    }
+  },
+  async beforeMount() {
     await this.getExercises();
     await this.getCategories();
     if (this.id != null) {

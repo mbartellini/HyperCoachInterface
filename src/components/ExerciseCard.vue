@@ -8,7 +8,8 @@
         }}"
     >
       <v-img
-          :src="exercise.metadata.img_src"
+          lazy-src="@/assets/hci.png"
+          :src="img_src"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class="justify-center" max-width="200">
@@ -24,16 +25,18 @@ export default {
     exercise: Object,
   },
   data: () => ({
-    img_src: 'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132484366.jpg'
+    img_src: ''
   }),
   methods: {
     getImg() {
       if (this.exercise.metadata) {
-        this.img_src = this.exercise.metadata.img_src
+        if (this.exercise.metadata.img_src !== "") {
+          this.img_src = this.exercise.metadata.img_src
+        }
       }
     }
   },
-  created() {
+  beforeMount() {
     console.log(this.exercise.metadata.img_src)
     this.getImg()
   }

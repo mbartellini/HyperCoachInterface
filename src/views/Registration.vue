@@ -225,7 +225,8 @@
                     md="3"
                 >
                   <v-btn
-                      type="submit"
+                      type="button"
+                      @click="login"
                       @click.stop="dialog = true"
                       :disabled="password.length < 3 || password !== passwordConfirmation"
                       class="bg-green-400 p-5 text-white text-decoration-underline"
@@ -311,7 +312,7 @@ export default {
       error: true,
       errorMsg: 'Ha ocurrido un error.',
       successMsg: 'Usuario creado exitosamente',
-      errorDetails: 'Hay campos obligatorios sin completar.'
+      errorDetails: 'Revise que los datos ingresados son correctos.'
     }
   },
   computed: {
@@ -352,6 +353,8 @@ export default {
     async login(e) {
       this.handleImage()
       e.preventDefault()
+      if (this.firstname.length <= 0 || this.firstname.length > 50 || this.lastname.length <= 0 || this.lastname.length > 50 || this.email.length <= 0 || this.email.length > 100 || this.username.length <= 0 || this.username.length > 50 || this.password.length <= 0 || this.password.length > 50 )
+        return
       try {
         if (this.gender === "Prefiero no indicar") {
           this.gender = 'other'
@@ -364,6 +367,7 @@ export default {
         }
         const credentials = new RegisterCredentials(this.username, this.password, this.firstname, this.lastname, this.gender, new Date(this.date.toString()).getTime(), this.email, this.phone, "", this.metadata)
         await this.$register({credentials, rememberMe: true })
+        this.error = false
       } catch(error) {
         this.error = true
         if (error.message) {

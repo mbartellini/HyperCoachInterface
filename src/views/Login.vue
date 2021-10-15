@@ -35,7 +35,8 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                    type="submit"
+                    type="button"
+                    @click="login"
                     class="ma-2 text-decoration-underline"
                     color="primary"
                     v-bind="attrs"
@@ -103,9 +104,9 @@ export default {
       show: false,
       username: '',
       password: '',
-      error: false,
+      error: true,
       errorMsg: 'Ha ocurrido un error.',
-      errorDetails: '',
+      errorDetails: 'Revise que los datos ingresados son correctos.',
       successMsg: 'Has iniciado sesión correctamente.',
       entireError: null
     }
@@ -126,23 +127,32 @@ export default {
     }),
     async login(e) {
       e.preventDefault()
+      if (this.username.length <= 0 || this.username.length > 50 || this.password.length <= 0 || this.password.length > 50)
+        return
       try {
         const credentials = new LoginCredentials(this.username, this.password)
         await this.$login({credentials, rememberMe: true})
-
+        this.error = false
       } catch (error) {
         this.error = true
-        this.errorDetails = error.details[0] // TODO: beautify this output
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }
         this.password = ''
       }
     },
     finishDialog() {
-      if(this.error){
-        router.push('/login')
-      } else {
+      this.dialog = false
+      if (!this.error) {
         router.push('/')
+        router.go(0)
       }
-      router.go(0)
     },
   }
 }

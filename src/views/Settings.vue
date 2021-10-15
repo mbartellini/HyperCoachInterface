@@ -78,11 +78,12 @@
                     outlined
                 ></v-autocomplete>
                 <v-btn
-                    type="submit"
+                    type="button"
                     tile
                     class="rounded-lg"
                     large
                     color="success"
+                    @click="login"
                     @click.stop="dialog = true"
                 >
                   <v-icon dark>mdi-content-save</v-icon>
@@ -146,7 +147,7 @@ export default {
     error: true,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Tus cambios fueron guardados.',
-    errorDetails: 'Hay campos obligatorios sin completar.',
+    errorDetails: 'Revise que los datos ingresados son correctos.',
     dialog: false,
     name: "Juan Ignacio Garcia Matwieiszyn",
     lastname: "Juan Ignacio Garcia Matwieiszyn",
@@ -159,9 +160,7 @@ export default {
       (v) => (v && v.length <= 50) ||
           "Maximo 50 caracteres",],
     age: 20,
-    password: '',
     preview: null,
-    passwordConfirmation: '',
     metadata: {img_src: ""},
     menu: null,
   }),
@@ -215,11 +214,9 @@ export default {
         } else {
           this.gender = ''
         }
-        if (this.password !== this.passwordConfirmation) {
-          this.error = true
-          return
+        if (this.name.length <= 0 || this.name.length > 50 || this.lastname.length <= 0 || this.lastname.length > 50) {
+          return;
         }
-        console.log(this.metadata)
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
         await this.$modify({credentials})
         this.dialog = true

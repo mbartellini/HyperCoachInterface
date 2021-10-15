@@ -42,6 +42,8 @@
               dense
               outlined
               clearable
+              counter="100"
+              :rules="nameRules"
               required
               label="Nombre del ejercicio"
               class="mb-0 pb-0"
@@ -52,6 +54,8 @@
         <v-text-field
           v-model="exercise.detail"
           dense
+          counter="200"
+          :rules="detailRules"
           outlined
           clearable
           label="Detalle del ejercicio"
@@ -65,7 +69,6 @@
               large
               color="success"
               @click="save"
-              @click.stop="dialog = true"
           >
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
@@ -94,7 +97,7 @@
                     text
                     @click="finishDialog"
                 >
-                  {{error? 'Reintentar' : 'Volver a mi perfil'}}
+                  {{error? 'Reintentar' : 'Ver todos mis ejercicios'}}
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -133,13 +136,20 @@ export default {
       detail: '',
       type: 'exercise',
       metadata: {
-        img_src: "@/assets/hci.png",
+        img_src: "",
       },
     },
+    nameRules: [
+      (v) => !!v || "Este campo es obligatorio",
+      (v) => (v && v.length <= 100) ||
+          "Maximo 100 caracteres",],
+    detailRules: [
+      (v) => (v.length <= 200) ||
+          "Maximo 200 caracteres",],
     error: true,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Ejercicio creado correctamente.',
-    errorDetails: 'Hay campos obligatorios sin completar.',
+    errorDetails: 'Revise que los datos ingresados son correctos.',
   }),
   methods: {
     handleImage() {
@@ -180,8 +190,11 @@ export default {
       }
     },
     async postExercise() {
+      if (this.exercise.detail >= 200 || this.exercise.name <= 0 || this.exercise.name > 100)
+        return
       try {
         this.exercise = await this.$postExercise(this.exercise)
+        this.error = false
       } catch(error) {
         this.error = true
         if (error.message) {
@@ -196,8 +209,11 @@ export default {
       }
     },
     async putExercise() {
+      if (this.exercise.detail >= 200 || this.exercise.name <= 0 || this.exercise.name > 100)
+        return
       try {
         this.exercise = await this.$putExercise(this.exercise)
+        this.error = false
       } catch(error) {
         this.error = true
         if (error.message) {
@@ -212,19 +228,18 @@ export default {
       }
     },
      save() {
-      alert("hola")
       this.handleImage()
       if (this.newExercise) {
         this.postExercise()
       } else {
         this.putExercise()
       }
+      this.dialog = true
     },
     finishDialog() {
       this.dialog = false
       if(!this.error) {
-        router.push('/profile')
-        router.go(0)
+        router.push('/my_exercises')
       }
     },
   },
