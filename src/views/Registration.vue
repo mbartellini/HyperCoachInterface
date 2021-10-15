@@ -334,6 +334,7 @@ export default {
         if (this.image.size > 1024 * 50) {
           this.errorDetails = "La imagen ingresada es demasiado grande."
           this.dialog = true
+          return;
         }
         this.PreviewImage();
         const aux = this.getImg();

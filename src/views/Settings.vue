@@ -143,10 +143,10 @@ export default {
   name: 'Settings',
 
   data: () => ({
-    error: false,
+    error: true,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Tus cambios fueron guardados.',
-    errorDetails:'',
+    errorDetails: 'Hay campos obligatorios sin completar.',
     dialog: false,
     name: "Juan Ignacio Garcia Matwieiszyn",
     lastname: "Juan Ignacio Garcia Matwieiszyn",
@@ -187,6 +187,7 @@ export default {
         if (this.image.size > 1024 * 50) {
           this.errorDetails = "La imagen ingresada es demasiado grande."
           this.dialog = true
+          return;
         }
         this.PreviewImage();
         const aux = this.getImg();
