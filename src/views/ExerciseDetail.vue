@@ -90,10 +90,10 @@ export default {
   },
   data: () => ({
     exercise: {
-      "name": "Nombre del Ejercicio",
-      "detail": "Detalle del ejercicio",
-      "type": "exercise",
-      "metadata": {
+      name: "Nombre del Ejercicio",
+      detail: "Detalle del ejercicio",
+      type: "exercise",
+      metadata: {
         img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
       }
     },

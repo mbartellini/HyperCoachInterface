@@ -42,6 +42,7 @@
               dense
               outlined
               clearable
+              required
               label="Nombre del ejercicio"
               class="mb-0 pb-0"
           />
@@ -134,15 +135,19 @@ export default {
         img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0",
       },
     },
-    error: false,
+    error: true,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Ejercicio creado correctamente.',
-    errorDetails: '',
+    errorDetails: 'Hay campos obligatorios sin completar.',
   }),
   methods: {
     handleImage() {
       if (this.image) {
-
+        if (this.image.size > 1024 * 50) {
+          this.errorDetails = "La imagen ingresada es demasiado grande."
+          this.dialog = true
+          return
+        }
         this.PreviewImage();
         const aux = this.getImg();
         aux.then(data => this.exercise.metadata.img_src = data);
@@ -214,12 +219,11 @@ export default {
       }
     },
     finishDialog() {
-      if(this.error){
-        this.dialog = false
-      } else {
+      this.dialog = false
+      if(!this.error) {
         router.push('/profile')
+        router.go(0)
       }
-      router.go(0)
     },
   },
   created() {
