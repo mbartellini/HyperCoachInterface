@@ -225,6 +225,7 @@ export default {
       await this.$router.push({name: 'MyRoutines'})
     },
     ...mapActions('exercise', {
+      $getExercise: 'get',
       $getExercises: 'getAll',
     }),
     async getExercises() {
@@ -233,6 +234,18 @@ export default {
         this.exercises = result.content
       } catch(e) {
         console.log(e)
+      }
+    },
+    async getOtherExercises() {
+      for (let i in this.routine.metadata.cycles) {
+        for (let j in this.routine.metadata.cycles[i].exercises) {
+          try {
+            let newEx = await this.$getExercise(this.routine.metadata.cycles[i].exercises[j])
+            this.exercises.push(newEx)
+          } catch(e) {
+            console.log(e)
+          }
+        }
       }
     },
     ...mapActions('favorite', {
@@ -288,6 +301,7 @@ export default {
     await this.getFavorites()
     if (this.id !== null) {
       await this.getRoutine()
+      await this.getOtherExercises()
     }
   },
 }
