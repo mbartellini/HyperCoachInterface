@@ -58,7 +58,6 @@
           <v-col dense class="ma-0 pa-0">
             <v-row dense>
               <v-col>
-                <h4 class="text">Duración: {{routine.metadata.duration}} min.</h4>
                 <h4 class="text">Dificultad: {{routine.difficulty}}</h4>
                 <h4 class="text">Detalle: {{routine.detail}}</h4>
                 <h4 class="text">Categoría: {{routine.category.name}}</h4>
