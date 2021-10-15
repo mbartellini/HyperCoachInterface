@@ -80,7 +80,7 @@
           >
             <v-card>
               <v-card-title class="text-h5">
-                {{error? errorMsg : successMsg}}
+                {{error? errorMsg : newExercise? successNewMsg : successMsg}}
               </v-card-title>
 
               <v-card-text
@@ -148,7 +148,8 @@ export default {
           "Maximo 200 caracteres")) || true,],
     error: true,
     errorMsg: 'Ha ocurrido un error.',
-    successMsg: 'Ejercicio creado correctamente.',
+    successMsg: 'Ejercicio editado correctamente.',
+    successNewMsg: 'Ejercicio guardado correctamente.',
     errorDetails: 'Revise que los datos ingresados son correctos.',
   }),
   methods: {
