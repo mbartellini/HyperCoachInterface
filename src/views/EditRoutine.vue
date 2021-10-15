@@ -45,12 +45,17 @@
           </v-row>
           <v-row dense class="ma-0 pb-0 d-flex justify-space-between">
             <v-col cols="6" class="py-0 pl-0 ma-0 justify-space-between">
-              <v-text-field
+              <v-select
+                  v-model="routine.category"
+                  :items="categories"
+                  item-text="name"
+                  item-value="id"
+                  label="Categoría"
                   dense
-                  v-model="routine.metadata.duration"
                   outlined
-                  disabled
-                  label="Duración (mins)"
+                  persistent-hint
+                  return-object
+                  single-line
               />
             </v-col>
             <v-col cols="6" class="pr-0 py-0 ma-0 justify-space-between">
@@ -164,6 +169,7 @@ export default {
   data: () => ({
     newRoutine: true,
     exercises: [],
+    categories: [],
     routine: {
       name: '',
       detail: '',
@@ -247,9 +253,27 @@ export default {
       $putRoutine: 'modify',
     }),
     addCycle() {
-      this.routine.metadata.cycles.push(
-          Object.assign({}, this.testCycle)
-      )
+      this.routine.metadata.cycles.push({
+        name: "Ciclo de calentamiento",
+        repetitions: 1,
+        exercises: [
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+        ]
+      })
     },
     deleteCycle(index) {
       if (this.routine.metadata.cycles.length > 3)
@@ -284,17 +308,14 @@ export default {
     save() {
       for (let c in this.routine.metadata.cycles) {
         for (let e in this.routine.metadata.cycles[c].exercises) {
-          this.routine.metadata.cycles[c].exercises[e] = this.routine.metadata.cycles[c].exercises[e].ref.id
+          this.routine.metadata.cycles[c].exercises[e].id = this.routine.metadata.cycles[c].exercises[e].id.id
         }
       }
-      alert(JSON.stringify(this.routine))
-      /*
       if (this.newRoutine) {
         this.postRoutine()
       } else {
         this.putRoutine()
       }
-      this.$router.push({name: 'MyRoutines'})*/
     },
     ...mapActions('exercise', {
       $getExercises: 'getAll',
@@ -304,6 +325,17 @@ export default {
         let result = await this.$getExercises();
         this.exercises = result.content
       } catch(e) {
+        alert(e)
+      }
+    },
+    ...mapActions('category', {
+      $getCategories: 'getAll',
+    }),
+    async getCategories() {
+      try {
+        let result = await this.$getCategories()
+        this.categories = result.content
+      } catch (e) {
         alert(e)
       }
     },
@@ -326,6 +358,7 @@ export default {
   },
   async created() {
     await this.getExercises();
+    await this.getCategories();
     if (this.id != null) {
       this.newRoutine = false
       await this.getRoutine()

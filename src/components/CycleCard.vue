@@ -5,7 +5,7 @@
       class="rounded-card pb-3"
   >
     <v-card-title class = "d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row secondary mb-3 white--text">
-      <p class="my-0">{{cycle}}. {{cycle.name}}</p>
+      <p class="my-0">{{cycle.name}}</p>
       <v-spacer/>
       <p class="my-0">Repeticiones: {{cycle.repetitions}}</p>
     </v-card-title>
@@ -19,7 +19,7 @@
         <v-row class="pa-0">
           <v-col>
             <v-card-text class="textSize">
-              {{AHAH}}
+              {{getExerciseName(exercise.id)}}
             </v-card-text>
           </v-col>
           <div>
@@ -39,12 +39,21 @@ export default {
       type: Object,
       required: true,
     },
+    exercises: {
+      type: Array,
+      required: true,
+    }
   },
   data: () => ({
   }),
   methods: {
     getExerciseName(id) {
-      return "Ejercicio " + id
+      for (let e in this.exercises) {
+        if (this.exercises[e].id === id) {
+          return this.exercises[e].name
+        }
+      }
+      return "ERROR"
     }
   }
 }
