@@ -60,7 +60,7 @@ export default {
   name: "TopBar",
 
   data: () => ({
-    profileRoute: 'Profile',
+    profileRoute: '/Profile',
     username: null,
     reload: false,
     profile_pic: "@/assets/Juani.jpeg",
