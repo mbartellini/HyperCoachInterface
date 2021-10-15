@@ -45,7 +45,7 @@
               counter="100"
               :rules="nameRules"
               required
-              label="Nombre del ejercicio"
+              label="Nombre del ejercicio*"
               class="mb-0 pb-0"
           />
         </v-row>
