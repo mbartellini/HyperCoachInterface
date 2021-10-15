@@ -227,7 +227,7 @@
                   <v-btn
                       type="button"
                       @click="login"
-                      :disabled="password.length < 3 || password !== passwordConfirmation || firstname.length <= 0 || firstname.length > 50 || lastname.length <= 0 || lastname.length > 50 || email.length <= 0 || email.length > 100 || username.length <= 0 || username.length > 50 || password.length <= 0 || password.length > 50"
+                      :disabled="util || password.length < 3 || password !== passwordConfirmation || firstname.length <= 0 || firstname.length > 50 || lastname.length <= 0 || lastname.length > 50 || email.length <= 0 || email.length > 100 || username.length <= 0 || username.length > 50 || password.length <= 0 || password.length > 50"
                       class="bg-green-400 p-5 text-white text-decoration-underline"
                       color="primary"
                   >
