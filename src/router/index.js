@@ -42,6 +42,7 @@ const routes = [
     {
         path: '/search',
         name: 'Search',
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
     },
     {
@@ -53,11 +54,13 @@ const routes = [
     {
         path: '/information',
         name: 'Info',
+        meta: { requiresAuth: true },
         component: () => import(/* webpackChunkName: "info" */ '../views/Info.vue')
     },
     {
         path: '/routine/:id',
         name: 'RoutineDetail',
+        meta: { requiresAuth: true },
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "routine_detail" */ '../views/RoutineDetail.vue'),
         /* beforeEnter: (to, from, next) => {
@@ -74,6 +77,7 @@ const routes = [
     {
         path: '/routine_edit/:id?',
         name: 'EditRoutine',
+        meta: { requiresAuth: true },
         props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "edit_routine" */ '../views/EditRoutine.vue'),
         /* beforeEnter: (to, from, next) => {
@@ -90,6 +94,7 @@ const routes = [
     {
         path: '/exercise/:id',
         name: 'ExerciseDetail',
+        meta: { requiresAuth: true },
         props: ({params}) => ({id: Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "exercise_detail" */ '../views/ExerciseDetail.vue'),
         /* beforeEnter: (to, from, next) => {
@@ -106,6 +111,7 @@ const routes = [
     {
         path: '/exercise_edit/:id?',
         name: 'EditExercise',
+        meta: { requiresAuth: true },
         props: ({params}) => ({id: params.id == null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "edit_exercise" */ '../views/EditExercise.vue'),
         /* beforeEnter: (to, from, next) => {

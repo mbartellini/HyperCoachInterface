@@ -66,7 +66,7 @@
                 </v-col>
               </div>
             </v-row>
-            <v-row class="justify-space-between">
+            <v-row v-show="is_owner" class="justify-space-between">
               <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
                 <v-icon dark>mdi-delete</v-icon>
                 <div class="text-decoration-underline">
@@ -240,6 +240,9 @@ export default {
       $postFavorite: 'create',
       $deleteFavorite: 'delete',
     }),
+    ...mapActions('security', {
+      $getCurrentUser: 'getCurrentUser',
+    }),
     inFavorites(list, id) {
       for (let i in list) {
         if (list[i].id === id)
@@ -268,8 +271,8 @@ export default {
         console.log(e)
       }
     },
-    canShow() {
-      return this.routine && this.routine.category && this.routine.category.name && this.routine.metadata && this.routine.metadata.equipment
+    async is_owner() {
+      return this.routine.user.id === await this.$getCurrentUser().id
     },
     translate(difficulty) {
       switch (difficulty) {

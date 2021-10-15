@@ -67,6 +67,7 @@
                 label="Cantidad"
                 type="number"
                 min="0"
+                max="999"
                 class="mt-3 mb-0 ml-1"
             />
             <v-autocomplete

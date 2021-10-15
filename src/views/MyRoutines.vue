@@ -113,7 +113,6 @@ export default {
           this.dialog = true
         } else {
           await router.push('/routine_edit')
-          router.go(0)
         }
       } catch(e) {
         console.log(e)

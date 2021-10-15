@@ -119,7 +119,7 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-row class="d-flex justify-center align-content-center">
+      <v-row class="d-flex justify-center align-start justify-center align-content-center">
         <v-col
             v-for="(cycle, i) in routine.metadata.cycles"
             :key="i"
@@ -127,34 +127,40 @@
             cols="12"
         >
           <v-row fluid class="d-flex justify-center">
-            <v-col cols="1">
-              <v-btn fab color="error" class="d-flex justify-center" @click="deleteCycle(i)">
+            <v-col xl="4" lg="4" md="4" sm="1" xs="1"/>
+            <v-col xl="4" lg="4" md="4" sm="9" xs="9" class="px-0 d-flex justify-center">
+              <EditCycleCard :cycle="cycle" :exercises="exercises" class="ma-auto" />
+            </v-col>
+            <v-col xl="4" lg="4" md="4" sm="1" xs="1" class="d-flex justify-start">
+              <v-btn
+                  fab
+                  color="error"
+                  class="d-flex justify-center"
+                  @click="deleteCycle(i)"
+                  :disabled="routine.metadata.cycles.length <= 3"
+              >
                 <v-icon>
                   mdi-delete
                 </v-icon>
               </v-btn>
-            </v-col>
-            <v-col xl="4" lg="6" md="8" sm="9" xs="9">
-              <EditCycleCard :cycle="cycle" :exercises="exercises" class="ma-auto"></EditCycleCard>
             </v-col>
           </v-row>
         </v-col>
 
       </v-row>
 
-      <v-row class="d-flex justify-center align-content-center">
+      <v-row cols="12" class="d-flex justify-center align-content-center">
         <template>
           <v-card
               elevation="6"
               max-width="500"
               class="rounded-card pb-3"
           >
-            <v-card-title class = "pb-0 d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row secondary mb-3 white--text">
+            <v-card-title class = "pb-0 d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row grey mb-3 white--text">
               <v-container>
                 <v-row>
                   <v-text-field
                       dense
-                      outlined
                       disabled
                       label="Nuevo ciclo"
                       color="white"
@@ -429,11 +435,10 @@ export default {
     },
   },
   async beforeMount() {
-    await this.getExercises();
+    // await this.getExercises();
     await this.getCategories();
-    if (this.id && this.id !== 0) {
+    if (this.id && this.id != null) {
       alert(this.id)
-      console.log(this.id)
       this.newRoutine = false
       await this.getRoutine()
       for (let i in this.difficultiesAvailable) {

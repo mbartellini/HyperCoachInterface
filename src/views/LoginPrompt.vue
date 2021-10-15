@@ -1,9 +1,6 @@
 <template>
   <div class="text-center">
     <v-container fluid>
-      <v-row class="justify-left mb-3">
-        <GoBackButton/>
-      </v-row>
       <v-sheet
           class="px-7 pt-7 pb-4 mt-5 text-center d-inline-block rounded-lg"
           outlined
@@ -38,11 +35,9 @@
 </template>
 
 <script>
-
-import GoBackButton from "@/components/GoBackButton";
 export default {
   name: "LoginPrompt",
-  components: {GoBackButton},
+  components: {},
 }
 </script>
 
