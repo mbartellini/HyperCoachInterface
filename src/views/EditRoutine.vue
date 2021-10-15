@@ -105,7 +105,7 @@
             >
               <v-card>
                 <v-card-title class="text-h5">
-                  {{error? errorMsg : successMsg}}
+                  {{error? errorMsg : newRoutine? successNewMsg : successMsg}}
                 </v-card-title>
 
                 <v-card-text
@@ -223,7 +223,8 @@ export default {
     dialog: false,
     error: true,
     errorMsg: 'Ha ocurrido un error.',
-    successMsg: 'Rutina creada correctamente.',
+    successMsg: 'Rutina editada correctamente.',
+    successNewMsg: 'Rutina creada correctamente.',
     errorDetails: 'Hay campos obligatorios sin completar.',
     categories: [],
     routine: {
@@ -335,8 +336,17 @@ export default {
         let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
         this.routine = await this.$postRoutine(routine)
         this.error = false
-      } catch(e) {
-        console.log(e)
+      } catch(error) {
+        this.error = true
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }
       }
     },
     async putRoutine() {
@@ -344,8 +354,17 @@ export default {
         let routine = new Routine(this.routine.id, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
         this.routine = await this.$putRoutine(routine)
         this.error = false
-      } catch(e) {
-        console.log(e)
+      } catch(error) {
+        this.error = true
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }
       }
     },
     save(e) {
