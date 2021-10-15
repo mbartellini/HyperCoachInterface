@@ -49,7 +49,7 @@
         <v-divider />
         <v-row class="ma-auto">
           <p class="text-h6">
-            {{ exercise.detail }}
+            {{ exercise.detail ? exercise.detail : "Este ejercicio no tiene detalle"}}
           </p>
         </v-row>
         <v-row class="justify-space-between">

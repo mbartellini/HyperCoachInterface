@@ -77,7 +77,7 @@
           </v-row>
           <v-row dense class="my-0 py-0">
             <v-checkbox
-                v-model="routine.equipment"
+                v-model="routine.metadata.equipment"
                 label="Requiere equipamiento"
                 class="my-0 py-0"
             ></v-checkbox>
@@ -348,7 +348,8 @@ export default {
     },
     async postRoutine() {
       try {
-        let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
+        let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
+        // alert(JSON.stringify(routine))
         this.routine = await this.$postRoutine(routine)
         this.error = false
       } catch(e) {
@@ -357,7 +358,7 @@ export default {
     },
     async putRoutine() {
       try {
-        let routine = new Routine(this.routine.id, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
+        let routine = new Routine(this.routine.id, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
         this.routine = await this.$putRoutine(routine)
         this.error = false
       } catch(e) {

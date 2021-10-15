@@ -22,11 +22,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "registration" */ '../views/Registration.vue')
     },
     {
-        path: '/login_questions',
-        name: 'LoginQuestions',
-        component: () => import(/* webpackChunkName: "login_questions" */ '../views/LoginQuestions.vue')
-    },
-    {
         path: '/favorites',
         name: 'Favorites',
         meta: { requiresAuth: true },

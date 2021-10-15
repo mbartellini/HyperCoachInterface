@@ -256,6 +256,7 @@
                         <v-btn
                             :color="error? 'error' : 'success'"
                             text
+                            class="text-decoration-underline"
                             @click="finishDialog"
                         >
                           {{error? 'Reintentar' : 'Iniciar sesión'}}

@@ -14,10 +14,10 @@
         <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
           <v-img
               class="justify-center ma-auto"
-              lazy-src="@/assets/loading.gif"
+              lazy-src="@/assets/hci.png"
               width="500px"
               :alt="routine.detail"
-              :src="routine.metadata.img_src"
+              :src="preview"
               contain
           ></v-img>
         </v-card>
@@ -57,17 +57,14 @@
         <v-row dense class="ma-0 pa-0">
           <v-col dense class="ma-0 pa-0">
             <v-row dense>
-              <v-col>
-                <h4 class="text">Dificultad: {{routine.difficulty}}</h4>
-                <h4 class="text">Detalle: {{routine.detail}}</h4>
-                <h4 class="text">Categoría: {{routine.category.name}}</h4>
-                <div v-if="routine.metadata.equipment">
-                  <h4 class="text">Requiere equipamiento.</h4>
-                </div>
-                <div v-else>
-                  <h4 class="text">No requiere equipamiento.</h4>
-                </div>
-              </v-col>
+              <div>
+                <v-col>
+                  <h4 class="text" >Dificultad: {{routine.difficulty ? translate(routine.difficulty) : "Esta rutina no tiene dificultad"}}</h4>
+                  <h4 class="text" >Detalle: {{routine.detail ? routine.detail : "Esta rutina no tiene detalle"}}</h4>
+                  <h4 class="text" >Categoría: {{routine.category ? (routine.category.name ? routine.category.name : "Sin categoría") : "Sin categoría"}}</h4>
+                  <h4 class="text">{{routine.metadata && routine.metadata.equipment ? "Requiere equipamiento." : "No requiere equipamiento."}}</h4>
+                </v-col>
+              </div>
             </v-row>
             <v-row class="justify-space-between">
               <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
@@ -87,7 +84,7 @@
         </v-row>
        </v-col>
       </v-row>
-    <v-row class="d-flex justify-center">
+    <v-row class="d-flex justify-center" v-if="routine.metadata">
       <v-col
           v-for="(cycle, i) in routine.metadata.cycles"
           :key="i"
@@ -125,14 +122,16 @@ export default {
     exercises: [],
     favorites: [],
     is_fav: false,
+    llave: false,
+    preview: '',
     routine: {
       name: '',
       detail: '',
       isPublic: true,
-      category: { id: 1 },
+      category: { id: 1 , name: "placeholder", detail: "placeholder"},
       difficulty: { name: 'beginner', hint: 'Principiante', },
       metadata: {
-        img_src: 'https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg',
+        img_src: '@/assets/hci.png',
         duration: 0,
         equipment: false,
         cycles: [
@@ -212,6 +211,7 @@ export default {
       try {
         this.routine = {id: this.id}
         this.routine = await this.$getRoutine(this.routine);
+        this.preview = this.routine.metadata.img_src
       } catch(e) {
         console.log(e)
       }
@@ -222,7 +222,7 @@ export default {
       } catch(e) {
         console.log(e)
       }
-      this.$router.push({name: 'MyRoutines'})
+      await this.$router.push({name: 'MyRoutines'})
     },
     ...mapActions('exercise', {
       $getExercises: 'getAll',
@@ -267,13 +267,25 @@ export default {
       } catch(e) {
         console.log(e)
       }
+    },
+    canShow() {
+      return this.routine && this.routine.category && this.routine.category.name && this.routine.metadata && this.routine.metadata.equipment
+    },
+    translate(difficulty) {
+      switch (difficulty) {
+        case 'beginner': return 'Principiante'
+        case 'intermediate': return 'Intermedio'
+        case 'advanced': return 'Avanzado'
+      }
+      return difficulty
     }
   },
   async beforeMount() {
     await this.getExercises()
     await this.getFavorites()
-    if (this.id !== null)
-      await this.getRoutine();
+    if (this.id !== null) {
+      await this.getRoutine()
+    }
   },
 }
 </script>

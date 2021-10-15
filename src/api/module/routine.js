@@ -57,6 +57,7 @@ export default {
 
             const result = await RoutineApi.get(routine.id)
             commit('push', result)
+            console.log(result)
             return result
         },
         async getPage({commit}, {pageNumber, pageSize}) {
