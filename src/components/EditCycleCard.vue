@@ -27,7 +27,7 @@
                     width="50"
                     type="number"
                     label="Cantidad de repeticiones"
-                    min="0"
+                    min="1"
                     class="ma-0 py-0"
                     color="white"
                 />
@@ -74,7 +74,7 @@
               v-model="exercise.limitType"
               :items="selRepOrDur"
               item-text="hint"
-              item-value="id"
+              item-value="name"
               label="Duración"
               dense
               outlined

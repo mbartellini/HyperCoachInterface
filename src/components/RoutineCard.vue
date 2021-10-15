@@ -9,6 +9,7 @@
     >
       <v-img
           :src="routine.metadata.img_src"
+          lazy-src="@/assets/hci.png"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class="justify-center" max-width="200">

@@ -70,7 +70,7 @@
               color="success"
               @click="save"
           >
-            <v-icon dark>mdi-content-save</v-icon>
+            <v-icon dark>mdi-content-pencil</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
           </v-btn>
           <v-dialog

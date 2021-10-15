@@ -59,10 +59,10 @@
             <v-row dense>
               <div>
                 <v-col>
-                  <h4 class="text" >Dificultad: {{routine.difficulty ? translate(routine.difficulty) : "Esta rutina no tiene dificultad"}}</h4>
-                  <h4 class="text" >Detalle: {{routine.detail ? routine.detail : "Esta rutina no tiene detalle"}}</h4>
-                  <h4 class="text" >Categoría: {{routine.category ? (routine.category.name ? routine.category.name : "Sin categoría") : "Sin categoría"}}</h4>
-                  <h4 class="text">{{routine.metadata && routine.metadata.equipment ? "Requiere equipamiento." : "No requiere equipamiento."}}</h4>
+                  <h4 class="text my-1" >Dificultad: {{routine.difficulty ? translate(routine.difficulty) : "Esta rutina no tiene dificultad"}}</h4>
+                  <h4 class="text my-1" >Detalle: {{routine.detail ? routine.detail : "Esta rutina no tiene detalle"}}</h4>
+                  <h4 class="text my-1" >Categoría: {{routine.category ? (routine.category.name ? routine.category.name : "Sin categoría") : "Sin categoría"}}</h4>
+                  <h4 class="text my-1">{{routine.metadata && routine.metadata.equipment ? "Requiere equipamiento." : "No requiere equipamiento."}}</h4>
                 </v-col>
               </div>
             </v-row>
@@ -74,7 +74,7 @@
                 </div>
               </v-btn>
               <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditRoutine', params: { id: id } }" >
-                <v-icon dark>mdi-content-save</v-icon>
+                <v-icon dark>mdi-pencil</v-icon>
                 <div class="text-decoration-underline">
                   Editar
                 </div>

@@ -44,6 +44,15 @@
                 label="Título de la rutina"
             />
           </v-row>
+          <v-row dense class="mt-5">
+            <v-text-field
+                dense
+                v-model="routine.detail"
+                outlined
+                clearable
+                label="Detalle de la rutina"
+            />
+          </v-row>
           <v-row dense class="ma-0 pb-0 d-flex justify-space-between">
             <v-col cols="6" class="py-0 pl-0 ma-0 justify-space-between">
               <v-select
@@ -204,6 +213,7 @@ export default {
     EditCycleCard,
   },
   data: () => ({
+    exercisesResult: null,
     newRoutine: true,
     exercises: [],
     preview: '',
@@ -218,7 +228,7 @@ export default {
       name: '',
       detail: '',
       isPublic: true,
-      category: { id: 1 },
+      category: { id: null },
       difficulty: { name: 'beginner', hint: 'Principiante', },
       metadata: {
         img_src: '@/assets/hci.png',
@@ -230,17 +240,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -250,17 +260,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -270,17 +280,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: 1 },
+                id: { id: null },
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -321,17 +331,17 @@ export default {
         repetitions: 1,
         exercises: [
           {
-            id: { id: 1 },
+            id: { id: null },
             limit: 5,
             limitType: 'repeticiones',
           },
           {
-            id: { id: 1 },
+            id: { id: null },
             limit: 5,
             limitType: 'repeticiones',
           },
           {
-            id: { id: 1 },
+            id: { id: null },
             limit: 5,
             limitType: 'repeticiones',
           },
@@ -355,8 +365,9 @@ export default {
     async postRoutine() {
       try {
         let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
-        // alert(JSON.stringify(routine))
-        this.routine = await this.$postRoutine(routine)
+        alert(JSON.stringify(routine))
+        let result = await this.$postRoutine(routine)
+        this.routine = result
         this.error = false
       } catch(e) {
         console.log(e)
@@ -433,12 +444,14 @@ export default {
         },
       ]
     },
+    validator(cycles) {
+      return cycles.length
+    }
   },
   async beforeMount() {
-    // await this.getExercises();
+    await this.getExercises();
     await this.getCategories();
-    if (this.id && this.id != null) {
-      alert(this.id)
+    if (this.id) {
       this.newRoutine = false
       await this.getRoutine()
       for (let i in this.difficultiesAvailable) {
