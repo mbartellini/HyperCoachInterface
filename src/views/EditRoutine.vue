@@ -71,7 +71,6 @@
             <v-col cols="6" class="pr-0 py-0 ma-0 justify-space-between">
               <v-select
                   v-model="routine.difficulty"
-                  :hint="`${routine.difficulty.hint}`"
                   :items="difficultiesAvailable"
                   item-text="hint"
                   item-value="name"
@@ -327,7 +326,7 @@ export default {
     addCycle() {
       this.handleImage()
       this.routine.metadata.cycles.push({
-        name: "Ciclo de calentamiento",
+        name: "Ciclo",
         repetitions: 1,
         exercises: [
           {

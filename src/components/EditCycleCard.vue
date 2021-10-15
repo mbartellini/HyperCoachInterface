@@ -47,11 +47,10 @@
           <v-row class="py-0 pt-3 my-0 pa-3">
             <v-autocomplete
                 v-model="exercise.id"
-                :hint="`${exercise.name}`"
                 :items="exercises"
                 item-text="name"
-                item-value="id"
                 label="Ejercicio*"
+                :rules="exerciseRules"
                 dense
                 outlined
                 required
@@ -73,8 +72,6 @@
             <v-autocomplete
               v-model="exercise.limitType"
               :items="selRepOrDur"
-              item-text="hint"
-              item-value="name"
               label="Duración"
               dense
               outlined
@@ -113,9 +110,9 @@ export default {
     },
   },
   data: () => ({
-    selRepOrDur: [
-      { hint: 'repeticiones', name: 'repetitions' },
-      { hint: 'segundos', name: 'duration' },
+    selRepOrDur: [ 'repeticiones', 'segundos'],
+    exerciseRules: [
+      (v) => !!v || "Este campo es obligatorio",
     ],
   }),
   methods: {
@@ -123,7 +120,7 @@ export default {
       this.cycle.exercises.push({
         id: 0,
         limit: 5,
-        limitType: { hint: 'repeticiones', name: 'repetitions' },
+        limitType: 'repeticiones',
       })
     },
     deleteExercise() {
