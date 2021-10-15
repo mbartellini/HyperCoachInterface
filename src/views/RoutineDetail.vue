@@ -99,7 +99,7 @@
           lg="5"
           xl="4"
       >
-        <CycleCard :cycle="cycle" class="ma-auto" />
+        <CycleCard :cycle="cycle" :exercises="exercises" class="ma-auto" />
       </v-col>
     </v-row>
   </v-container>
@@ -123,6 +123,7 @@ export default {
     GoBackButton
   },
   data: () => ({
+    exercises: [],
     is_fav: false,
     routine: {
       name: '',
@@ -223,8 +224,20 @@ export default {
       }
       this.$router.push({name: 'MyRoutines'})
     },
+    ...mapActions('exercise', {
+      $getExercises: 'getAll',
+    }),
+    async getExercises() {
+      try {
+        let result = await this.$getExercises();
+        this.exercises = result.content
+      } catch(e) {
+        alert(e)
+      }
+    },
   },
-  created() {
+  async created() {
+    await this.getExercises()
     if (this.id !== null)
       this.getRoutine();
   },
