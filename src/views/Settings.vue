@@ -214,10 +214,11 @@ export default {
         } else {
           this.gender = ''
         }
-        if (this.name.length <= 0 || this.name.length > 50 || this.lastname.length <= 0 || this.lastname.length > 50) {
+        if (this.gender === '' || this.name.length <= 0 || this.name.length > 50 || this.lastname.length <= 0 || this.lastname.length > 50) {
           return;
         }
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
+        console.log(credentials)
         await this.$modify({credentials})
         this.dialog = true
         this.error = false
