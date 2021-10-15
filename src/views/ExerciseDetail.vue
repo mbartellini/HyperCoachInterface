@@ -17,7 +17,7 @@
               lazy-src="@/assets/loading.gif"
               width="500px"
               :alt="exercise.detail"
-              :src="exercise.metadata.img_src"
+              :src="preview"
               contain
           ></v-img>
         </v-card>
@@ -94,9 +94,10 @@ export default {
       detail: "Detalle del ejercicio",
       type: "exercise",
       metadata: {
-        img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720",
+        img_src: "@/assets/hci.png",
       }
     },
+    preview: ''
   }),
   methods: {
     ...mapActions('exercise', {
@@ -107,7 +108,8 @@ export default {
       try {
         this.exercise = {id: this.id}
         this.exercise = await this.$getExercise(this.exercise);
-        this.exercise.metadata = this.exercise.metadata.img_src
+        console.log(this.exercise)
+        this.preview = this.exercise.metadata.img_src
       } catch(e) {
         console.log(e)
       }
@@ -118,10 +120,14 @@ export default {
       } catch(e) {
         console.log(e)
       }
-      this.$router.push({name: 'MyExercises'})
+      await this.$router.push({name: 'MyExercises'})
     },
   },
   created() {
+    if (this.id !== null)
+      this.getExercise();
+  },
+  beforeMount() {
     if (this.id !== null)
       this.getExercise();
   },

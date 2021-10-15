@@ -132,7 +132,7 @@ export default {
       detail: '',
       type: 'exercise',
       metadata: {
-        img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0",
+        img_src: "@/assets/hci.png",
       },
     },
     error: true,
@@ -173,7 +173,7 @@ export default {
       try {
         this.exercise = {id: this.id}
         this.exercise = await this.$getExercise(this.exercise);
-        this.exercise.metadata = {img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0"}
+        this.preview = this.exercise.metadata.img_src
       } catch(e) {
         console.log(e)
       }

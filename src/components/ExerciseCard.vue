@@ -8,7 +8,7 @@
         }}"
     >
       <v-img
-          :src="img_src"
+          :src="exercise.metadata.img_src"
           height="114px"
       ></v-img>  <!-- Make it variable so that it does not break in small screens. -->
       <v-card-title class="justify-center" max-width="200">
@@ -34,6 +34,7 @@ export default {
     }
   },
   created() {
+    console.log(this.exercise.metadata.img_src)
     this.getImg()
   }
 }

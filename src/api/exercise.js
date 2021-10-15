@@ -8,7 +8,7 @@ class ExerciseApi {
     }
 
     static async add(exercise, controller) {
-        return await Api.post(ExerciseApi.getUrl(), true, exercise, controller)
+        return await Api.post(ExerciseApi.getUrl(), false, exercise, controller)
     }
 
     static async modify(exercise, controller) {
