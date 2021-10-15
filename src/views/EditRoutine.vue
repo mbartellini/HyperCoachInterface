@@ -41,7 +41,8 @@
                 v-model="routine.name"
                 outlined
                 clearable
-                label="Título de la rutina"
+                label="Título de la rutina*"
+                :rules="nameRules"
             />
           </v-row>
           <v-row dense class="mt-5">
@@ -60,7 +61,9 @@
                   :items="categories"
                   item-text="name"
                   item-value="id"
-                  label="Categoría"
+                  label="Categoría*"
+                  required
+                  :rules="categoryRules"
                   dense
                   outlined
                   persistent-hint
@@ -298,6 +301,12 @@ export default {
         ],
       },
     },
+    nameRules: [
+      (v) => !!v || "Este campo es obligatorio",
+    ],
+    categoryRules: [
+      (v) => (!!v && !!v.id && true) || "Este campo es obligatorio",
+    ],
   }),
   methods: {
     handleImage() {
