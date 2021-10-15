@@ -27,6 +27,7 @@
                     width="50"
                     type="number"
                     label="Cantidad de repeticiones"
+                    min="0"
                     class="ma-0 py-0"
                     color="white"
                 />
@@ -50,9 +51,10 @@
                 :items="exercises"
                 item-text="name"
                 item-value="id"
-                label="Ejercicio"
+                label="Ejercicio*"
                 dense
                 outlined
+                required
                 return-object
                 single-line
             ></v-autocomplete>
@@ -64,6 +66,7 @@
                 outlined
                 label="Cantidad"
                 type="number"
+                min="0"
                 class="mt-3 mb-0 ml-1"
             />
             <v-autocomplete
@@ -77,7 +80,7 @@
               return-object
               single-line
               class="mt-3 mb-0 ml-3"
-          ></v-autocomplete>
+          />
           </v-row>
         </v-card-text>
       </v-row>
