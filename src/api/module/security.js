@@ -81,12 +81,12 @@ export default {
             return result
         },
         async logout({dispatch}) {
-            dispatch('removeToken')
-            dispatch('removeUser')
             try {
                 await UserApi.logout()
+                dispatch('removeToken')
+                dispatch('removeUser')
             } catch (e) {
-                console.log(e)
+                console.log(JSON.stringify(e))
             }
         },
     },

@@ -137,11 +137,12 @@ export default {
     error: false,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Ejercicio creado correctamente.',
-    errorDetails: ''
+    errorDetails: '',
   }),
   methods: {
     handleImage() {
       if (this.image) {
+
         this.PreviewImage();
         const aux = this.getImg();
         aux.then(data => this.exercise.metadata.img_src = data);
