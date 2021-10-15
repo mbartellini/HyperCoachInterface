@@ -373,9 +373,7 @@ export default {
     async postRoutine() {
       try {
         let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, this.routine.category.id, this.routine.metadata)
-        alert(JSON.stringify(routine))
-        let result = await this.$postRoutine(routine)
-        this.routine = result
+        this.routine = await this.$postRoutine(routine)
         this.error = false
       } catch(e) {
         console.log(e)
