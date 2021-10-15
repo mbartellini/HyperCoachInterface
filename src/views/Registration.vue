@@ -227,12 +227,13 @@
                   <v-btn
                       type="button"
                       @click="login"
-                      :disabled="password.length < 3 || password !== passwordConfirmation"
+                      :disabled="util || password.length < 3 || password !== passwordConfirmation || firstname.length <= 0 || firstname.length > 50 || lastname.length <= 0 || lastname.length > 50 || email.length <= 0 || email.length > 100 || username.length <= 0 || username.length > 50 || password.length <= 0 || password.length > 50"
                       class="bg-green-400 p-5 text-white text-decoration-underline"
                       color="primary"
                   >
                     Registrarse
                   </v-btn>
+                  <p v-show="password.length < 3 || password !== passwordConfirmation || firstname.length <= 0 || firstname.length > 50 || lastname.length <= 0 || lastname.length > 50 || email.length <= 0 || email.length > 100 || username.length <= 0 || username.length > 50 || password.length <= 0 || password.length > 50">Asegurese de completar todos los campos</p>
 
                   <v-dialog
                       v-model="dialog"
@@ -288,6 +289,7 @@ export default {
       firstname: '',
       lastname: '',
       password: '',
+      util: false,
       nameRules: [
         (v) => !!v || "Este campo es obligatorio",
         (v) => (v && v.length <= 50) ||
@@ -350,10 +352,12 @@ export default {
       });
     },
     async login(e) {
+      this.util = true
       this.handleImage()
       e.preventDefault()
       if (this.firstname.length <= 0 || this.firstname.length > 50 || this.lastname.length <= 0 || this.lastname.length > 50 || this.email.length <= 0 || this.email.length > 100 || this.username.length <= 0 || this.username.length > 50 || this.password.length <= 0 || this.password.length > 50 ) {
         this.dialog = true
+        this.util = false
         return
       }
       try {
@@ -383,12 +387,13 @@ export default {
         this.password = ''
         this.passwordConfirmation = ''
       }
+      this.util = false
       this.dialog = true
     },
     finishDialog() {
       this.dialog = false
       if (!this.error) {
-        router.push('/profile')
+        router.push('/login')
         router.go(0)
       }
     }
