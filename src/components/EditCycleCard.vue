@@ -84,7 +84,12 @@
         </v-card-text>
       </v-row>
       <v-card-actions>
-        <v-btn outlined icon @click="deleteExercise()">
+        <v-btn
+            outlined
+            icon
+            @click="deleteExercise()"
+            :disabled="cycle.exercises.length <= 1"
+        >
           <v-icon>mdi-delete</v-icon>
         </v-btn>
 
@@ -113,7 +118,7 @@ export default {
   data: () => ({
     selRepOrDur: [ 'repeticiones', 'segundos'],
     exerciseRules: [
-      (v) => !!v || "Este campo es obligatorio",
+      (v) => (!!v && v !== null) || "Este campo es obligatorio",
     ],
   }),
   methods: {

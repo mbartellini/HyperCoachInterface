@@ -59,14 +59,18 @@
             <v-row dense>
               <div>
                 <v-col>
-                  <h4 class="text my-1" >Dificultad: {{routine.difficulty ? translate(routine.difficulty) : "Esta rutina no tiene dificultad"}}</h4>
-                  <h4 class="text my-1" >Detalle: {{routine.detail ? routine.detail : "Esta rutina no tiene detalle"}}</h4>
-                  <h4 class="text my-1" >Categoría: {{routine.category ? (routine.category.name ? routine.category.name : "Sin categoría") : "Sin categoría"}}</h4>
-                  <h4 class="text my-1">{{routine.metadata && routine.metadata.equipment ? "Requiere equipamiento." : "No requiere equipamiento."}}</h4>
+                  <h4 class="text-h6 my-1" >Autor: {{routine.user && routine.user.username ? routine.user.username : "Esta rutina no tiene autor"}}</h4>
+                  <h4 class="text-h6 my-1" >Dificultad: {{routine.difficulty ? translate(routine.difficulty) : "Esta rutina no tiene dificultad"}}</h4>
+                  <h4 class="text-h6 my-1" >Detalle: {{routine.detail ? routine.detail : "Esta rutina no tiene detalle"}}</h4>
+                  <h4 class="text-h6 my-1" >Categoría: {{routine.category ? (routine.category.name ? routine.category.name : "Sin categoría") : "Sin categoría"}}</h4>
+                  <h4 class="text-h6 my-1">{{routine.metadata && routine.metadata.equipment ? "Requiere equipamiento." : "No requiere equipamiento."}}</h4>
                 </v-col>
               </div>
             </v-row>
-            <v-row v-show="is_owner" class="justify-space-between">
+            <v-row
+                v-show="true"
+                class="justify-space-around"
+            >
                 <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
                   <v-icon dark>mdi-delete</v-icon>
                   <div class="text-decoration-underline">
@@ -102,7 +106,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, } from "vuex";
 import CycleCard from "../components/CycleCard";
 import GoBackButton from "../components/GoBackButton";
 
@@ -119,6 +123,7 @@ export default {
     GoBackButton
   },
   data: () => ({
+    currentUserId: 0,
     exercises: [],
     favorites: [],
     is_fav: false,
@@ -202,6 +207,12 @@ export default {
       },
     },
   }),
+  computed: {
+    // ...mapGetters('security', {
+    //   $isLoggedIn: 'isLoggedIn',
+    //   $getCurrentUser: 'getCurrentUser',
+    // }),
+  },
   methods: {
     ...mapActions('routine', {
       $getRoutine: 'get',
@@ -253,9 +264,6 @@ export default {
       $postFavorite: 'create',
       $deleteFavorite: 'delete',
     }),
-    ...mapActions('security', {
-      $getCurrentUser: 'getCurrentUser',
-    }),
     inFavorites(list, id) {
       for (let i in list) {
         if (list[i].id === id)
@@ -284,9 +292,6 @@ export default {
         console.log(e)
       }
     },
-    async is_owner() {
-      return this.routine.user.id === await this.$getCurrentUser().id
-    },
     translate(difficulty) {
       switch (difficulty) {
         case 'beginner': return 'Principiante'
@@ -294,6 +299,14 @@ export default {
         case 'advanced': return 'Avanzado'
       }
       return difficulty
+    },
+    async getUserId() {
+      // if (this.$isLoggedIn) {
+      //   let aux = await this.$getCurrentUser
+      //   if (aux) {
+      //     this.currentUserId = aux.id
+      //   }
+      // }
     }
   },
   async beforeMount() {
@@ -304,21 +317,14 @@ export default {
       await this.getOtherExercises()
     }
   },
+  created() {
+    this.getUserId()
+  }
 }
 </script>
 
 <style scoped>
-h4.text{
-  font-weight: normal;
-  font-size: medium;
-}
-h4.text2 {
-  font-weight: normal;
-  font-size: medium;
-}
-v-icon.margin-left {
-  margin-left: 70px;
-}
+
 h1.increment{
   font-size: 225%;
 }

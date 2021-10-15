@@ -246,16 +246,6 @@ export default {
                 limit: 5,
                 limitType: 'repeticiones',
               },
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
             ]
           },{
             name: "Ciclo principal",
@@ -266,31 +256,11 @@ export default {
                 limit: 5,
                 limitType: 'repeticiones',
               },
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
             ]
           },{
             name: "Ciclo de enfriamiento",
             repetitions: 1,
             exercises: [
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
-              {
-                id: null,
-                limit: 5,
-                limitType: 'repeticiones',
-              },
               {
                 id: null,
                 limit: 5,
@@ -338,16 +308,6 @@ export default {
         name: "Ciclo",
         repetitions: 1,
         exercises: [
-          {
-            id: null,
-            limit: 5,
-            limitType: 'repeticiones',
-          },
-          {
-            id: null,
-            limit: 5,
-            limitType: 'repeticiones',
-          },
           {
             id: null,
             limit: 5,
