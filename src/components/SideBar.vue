@@ -33,6 +33,7 @@ export default {
       {name: 'Favoritos', route: 'Favorites', icon:'mdi-star'},
       {name: 'Mis rutinas', route: 'MyRoutines', icon: 'mdi-folder'},
       {name: 'Mis ejercicios', route: 'MyExercises', icon: 'mdi-weight-lifter'},
+      {name: 'Buscar', route: 'Buscar', icon:'mdi-magnify'},
       {name: 'Perfil', route: 'Profile', icon: 'mdi-account'},
       {name: '[Iniciar]', route: 'Initialization', icon: 'mdi-restart'},
     // TODO: make active icon to only have outline.
