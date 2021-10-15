@@ -64,7 +64,6 @@
               large
               color="success"
               @click.stop="dialog = true"
-              img="AAAAAAA"
           >
             <v-icon dark>mdi-content-save</v-icon>
             <div class="text-decoration-underline"> Guardar </div>
