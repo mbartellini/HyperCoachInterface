@@ -253,9 +253,27 @@ export default {
       $putRoutine: 'modify',
     }),
     addCycle() {
-      this.routine.metadata.cycles.push(
-          Object.assign({}, this.testCycle)
-      )
+      this.routine.metadata.cycles.push({
+        name: "Ciclo de calentamiento",
+        repetitions: 1,
+        exercises: [
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+          {
+            id: { id: 1 },
+            limit: 5,
+            limitType: 'repeticiones',
+          },
+        ]
+      })
     },
     deleteCycle(index) {
       if (this.routine.metadata.cycles.length > 3)
