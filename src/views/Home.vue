@@ -1,19 +1,6 @@
 <template>
   <div>
     <v-container fluid>
-      <v-row class="text-h5 ma-3">
-        <h1>Recientes</h1>
-      </v-row>
-
-      <v-row v-if="recent_empty" class="text-h6 ma-3 pt-5">
-        <p>
-          Parece que no encontramos rutinas. <router-link :to="{name: 'MyRoutines'}">¿Qué tal si creas una propia?</router-link>
-        </p>
-      </v-row>
-
-      <v-row fluid>
-        <RoutinesCardsGrid :routines="recent" />
-      </v-row>
 
       <v-row class="text-h5 ma-3 mt-15">
         <h1>Todas las rutinas</h1>
@@ -21,7 +8,7 @@
 
       <v-row v-if="recent_empty" class="text-h6 ma-3 pt-5">
         <p>
-          Parece que no encontramos rutinas. <router-link :to="{name: 'MyRoutines'}">¿Qué tal si creas una propia?</router-link>
+          Aún no hay rutinas creadas. <router-link :to="{name: 'MyRoutines'}">¿Qué tal si creas una propia?</router-link>
         </p>
       </v-row>
 
