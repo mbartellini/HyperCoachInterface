@@ -59,11 +59,12 @@
         </v-row>
         <v-row class="justify-end">
           <v-btn
-              type="submit"
+              type="button"
               tile
               class="rounded-lg"
               large
               color="success"
+              @click="save"
               @click.stop="dialog = true"
           >
             <v-icon dark>mdi-content-save</v-icon>
@@ -211,6 +212,7 @@ export default {
       }
     },
      save() {
+      alert("hola")
       this.handleImage()
       if (this.newExercise) {
         this.postExercise()

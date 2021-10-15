@@ -25,9 +25,6 @@ class Api {
     init.signal = controller.signal
 
     try {
-      alert(url)
-      console.log(init)
-      alert(init)
       const response = await fetch(url, init)
       const text = await response.text()
       const result = text ? (JSON).parse(text) : {}
