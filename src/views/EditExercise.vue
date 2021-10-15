@@ -15,15 +15,16 @@
         <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
           <v-img
               class="justify-center ma-auto"
-              lazy-src="@/assets/no_img.png"
+              lazy-src="@/assets/hci.png"
               width="500px"
-              :alt="exercise.detail"
-              :src="exercise.metadata.img_src"
+              :src="preview"
               contain
           >
+            <v-file-input @change="handleImage" v-show="false" id="file-upload" v-model="image" />
             <v-btn fab class="primary">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn></v-img>
+              <label for="file-upload"><v-icon >mdi-pencil</v-icon></label>
+            </v-btn>
+          </v-img>
         </v-card>
       </v-col>
       <v-col
@@ -123,6 +124,9 @@ export default {
   },
   data: () => ({
     newExercise: true,
+    dialog: false,
+    preview: '',
+    image: null,
     exercise: {
       name: '',
       detail: '',
@@ -137,6 +141,24 @@ export default {
     errorDetails: ''
   }),
   methods: {
+    handleImage() {
+      if (this.image) {
+        this.PreviewImage();
+        const aux = this.getImg();
+        aux.then(data => this.exercise.metadata.img_src = data);
+      }
+    },
+    PreviewImage() {
+      this.preview = URL.createObjectURL(this.image)
+    },
+    getImg() {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(this.image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    },
     ...mapActions('exercise', {
       $postExercise: 'create',
       $getExercise: 'get',
@@ -154,20 +176,37 @@ export default {
     async postExercise() {
       try {
         this.exercise = await this.$postExercise(this.exercise)
-      } catch(e) {
+      } catch(error) {
         this.error = true
-        this.errorDetails = e.details[0] // TODO: beautify this output
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }// TODO: beautify this output
       }
     },
     async putExercise() {
       try {
         this.exercise = await this.$putExercise(this.exercise)
-      } catch(e) {
+      } catch(error) {
         this.error = true
-        this.errorDetails = e.details[0] // TODO: beautify this output
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }// TODO: beautify this output
       }
     },
      save() {
+      this.handleImage()
       if (this.newExercise) {
         this.postExercise()
       } else {

@@ -107,7 +107,7 @@ export default {
       try {
         this.exercise = {id: this.id}
         this.exercise = await this.$getExercise(this.exercise);
-        this.exercise.metadata = {img_src: "https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720"}
+        this.exercise.metadata = this.exercise.metadata.img_src
       } catch(e) {
         alert(e)
       }

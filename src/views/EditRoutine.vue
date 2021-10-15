@@ -15,14 +15,15 @@
           <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
             <v-img
                 class="justify-center ma-auto"
-                lazy-src="@/assets/loading.gif"
+                lazy-src="@/assets/hci.png"
                 width="500px"
                 :alt="routine.detail"
-                :src="routine.metadata.img_src"
+                :src="preview"
                 contain
             >
+              <v-file-input @change="handleImage" v-show="false" id="file-upload" v-model="image" />
               <v-btn fab class="primary">
-                <v-icon>mdi-pencil</v-icon>
+                <label for="file-upload"><v-icon >mdi-pencil</v-icon></label>
               </v-btn>
             </v-img>
           </v-card>
@@ -169,6 +170,8 @@ export default {
   data: () => ({
     newRoutine: true,
     exercises: [],
+    preview: '',
+    image: null,
     categories: [],
     routine: {
       name: '',
@@ -247,12 +250,31 @@ export default {
     },
   }),
   methods: {
+    handleImage() {
+      if (this.image) {
+        this.PreviewImage();
+        const aux = this.getImg();
+        aux.then(data => this.routine.metadata.img_src = data);
+      }
+    },
+    PreviewImage() {
+      this.preview = URL.createObjectURL(this.image)
+    },
+    getImg() {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(this.image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    },
     ...mapActions('routine', {
       $postRoutine: 'create',
       $getRoutine: 'get',
       $putRoutine: 'modify',
     }),
     addCycle() {
+      this.handleImage()
       this.routine.metadata.cycles.push({
         name: "Ciclo de calentamiento",
         repetitions: 1,
