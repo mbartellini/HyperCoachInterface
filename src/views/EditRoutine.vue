@@ -138,11 +138,11 @@
             cols="12"
         >
           <v-row fluid class="d-flex justify-center">
-            <v-col xl="4" lg="4" md="4" sm="1" xs="1"/>
-            <v-col xl="4" lg="4" md="4" sm="9" xs="9" class="px-0 d-flex justify-center">
+            <v-col xl="4" lg="3" md="2" sm="1" xs="1"/>
+            <v-col xl="4" lg="6" md="8" sm="9" xs="9" class="px-0 d-flex justify-center">
               <EditCycleCard :cycle="cycle" :exercises="exercises" class="ma-auto" />
             </v-col>
-            <v-col xl="4" lg="4" md="4" sm="1" xs="1" class="d-flex justify-start">
+            <v-col xl="4" lg="3" md="2" sm="1" xs="1" class="d-flex justify-start">
               <v-btn
                   fab
                   color="error"
