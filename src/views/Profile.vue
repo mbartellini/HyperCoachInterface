@@ -154,7 +154,7 @@ export default {
     async logout() {
       await this.$logout()
       await router.push('/')
-      alert("AH")
+      console.log("AH")
       await router.go(0)
     },
 

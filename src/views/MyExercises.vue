@@ -53,7 +53,7 @@ export default {
         this.is_empty = result.totalCount === 0
         this.exercises = result.content
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
   },

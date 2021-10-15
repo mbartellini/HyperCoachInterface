@@ -58,7 +58,7 @@ export default {
         this.routines_empty = result.totalCount === 0
         this.routines = result.content
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
   },

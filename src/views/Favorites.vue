@@ -54,7 +54,7 @@ export default {
         this.favorites_empty = result.totalCount === 0
         this.favorites = result.content
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
   },

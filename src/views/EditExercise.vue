@@ -170,7 +170,7 @@ export default {
         this.exercise = await this.$getExercise(this.exercise);
         this.exercise.metadata = {img_src: "https://lh3.googleusercontent.com/proxy/f63tfbox7hHYf6sHyBVRJ129TSpSezZf57vNp28ZYQ5dl_FTPDZ6J4sXBr5qC5b1Unii8XjpcZcmOpNgps3zTricFnhrKDJlr5GDRzOlTTCidWLbErg_eJ3HE5LBk-7xGHlwQLqkGKVA8kjZsLdXvO0"}
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     async postExercise() {

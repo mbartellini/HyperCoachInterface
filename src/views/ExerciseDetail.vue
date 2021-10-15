@@ -109,14 +109,14 @@ export default {
         this.exercise = await this.$getExercise(this.exercise);
         this.exercise.metadata = this.exercise.metadata.img_src
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     async deleteExercise() {
       try {
         await this.$deleteExercise(this.exercise);
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
       this.$router.push({name: 'MyExercises'})
     },

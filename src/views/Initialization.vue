@@ -32,7 +32,7 @@ export default {
         let result = await this.$getCategories()
         this.categories = result.content
       } catch (e) {
-        alert(e)
+        console.log(e)
       }
     },
     async postCategory(categoryName) {
@@ -40,7 +40,7 @@ export default {
         let category = new Category(null, categoryName, "")
         await this.$postCategory(category)
       } catch (e) {
-        alert(e)
+        console.log(e)
       }
     },
   },

@@ -213,14 +213,14 @@ export default {
         this.routine = {id: this.id}
         this.routine = await this.$getRoutine(this.routine);
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     async deleteRoutine() {
       try {
         await this.$deleteRoutine(this.routine);
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
       this.$router.push({name: 'MyRoutines'})
     },
@@ -232,7 +232,7 @@ export default {
         let result = await this.$getExercises();
         this.exercises = result.content
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
   },

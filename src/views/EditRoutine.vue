@@ -308,7 +308,7 @@ export default {
         if (!result.content)
           this.routine = result
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     async postRoutine() {
@@ -316,7 +316,7 @@ export default {
         let routine = new Routine(null, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
         this.routine = await this.$postRoutine(routine)
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     async putRoutine() {
@@ -324,7 +324,7 @@ export default {
         let routine = new Routine(this.routine.id, this.routine.name, this.routine.detail, this.routine.difficulty.name, 1, this.routine.metadata)
         this.routine = await this.$putRoutine(routine)
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     save() {
@@ -347,7 +347,7 @@ export default {
         let result = await this.$getExercises();
         this.exercises = result.content
       } catch(e) {
-        alert(e)
+        console.log(e)
       }
     },
     ...mapActions('category', {
@@ -358,7 +358,7 @@ export default {
         let result = await this.$getCategories()
         this.categories = result.content
       } catch (e) {
-        alert(e)
+        console.log(e)
       }
     },
   },
