@@ -71,6 +71,8 @@
                   >
                     <v-date-picker
                         v-model="date"
+                        :max="today"
+                        :min="yesterday"
                         no-title
                         scrollable
                     >
@@ -295,6 +297,8 @@ export default {
       menu: null,
       gender: ["Masculino","Femenino","Prefiero no indicar"],
       date: '',
+      today: new Date(Date.now() - 864e5).toISOString().slice(0, 10),
+      yesterday: new Date("1900-01-01").toISOString().slice(0, 10),
       email: '',
       preview: 'https://e7.pngegg.com/pngimages/416/62/png-clipart-anonymous-person-login-google-account-computer-icons-user-activity-miscellaneous-computer.png',
       image: null,
@@ -353,8 +357,17 @@ export default {
         await this.$register({credentials, rememberMe: true })
       } catch(error) {
         this.error = true
-        this.errorDetails = error.details[0] // TODO: beautify this output
+        if (error.message) {
+          this.errorDetails = error.message
+        } else if (error.details) {
+          this.errorDetails = error.details[0]
+        } else if (error.description) {
+          this.errorDetails = error.description
+        } else {
+          this.errorDetails = error
+        }
         this.password = ''
+        this.passwordConfirmation = ''
       }
     },
   }

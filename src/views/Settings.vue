@@ -224,7 +224,7 @@ export default {
         if (error.message) {
           this.errorMsg = error.message
         } else if (error.details) {
-          this.errorMsg = error.details
+          this.errorMsg = error.details[0]
         } else if (error.description) {
           this.errorMsg = error.description
         } else {
