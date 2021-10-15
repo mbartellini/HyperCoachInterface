@@ -14,7 +14,7 @@
         <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
           <v-img
               class="justify-center ma-auto"
-              lazy-src="@/assets/loading.gif"
+              lazy-src="@/assets/hci.png"
               width="500px"
               :alt="exercise.detail"
               :src="preview"

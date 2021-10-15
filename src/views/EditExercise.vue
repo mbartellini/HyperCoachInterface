@@ -144,8 +144,8 @@ export default {
       (v) => (v && v.length <= 100) ||
           "Maximo 100 caracteres",],
     detailRules: [
-      (v) => (v.length <= 200) ||
-          "Maximo 200 caracteres",],
+      (v) => (v && (v.length <= 200 ||
+          "Maximo 200 caracteres")) || true,],
     error: true,
     errorMsg: 'Ha ocurrido un error.',
     successMsg: 'Ejercicio creado correctamente.',
@@ -209,7 +209,7 @@ export default {
       }
     },
     async putExercise() {
-      if (this.exercise.detail >= 200 || this.exercise.name <= 0 || this.exercise.name > 100)
+      if (this.exercise.detail.length >= 200 || this.exercise.name.length <= 0 || this.exercise.name.length > 100)
         return
       try {
         this.exercise = await this.$putExercise(this.exercise)
