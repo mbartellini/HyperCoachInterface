@@ -14,7 +14,7 @@
         <v-card dense elevation="10" class="d-inline-flex justify-center rounded-xl">
           <v-img
               class="justify-center ma-auto"
-              lazy-src="@/assets/hci.png"
+              lazy-src="../assets/hci.png"
               width="500px"
               :alt="routine.detail"
               :src="preview"
@@ -67,18 +67,18 @@
               </div>
             </v-row>
             <v-row v-show="is_owner" class="justify-space-between">
-              <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
-                <v-icon dark>mdi-delete</v-icon>
-                <div class="text-decoration-underline">
-                  Eliminar
-                </div>
-              </v-btn>
-              <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditRoutine', params: { id: id } }" >
-                <v-icon dark>mdi-pencil</v-icon>
-                <div class="text-decoration-underline">
-                  Editar
-                </div>
-              </v-btn>
+                <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
+                  <v-icon dark>mdi-delete</v-icon>
+                  <div class="text-decoration-underline">
+                    Eliminar
+                  </div>
+                </v-btn>
+                <v-btn tile class="rounded-lg" large color="success" :to="{ name: 'EditRoutine', params: { id: id } }" >
+                  <v-icon dark>mdi-pencil</v-icon>
+                  <div class="text-decoration-underline">
+                    Editar
+                  </div>
+                </v-btn>
             </v-row>
           </v-col>
         </v-row>
