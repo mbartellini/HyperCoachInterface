@@ -4,7 +4,7 @@
         max-width="500"
         class="rounded-card pb-3"
     >
-      <v-card-title class = "pb-0 d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row secondary mb-3 white--text">
+      <v-card-title class = "pb-0 d-flex justify-space-around flex-xs-column flex-sm-column flex-md-row mb-3 grey">
         <v-container>
           <v-row>
             <v-text-field
