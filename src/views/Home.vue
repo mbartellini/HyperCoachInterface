@@ -2,7 +2,7 @@
   <div>
     <v-container fluid>
 
-      <v-row class="text-h5 ma-3 mt-15">
+      <v-row class="text-h5 ma-3">
         <h1>Todas las rutinas</h1>
       </v-row>
 
