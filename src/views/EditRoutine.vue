@@ -242,17 +242,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -262,17 +262,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -282,17 +282,17 @@ export default {
             repetitions: 1,
             exercises: [
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
               {
-                id: { id: null },
+                id: null,
                 limit: 5,
                 limitType: 'repeticiones',
               },
@@ -339,17 +339,17 @@ export default {
         repetitions: 1,
         exercises: [
           {
-            id: { id: null },
+            id: null,
             limit: 5,
             limitType: 'repeticiones',
           },
           {
-            id: { id: null },
+            id: null,
             limit: 5,
             limitType: 'repeticiones',
           },
           {
-            id: { id: null },
+            id: null,
             limit: 5,
             limitType: 'repeticiones',
           },
@@ -392,11 +392,6 @@ export default {
       e.preventDefault()
       // TODO: Handle default like registration, login, exercises.
       this.handleImage()
-      for (let c in this.routine.metadata.cycles) {
-        for (let e in this.routine.metadata.cycles[c].exercises) {
-          this.routine.metadata.cycles[c].exercises[e].id = this.routine.metadata.cycles[c].exercises[e].id.id
-        }
-      }
       if (this.newRoutine) {
         this.postRoutine()
       } else {

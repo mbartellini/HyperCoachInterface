@@ -49,12 +49,13 @@
                 v-model="exercise.id"
                 :items="exercises"
                 item-text="name"
+                item-value="id"
                 label="Ejercicio*"
                 :rules="exerciseRules"
+                hint="Ejercicio"
                 dense
                 outlined
                 required
-                return-object
                 single-line
             ></v-autocomplete>
           </v-row>
@@ -126,8 +127,8 @@ export default {
     deleteExercise() {
       if (this.cycle.exercises.length > 1)
         this.cycle.exercises.pop()
-    }
-  }
+    },
+  },
 }
 </script>
 
