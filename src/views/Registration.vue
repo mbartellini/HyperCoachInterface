@@ -395,7 +395,6 @@ export default {
       this.dialog = false
       if (!this.error) {
         router.push('/login')
-        router.go(0)
       }
     }
   }
