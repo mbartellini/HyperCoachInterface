@@ -428,24 +428,12 @@ export default {
       ]
     },
   },
-  async created() {
-    await this.getExercises();
-    await this.getCategories();
-    if (this.id != null) {
-      this.newRoutine = false
-      await this.getRoutine()
-      for (let i in this.difficultiesAvailable) {
-        if (this.difficultiesAvailable[i].name === this.routine.difficulty) {
-          this.routine.difficulty = this.difficultiesAvailable[i]
-          break
-        }
-      }
-    }
-  },
   async beforeMount() {
     await this.getExercises();
     await this.getCategories();
-    if (this.id != null) {
+    if (this.id && this.id !== 0) {
+      alert(this.id)
+      console.log(this.id)
       this.newRoutine = false
       await this.getRoutine()
       for (let i in this.difficultiesAvailable) {

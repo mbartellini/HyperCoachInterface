@@ -106,7 +106,7 @@ const routes = [
     {
         path: '/exercise_edit/:id?',
         name: 'EditExercise',
-        props: ({params}) => ({id: params.id === null ? null : Number.parseInt(params.id, 10) || 0}),
+        props: ({params}) => ({id: params.id == null ? null : Number.parseInt(params.id, 10) || 0}),
         component: () => import(/* webpackChunkName: "edit_exercise" */ '../views/EditExercise.vue'),
         /* beforeEnter: (to, from, next) => {
             const exists = store.routines.find(
