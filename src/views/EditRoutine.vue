@@ -111,7 +111,7 @@
                       text
                       @click="finishDialog"
                   >
-                    {{error? 'Reintentar' : 'Ver todos mis ejercicios'}}
+                    {{error? 'Reintentar' : 'Ver todas mis rutinas'}}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -205,7 +205,7 @@ export default {
     dialog: false,
     error: true,
     errorMsg: 'Ha ocurrido un error.',
-    successMsg: 'Ejercicio creado correctamente.',
+    successMsg: 'Rutina creada correctamente.',
     errorDetails: 'Hay campos obligatorios sin completar.',
     categories: [],
     routine: {
