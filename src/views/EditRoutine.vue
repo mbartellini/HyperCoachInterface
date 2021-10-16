@@ -369,7 +369,14 @@ export default {
     },
     save(e) {
       e.preventDefault()
-      // TODO: Handle default like registration, login, exercises.
+      for (let i in this.routine.metadata.cycles) {
+        for (let j in this.routine.metadata.cycles[i].exercises) {
+          if (!this.routine.metadata.cycles[i].exercises[j] || !this.routine.metadata.cycles[i].exercises[j].id) {
+            this.dialog = true
+            return
+          }
+        }
+      }
       this.handleImage()
       if (this.newRoutine) {
         this.postRoutine()
