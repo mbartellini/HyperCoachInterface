@@ -17,18 +17,11 @@ npm install -g npm
 
 For Windows installation you can follow the [Node documentation](https://nodejs.org/en/download/package-manager/) and [npm Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-## Setting up the API
-```bash
-cd sportAPI
-npm install
-cd ..
-````
+## Setting up the API url
 
-## Running the API
-```bash
-cd sportAPI
-npm start
-```
+Go to the src/api/api.js and set up the baseUrl to your API's server url.
+
+Once that is done you could use our own mailing.js template file.
 
 ## Project setup
 ```bash
