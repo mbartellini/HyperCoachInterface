@@ -68,7 +68,7 @@
               </div>
             </v-row>
             <v-row
-                v-show="true"
+                v-show="routine && routine.user && routine.user.id && currentUserId === routine.user.id"
                 class="justify-space-around"
             >
                 <v-btn tile class="rounded-lg" large color="error" @click="deleteRoutine()">
@@ -106,9 +106,10 @@
 </template>
 
 <script>
-import {mapActions, } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import CycleCard from "../components/CycleCard";
 import GoBackButton from "../components/GoBackButton";
+import store from "@/api";
 
 export default {
   name: 'RoutineDetail',
@@ -208,10 +209,10 @@ export default {
     },
   }),
   computed: {
-    // ...mapGetters('security', {
-    //   $isLoggedIn: 'isLoggedIn',
-    //   $getCurrentUser: 'getCurrentUser',
-    // }),
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn',
+      $getCurrentUser: 'getCurrentUser',
+    }),
   },
   methods: {
     ...mapActions('routine', {
@@ -301,12 +302,13 @@ export default {
       return difficulty
     },
     async getUserId() {
-      // if (this.$isLoggedIn) {
-      //   let aux = await this.$getCurrentUser
-      //   if (aux) {
-      //     this.currentUserId = aux.id
-      //   }
-      // }
+      if (await store.getters['security/isLoggedIn']) {
+        let aux = await store.getters['security/getCurrentUser']
+        if (aux) {
+           this.currentUserId = aux.id
+        }
+        console.log(this.currentUserId)
+      }
     }
   },
   async beforeMount() {
@@ -316,10 +318,8 @@ export default {
       await this.getRoutine()
       await this.getOtherExercises()
     }
-  },
-  created() {
     this.getUserId()
-  }
+  },
 }
 </script>
 
