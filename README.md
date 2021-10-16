@@ -19,7 +19,7 @@ For Windows installation you can follow the [Node documentation](https://nodejs.
 
 ## Setting up the API url
 
-Go to the src/api/api.js and set up the baseUrl to your API's server url.
+Go to the _**src/api/api.js**_ and set up the baseUrl to your API's server url.
 
 Once that is done you could use our own mailing.js template file.
 
@@ -27,6 +27,8 @@ Once that is done you could use our own mailing.js template file.
 ```bash
 npm install
 ```
+
+The server port is set in _**vue.config.js**_ you can change it to which ever you will use. The default is `9090`.
 
 ### Compiles and hot-reloads for development
 ```bash
