@@ -307,7 +307,6 @@ export default {
         if (aux) {
            this.currentUserId = aux.id
         }
-        console.log(this.currentUserId)
       }
     }
   },
@@ -319,6 +318,8 @@ export default {
       await this.getOtherExercises()
     }
     this.getUserId()
+    if (!this.routine || !this.routine.user || !this.routine.user.id)
+      this.$router.go(0)
   },
 }
 </script>

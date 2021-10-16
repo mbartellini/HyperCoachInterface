@@ -218,13 +218,11 @@ export default {
           return;
         }
         const credentials = new ModifyCredentials(this.name, this.lastname, this.gender, await this.$getCurrentUser.birthdate, "", this.metadata)
-        console.log(credentials)
         await this.$modify({credentials})
         this.dialog = true
         this.error = false
       } catch (error) {
         this.error = true
-        console.log(error)
         if (error.message) {
           this.errorMsg = error.message
         } else if (error.details) {

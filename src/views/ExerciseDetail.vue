@@ -108,7 +108,6 @@ export default {
       try {
         this.exercise = {id: this.id}
         this.exercise = await this.$getExercise(this.exercise);
-        console.log(this.exercise)
         this.preview = this.exercise.metadata.img_src
       } catch(e) {
         console.log(e)

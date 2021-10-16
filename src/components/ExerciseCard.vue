@@ -37,7 +37,6 @@ export default {
     }
   },
   beforeMount() {
-    console.log(this.exercise.metadata.img_src)
     this.getImg()
   }
 }
